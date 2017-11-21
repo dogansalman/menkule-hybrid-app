@@ -1,0 +1,33 @@
+<ion-content padding class="page-home background-cover">
+  <div class="home">
+    <div class="center padding-top3">
+      <img src="../../assets/images/logo.png" class="animated flipInY" style=" border-radius: 50%; width: 100px; height: 100px;" alt="" >
+    </div>
+    <h2 class="maintitle animated fadeInUp">Keşfedeceğiniz Heryerde Eviniz Var</h2>
+
+
+    <ng-container padding>
+      <form class="sing-in">
+        <input ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/"  class="form-control" type="email" placeholder="E-posta">
+        <input type="password" placeholder="Şifre">
+        <a class="loginarrowbtn animated fadeIn"> <i class="ion-ios-arrow-right"></i></a>
+
+        <ion-buttons start>
+          <button ion-button icon-only full color="secondary">
+            Giriş
+          </button>
+        </ion-buttons>
+
+        <a class="floatleft animated fadeInUp" (click)="onRegister()" >Kayıt Ol</a>
+        <a class="floatright animated fadeInUp">Şifremi Unuttum</a>
+
+      </form>
+    </ng-container>
+    <div class="padding-top1 center">
+      <span class="loginpage-slide-icon"></span>
+      <span class="loginpage-slide-icon passive"></span>
+    </div>
+
+  </div>
+
+</ion-content>
