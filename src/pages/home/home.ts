@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { Register } from '../register/register';
+import { SplashScreen } from '@ionic-native/splash-screen';
+import { Platform } from 'ionic-angular';
 
 @Component({
   selector: 'page-home',
@@ -8,9 +10,15 @@ import { Register } from '../register/register';
 })
 export class HomePage implements OnInit{
 
-  constructor(public navCtrl: NavController) {
+  constructor(public navCtrl: NavController, public SplashScreen: SplashScreen, public platform: Platform) {
   }
   ngOnInit() {
+  }
+
+  ngAfterViewInit(){
+    this.platform.ready().then(() => {
+      this.SplashScreen.hide();
+    });
   }
 
   onRegister(): void {
