@@ -1,14 +1,15 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { Register } from '../register/register';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Platform } from 'ionic-angular';
 
+
 @Component({
-  selector: 'page-home',
-  templateUrl: 'home.html'
+  selector: 'login',
+  templateUrl: 'login.html'
 })
-export class HomePage implements OnInit{
+export class Login implements OnInit{
 
   constructor(public navCtrl: NavController, public SplashScreen: SplashScreen, public platform: Platform) {
   }
@@ -25,9 +26,9 @@ export class HomePage implements OnInit{
     this.navCtrl.push(Register, {},{animate:true, animation:'md-transition', direction: 'none', duration:1000});
   }
 
-  swipeEvent(e) {
+  onSearch(e) {
     if (e.direction == 2) {
-      alert('tested');
+    //  this.navCtrl.push(Search, {},{animate:true, direction: 'forward', duration:1000});
     }
   }
 

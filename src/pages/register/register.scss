@@ -6,7 +6,7 @@ register {
   .background-cover {
     transform: translate3d(0%, 0px, 0px);
     opacity: 1;
-    background: url('../../assets/images/bg.png') no-repeat center center fixed;
+    background: url('../assets/images/bg.png') no-repeat center center fixed;
     -moz-background-size: cover;
     background-size: cover;
   }
@@ -26,6 +26,10 @@ register {
   }
 
   .sing-up {
+    max-width: 350px;
+    margin: auto;
+    margin-top: 25px;
+    
     input, select {
       display: block;
       width: 100%;

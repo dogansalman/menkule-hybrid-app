@@ -1,0 +1,52 @@
+<ion-header no-border>
+  <ion-navbar transparent text-center>
+    <ion-buttons start left>
+      <button ion-button icon-only menuToggle> 
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons end>
+      <button ion-button icon-only color="light"> 
+        <ion-icon name="search"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content fullscreen color="white" padding class="page-home background-cover">
+  <div (swipe)="onSearch($event)" class="home">
+    
+    <ng-container padding>
+        <form class="sing-in">
+            <div class="center padding-top3">
+                <img src="assets/images/logo.png" class="animated flipInY" style=" border-radius: 50%; width: 100px; height: 100px;" alt="" >
+            </div>
+            <h2 class="maintitle animated fadeInUp">Keşfedeceğiniz Heryerde Eviniz Var</h2>
+
+            <input ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/"  class="form-control" type="email" placeholder="E-posta">
+            <input type="password" placeholder="Şifre">
+
+            <ion-buttons start>
+              <button [round]="true" ion-button icon-only full color="secondary">Giriş</button>
+              <button [round]="true" ion-button  full color="default">Facebook İle Bağlan</button>
+            </ion-buttons>
+    
+            <ng-container>
+              <a class="floatright animated fadeInUp">Şifremi Unuttum</a>
+            </ng-container>
+
+          </form>
+      
+    </ng-container>
+  </div>
+
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar transparent text-center>
+    <p class="login-footer" color="light" ion-text>
+      Yeni hesap oluşturmak için
+      <span color="primary" (click)="onRegister()" ion-text> Kayıt Ol</span>
+    </p>
+  </ion-toolbar>
+</ion-footer>

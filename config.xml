@@ -17,14 +17,16 @@
     <preference name="DisallowOverscroll" value="true" />
     <preference name="android-minSdkVersion" value="16" />
     <preference name="BackupWebStorage" value="none" />
+    <preference name="android-targetSdkVersion" value="23" />
     <preference name="SplashMaintainAspectRatio" value="true" />
     <preference name="FadeSplashScreenDuration" value="300" />
     <preference name="SplashShowOnlyFirstTime" value="false" />
     <preference name="AutoHideSplashScreen" value="false" />
-    <preference name="SplashScreenSpinnerColor" value="White" />
-    <preference name="android-targetSdkVersion" value="23" />
     <preference name="SplashScreen" value="screen" />
-    <preference name="SplashScreenDelay" value="3000" />
+    <preference name="SplashScreenDelay" value="0" />
+    <preference name="SplashScreenSpinnerColor" value="#242424" />
+    <preference name="SplashScreenSpinnerColor" value="DarkRed" />
+    <preference name="SplashScreenSpinnerColor" value="rgb(50,128,128)" />
     <platform name="android">
         <allow-intent href="market:*" />
         <icon density="ldpi" src="resources/android/icon/drawable-ldpi-icon.png" />
