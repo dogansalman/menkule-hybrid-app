@@ -1,29 +1,4 @@
 login {
-  .scroll-bar-indicator
-  {
-    display: none;
-  }
-  .background-cover {
-    transform: translate3d(0%, 0px, 0px);
-    opacity: 1;
-    background: url('../assets/images/bg.png') no-repeat center center fixed;
-    -moz-background-size: cover;
-    background-size: cover;
-  }
-
-  .background-cover a {
-    color: #fff;
-    text-decoration: none;
-  }
-  .maintitle {
-    font-size: 24px;
-    text-align: center;
-    color: #fff;
-    font-weight: 300
-  }
-  .swiper-pagination-bullet {
-    background: #fff !important;
-  }
 
   .sing-in {
     position: absolute;

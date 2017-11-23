@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { Register } from '../register/register';
+import { Forgot } from '../forgot/forgot';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Platform } from 'ionic-angular';
 
@@ -31,5 +32,7 @@ export class Login implements OnInit{
     //  this.navCtrl.push(Search, {},{animate:true, direction: 'forward', duration:1000});
     }
   }
-
+  onForgot(): void {
+    this.navCtrl.push(Forgot, {}, {animate: true, animation: 'md-transition', direction: 'forward', duration: 1000});
+  }
 }

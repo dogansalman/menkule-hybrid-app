@@ -1,8 +1,8 @@
 {
     "name": "Menkule",
     "version": "0.0.1",
-    "author": "Ionic Framework",
-    "homepage": "http://ionicframework.com/",
+    "author": "Menkule",
+    "homepage": "http://www.menkule.com.tr/",
     "private": true,
     "scripts": {
         "clean": "ionic-app-scripts clean",
@@ -28,7 +28,6 @@
         "@ionic-native/splash-screen": "3.12.1",
         "@ionic-native/status-bar": "3.12.1",
         "@ionic/storage": "2.0.1",
-        "animate.css": "^3.5.2",
         "cordova-android": "^6.2.3",
         "cordova-ios": "^4.4.0",
         "cordova-plugin-device": "^1.1.4",
@@ -45,7 +44,6 @@
     },
     "devDependencies": {
         "@ionic/app-scripts": "2.1.4",
-        "animate-sass": "^0.8.2",
         "typescript": "2.3.4"
     },
     "description": "An Ionic project",

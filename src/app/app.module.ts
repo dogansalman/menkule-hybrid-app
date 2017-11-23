@@ -7,7 +7,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { MyApp } from './app.component';
 import { Login } from '../pages/login/login';
 import { Register } from '../pages/register/register';
-
+import { Forgot } from '../pages/forgot/forgot';
 
 
 @NgModule({
@@ -15,16 +15,25 @@ import { Register } from '../pages/register/register';
     MyApp,
     Login,
     Register,
+    Forgot,
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp, {
+      backButtonText: '',
+      iconMode: 'ios',
+      modalEnter: 'modal-slide-in',
+      modalLeave: 'modal-slide-out',
+      tabsPlacement: 'bottom',
+      pageTransition: 'ios-transition'
+    })
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
     Login,
     Register,
+    Forgot,
   ],
   providers: [
     StatusBar,
