@@ -1,7 +1,13 @@
 register {
-  .bar-button-default-ios, .bar-button-default.bar-button-ios-default, .bar-button-clear-ios-default{
+  .back-button.show-back-button{
     color: #ffffff;
   }
+
+  .register .scroll-content {
+    text-align: center;
+  }
+
+
   .sing-up {
     max-width: 350px;
     margin: auto;

@@ -1,27 +1,28 @@
 <ion-header no-border>
         <ion-navbar transparent text-center></ion-navbar>
 </ion-header>
-
-<ion-content fullscreen color="white" padding class="background-cover">
-          <ng-container padding>
-              <form class="forgot-form">
-                  <h2 ion-text center color="light"><ion-icon ios="ios-lock" md="md-lock"></ion-icon> Şifremi Unuttum ! </h2>
-                <p ion-text center color="light">
-                    Kayıtlı e-posta adresinizi yazınız. Şifre bilginiz e-posta adresinize iletilecektir.
-                </p>
-                  <input ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/"  class="form-control animated fadeInUp" type="email" placeholder="E-posta">
-                  <ion-buttons start>
-                        <button class="animated fadeInUp" ion-button  full color="default">Tamam</button>
-                    </ion-buttons>
-                </form>
-          </ng-container>
-      </ion-content>
-
+<ion-content fullscreen color="white" padding class="forgot background-cover">
+        <div class="forgot-container">
+        <form padding class="forgot-form">
+        <h2 ion-text center color="light">
+                <ion-icon ios="ios-lock" md="md-lock"></ion-icon>
+                Şifremi Unuttum ! 
+        </h2>
+        <p ion-text center color="light">
+                Kayıtlı e-posta adresinizi yazınız. Şifre bilginiz e-posta adresinize iletilecektir.
+        </p>
+        <input ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/"  class="form-control animated fadeInUp" type="email" placeholder="E-posta">
+        <ion-buttons start>
+                <button class="animated fadeInUp" ion-button  full color="default">Tamam</button>
+        </ion-buttons>
+        </form>
+        </div>
+</ion-content>
 <ion-footer class="animated fadeInUp">
         <ion-toolbar transparent text-center>
-          <p class="login-footer" color="light" ion-text>
-            Hesabınıza erişim ile ilgili sorun yaşıyorsanız  aşağıdaki adresi kullanarak bizim ile iletişime geçin. <br> 
-            <b>Destek için</b> yardim@menkule.com.tr
-          </p>
+                <p class="login-footer" color="light" ion-text>
+                Hesabınıza erişim ile ilgili sorun yaşıyorsanız  aşağıdaki adresi kullanarak bizim ile iletişime geçin. <br> 
+                <b>Destek için</b> yardim@menkule.com.tr
+                </p>
         </ion-toolbar>
 </ion-footer>

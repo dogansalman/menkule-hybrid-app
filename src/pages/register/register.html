@@ -2,28 +2,24 @@
     <ion-navbar transparent text-center></ion-navbar>
 </ion-header>
 
-<ion-content fullscreen swipeBackEnabled="true" animation="none" padding class="register background-cover">
-    <div class="center padding-top3">
+<ion-content  swipeBackEnabled="true" animation="none" padding class="register background-cover">
+  <div center padding>
       <img src="assets/images/logo.png" class="animated flipInY" style=" border-radius: 50%; width: 100px; height: 100px;" alt="" >
-    </div>
-    <h2 class="title animated fadeInUp">Yeni Hesap Oluştur</h2>
-    <ng-container padding>
+      <h2 class="title animated fadeInUp">Yeni Hesap Oluştur</h2>
       <form class="sing-up">
-
-        <ion-input placeholder="E-Posta" type="email"></ion-input>
-        <ion-input placeholder="Adınız" type="text"></ion-input>
-        <ion-input placeholder="Soyadınız" type="text"></ion-input>
-        <select placeholder="Cinsiyet">
-          <option value="Bay">Bay</option>
-          <option value="Bayan">Bayan</option>
-        </select>
-        <ion-input placeholder="Gsm" type="text"></ion-input>
-        <ion-input placeholder="Şifre" type="password"></ion-input>
-        <ion-input placeholder="Şifre Tekrar" type="password"></ion-input>
-        <ion-buttons start>
-            <button ion-button  full color="default">Tamam</button>
-        </ion-buttons>
-      </form>
-    </ng-container>
-
+          <ion-input placeholder="E-Posta" type="email"></ion-input>
+          <ion-input placeholder="Adınız" type="text"></ion-input>
+          <ion-input placeholder="Soyadınız" type="text"></ion-input>
+          <select placeholder="Cinsiyet">
+            <option value="Bay">Bay</option>
+            <option value="Bayan">Bayan</option>
+          </select>
+          <ion-input placeholder="Gsm" type="text"></ion-input>
+          <ion-input placeholder="Şifre" type="password"></ion-input>
+          <ion-input placeholder="Şifre Tekrar" type="password"></ion-input>
+          <ion-buttons start>
+              <button ion-button  full color="default">Tamam</button>
+          </ion-buttons>
+        </form>
+  </div>
 </ion-content>
