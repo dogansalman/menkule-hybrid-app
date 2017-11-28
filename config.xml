@@ -3,7 +3,7 @@
     <name>Menkule</name>
     <description>Menkule mobil uygulaması.</description>
     <author email="iletisim@menkule.com.tr" href="https://menkule.com.tr/">Menkule</author>
-    <content src="index.html" />
+    <content original-src="index.html" src="http://192.168.1.240:8100" />
     <access origin="*" />
     <allow-navigation href="http://ionic.local/*" />
     <allow-intent href="http://*/*" />
@@ -87,16 +87,19 @@
     <allow-navigation href="http://192.168.1.240:8100" />
     <engine name="android" spec="^6.2.3" />
     <engine name="ios" spec="^4.4.0" />
-    <plugin name="cordova-plugin-device" spec="^1.1.4" />
     <plugin name="cordova-plugin-inappbrowser" spec="^1.7.1" />
+    <plugin name="cordova-plugin-device" spec="^1.1.4" />
     <plugin name="cordova-plugin-splashscreen" spec="^4.0.3" />
     <plugin name="cordova-plugin-statusbar" spec="^2.2.2" />
     <plugin name="cordova-plugin-whitelist" spec="^1.3.1" />
     <plugin name="ionic-plugin-keyboard" spec="^2.2.1" />
-    <plugin name="cordova-plugin-googlemaps" spec="https://github.com/mapsplugin/cordova-plugin-googlemaps">
+    <plugin name="cordova-plugin-googlemaps" spec="git+https://github.com/mapsplugin/cordova-plugin-googlemaps.git">
         <variable name="API_KEY_FOR_ANDROID" value="AIzaSyCvZ_rend0Mo3cBMmy4po3_TfsiKxB9nmE" />
         <variable name="API_KEY_FOR_IOS" value="AIzaSyBN8Rnz_WFo5x4cSKd279_phOWYqBWJZnY" />
         <variable name="LOCATION_WHEN_IN_USE_DESCRIPTION" value="Show your location on the map" />
         <variable name="LOCATION_ALWAYS_USAGE_DESCRIPTION" value="Trace your location on the map" />
+    </plugin>
+    <plugin name="cordova-plugin-geolocation" spec="^2.4.3">
+        <variable name="GEOLOCATION_USAGE_DESCRIPTION" value="Using locations" />
     </plugin>
 </widget>
