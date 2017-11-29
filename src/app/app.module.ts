@@ -4,10 +4,11 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 
 // Pages
 import { MyApp } from './app.component';
-import { Login } from '../pages/login/login';
+import { Main } from '../pages/main/main';
 import { Register } from '../pages/register/register';
 import { Forgot } from '../pages/forgot/forgot';
 import { Search } from '../pages/search/search';
+import { Login } from '../pages/login/login';
 
 // Native Modules
 import { GoogleMaps } from '@ionic-native/google-maps';
@@ -15,14 +16,16 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { Geolocation } from '@ionic-native/geolocation';
 import { Camera } from '@ionic-native/camera';
+import { Keyboard } from '@ionic-native/keyboard';
 
 @NgModule({
   declarations: [
     MyApp,
-    Login,
+    Main,
     Register,
     Forgot,
     Search,
+    Login,
   ],
   imports: [
     BrowserModule,
@@ -32,16 +35,21 @@ import { Camera } from '@ionic-native/camera';
       modalEnter: 'modal-slide-in',
       modalLeave: 'modal-slide-out',
       tabsPlacement: 'bottom',
-      pageTransition: 'ios-transition'
+      pageTransition: 'ios-transition',
+      scrollAssist: true, 
+      autoFocusAssist: true,
+      inputBlurring: false, 
+
     })
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    Login,
+    Main,
     Register,
     Forgot,
-    Search
+    Search,
+    Login
   ],
   providers: [
     StatusBar,
@@ -49,6 +57,7 @@ import { Camera } from '@ionic-native/camera';
     GoogleMaps,
     Camera,
     Geolocation,
+    Keyboard,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
