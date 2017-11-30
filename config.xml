@@ -1,10 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="io.ionic.starter" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="io.ionic.starter" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Menkule</name>
     <description>Menkule mobil uygulaması.</description>
-    <edit-config file="AndroidManifest.xml" mode="merge" target="/manifest/application/activity[@android:name='MainActivity']">
-        <activity android:name="MainActivity" android:windowSoftInputMode="adjustPan" />
-    </edit-config>
     <author email="iletisim@menkule.com.tr" href="https://menkule.com.tr/">Menkule</author>
     <content src="index.html" />
     <access origin="*" />
@@ -15,6 +12,7 @@
     <allow-intent href="sms:*" />
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
+    <preference name="cordova-custom-config-autorestore" value="true" />
     <preference name="webviewbounce" value="false" />
     <preference name="UIWebViewBounce" value="false" />
     <preference name="DisallowOverscroll" value="true" />
@@ -31,6 +29,7 @@
     <preference name="SplashScreenSpinnerColor" value="DarkRed" />
     <preference name="SplashScreenSpinnerColor" value="rgb(50,128,128)" />
     <platform name="android">
+        <preference name="android-manifest/application/activity/@android:windowSoftInputMode" value="adjustPan" />
         <icon density="ldpi" src="resources/android/icon/drawable-ldpi-icon.png" />
         <icon density="mdpi" src="resources/android/icon/drawable-mdpi-icon.png" />
         <icon density="hdpi" src="resources/android/icon/drawable-hdpi-icon.png" />
@@ -51,6 +50,10 @@
         <splash density="port-xxxhdpi" src="resources/android/splash/drawable-port-xxxhdpi-screen.png" />
     </platform>
     <allow-navigation href="http://192.168.1.240:8100" />
+    <edit-config file="AndroidManifest.xml" mode="merge" target="application">
+        <activity android:name="MainActivity" android:windowSoftInputMode="adjustPan" />
+    </edit-config>
+    <engine name="android" spec="6.3.0" />
     <plugin name="cordova-plugin-inappbrowser" spec="^1.7.2" />
     <plugin name="cordova-plugin-device" spec="^1.1.7" />
     <plugin name="cordova-plugin-splashscreen" spec="^4.1.0" />
@@ -70,5 +73,5 @@
         <variable name="CAMERA_USAGE_DESCRIPTION" value=" " />
         <variable name="PHOTOLIBRARY_USAGE_DESCRIPTION" value=" " />
     </plugin>
-    <engine name="android" spec="~6.3.0" />
+    <plugin name="cordova-custom-config" spec="^4.0.2" />
 </widget>
