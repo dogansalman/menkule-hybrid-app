@@ -12,8 +12,10 @@ log.txt
 *.sublime-workspace
 .vscode/
 npm-debug.log*
+package-lock.json
 
 .idea/
+.gradle/
 .sourcemaps/
 .sass-cache/
 .tmp/
