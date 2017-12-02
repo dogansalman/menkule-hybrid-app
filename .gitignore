@@ -14,7 +14,6 @@ log.txt
 npm-debug.log*
 
 .idea/
-.gradle/
 .sourcemaps/
 .sass-cache/
 .tmp/
