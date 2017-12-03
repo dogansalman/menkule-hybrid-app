@@ -1,0 +1,22 @@
+<ion-header no-border>
+    <ion-navbar transparent text-center>
+      <ion-buttons start left>
+        <button ion-button icon-only menuToggle> 
+          <ion-icon name="ios-menu"></ion-icon>
+        </button>
+      </ion-buttons>
+    </ion-navbar>
+  </ion-header>
+<ion-content fullscreen class="background-cover">
+    <form class="sing-in">
+        <h2 class="title animated fadeInUp">Keşfedeceğiniz Heryerde Eviniz Var</h2>
+        <input autofocus #mail ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/"  class="form-control animated fadeInUp" type="email" placeholder="E-posta">
+        <input type="password" class="animated fadeInUp" placeholder="Şifre">
+        <ion-buttons  start>
+          <button [round]="true" class="animated fadeIn" ion-button icon-only full color="secondary">Oturum Aç</button>
+        </ion-buttons>
+        <ng-container>
+          <a (click)="onForgot()" class="floatright animated fadeInUp">Şifremi Unuttum</a>
+        </ng-container>
+      </form>
+</ion-content>
