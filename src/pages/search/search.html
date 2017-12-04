@@ -1,10 +1,17 @@
 <ion-header>
-                <ion-navbar>
-                  <ion-title>
-                    Ionic Blank
-                  </ion-title>
-                </ion-navbar>
-              </ion-header>
+  <ion-navbar>
+    <ion-title>
+     Keşfet
+    </ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="openModal()">
+        <ion-icon color="light" name="ios-search-outline"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
 <ion-content>
   <div id="map" style="height: 100%"></div>
 </ion-content>

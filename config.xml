@@ -20,6 +20,7 @@
     <preference name="SplashShowOnlyFirstTime" value="false" />
     <preference name="SplashScreen" value="screen" />
     <preference name="SplashScreenDelay" value="3000" />
+    <preference name="AutoHideSplashScreen" value="false" />
     <platform name="android">
         <preference name="android-manifest/application/activity/@android:windowSoftInputMode" value="adjustPan" />
         <allow-intent href="market:*" />
@@ -58,4 +59,5 @@
         <variable name="LOCATION_ALWAYS_USAGE_DESCRIPTION" value="My custom always usage message" />
     </plugin>
     <plugin name="cordova-custom-config" spec="^4.0.2" />
+    <allow-navigation href="http://192.168.1.240:8100" />
 </widget>

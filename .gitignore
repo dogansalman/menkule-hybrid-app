@@ -25,6 +25,10 @@ tmp/
 temp/
 hooks/
 platforms/
+resources/andorid/
+resources/ios/
+resources/icon.png.md5
+resources/splash.png.md5
 plugins/
 plugins/android.json
 plugins/ios.json

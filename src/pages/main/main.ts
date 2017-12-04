@@ -41,4 +41,8 @@ export class Main implements OnInit{
   onForgot(): void {
     this.navCtrl.push(Forgot, {}, {animate: true, animation: 'animated fadeIn', direction: 'none', duration: 500});
   }
+
+  onSearch(): void {
+    this.navCtrl.push(Search, {}, {animate: true, animation: 'animated fadeIn', direction: 'none', duration: 500});
+  }
 }

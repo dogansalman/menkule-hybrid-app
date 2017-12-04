@@ -1,3 +1,15 @@
+<ion-header>
+
+  <ion-navbar transparent>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="onSearch()">
+        <ion-icon color="light" name="ios-search-outline"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
 <ion-content class="background-cover">
     <div (swipe)="onSwipeRight($event)" class="main-container">
         <ng-container padding>
@@ -12,7 +24,7 @@
                 <div padding>
                   <a (click)="onForgot()" class="floatright animated fadeInUp">Şifremi Unuttum</a>
                 </div>
-              
+
         </ng-container>
       </div>
 </ion-content>
