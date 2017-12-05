@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
+
 @Component({
     selector: 'search',
     templateUrl: 'search.html'

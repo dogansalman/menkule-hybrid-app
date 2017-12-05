@@ -22,6 +22,9 @@
 .scroll-content {
   overflow-y: auto;
 }
+.no-radius{
+  border-radius: 0px !important;
+}
 
 
 //Backgrounds
@@ -31,7 +34,7 @@
   background-size: cover;
   background-attachment: fixed;
   height: 100%;
-  
+
 }
 .background-cover a {
   color: #fff;
