@@ -8,6 +8,10 @@ import { NavController } from 'ionic-angular';
 })
 
 export class Search implements OnInit {
+    /*
+    Swipe state for maps
+     */
+    public onSwipedMap = false;
 
     constructor(public navCtrl: NavController) { }
 
@@ -16,4 +20,8 @@ export class Search implements OnInit {
     onInput(e): void { }
     onCancel(e): void { }
 
+    onSwipeMap(event: any, swipe): any {
+      this.onSwipedMap = swipe;
+      alert(swipe);
+    }
 }

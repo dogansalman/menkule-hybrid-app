@@ -1,6 +1,6 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, Input } from '@angular/core';
 import {Platform, NavController } from 'ionic-angular';
-
+import { Geolocation } from '@ionic-native/geolocation';
 import {
   GoogleMaps,
   GoogleMap,
@@ -13,14 +13,14 @@ import {
 @Component({
   templateUrl: 'map.html',
   selector: 'google-map-component',
-  providers: [ GoogleMaps ]
+  providers: [ GoogleMaps, Geolocation ]
 })
 
 export class Map{
 
   @ViewChild('map') element;
-
-  constructor(public googleMaps: GoogleMaps, public plt: Platform, public navCtrl: NavController) { }
+  @Input('setMyPoi') setMyPoi: boolean;
+  constructor(public googleMaps: GoogleMaps, public plt: Platform, public geolocation: Geolocation) { }
 
   ngAfterViewInit() {
     this.plt.ready().then(() => {
@@ -29,25 +29,38 @@ export class Map{
   }
 
   initMap() {
-    console.log(this.element.nativeElement);
     let map: GoogleMap = this.googleMaps.create(this.element.nativeElement);
-    map.one(GoogleMapsEvent.MAP_READY).then((data: any) => {
-      let coordinates: LatLng = new LatLng(33.6396965, -84.4304574);
-      let position = {
-        target: coordinates,
-        zoom: 17
-      };
-      map.animateCamera(position);
-      let markerOptions: MarkerOptions = {
-        position: coordinates,
-        icon: "assets/images/icons8-Marker-64.png",
-        title: 'Our first POI'
-      };
-      const marker = map.addMarker(markerOptions)
-        .then((marker: Marker) => {
-          marker.showInfoWindow();
-        });
-    })
+    console.log(this.setMyPoi);
+    console.log('girdiiii1');
+
+    /*
+    * Is set geolocation marker*/
+
+    this.geolocation.getCurrentPosition().then((resp) => {
+      let coordinates: LatLng = new LatLng(resp.coords.latitude, resp.coords.longitude);
+      alert(resp.coords.latitude);
+      alert(resp.coords.longitude);
+      map.one(GoogleMapsEvent.MAP_READY).then((data: any) => {
+        let position = {
+          target: coordinates,
+          zoom: 17
+        };
+        map.animateCamera(position);
+        let markerOptions: MarkerOptions = {
+          position: coordinates,
+          icon: "assets/images/my-poi.png",
+          title: 'Buradasın !'
+        };
+        const marker = map.addMarker(markerOptions)
+          .then((marker: Marker) => {
+            marker.showInfoWindow();
+          });
+      });
+    }).catch((error) => {
+      alert('Üzgünüz! Konumuza erişilemedi. Lütfen konum servisini aktif edin.');
+    });
+
+
   }
 }
 

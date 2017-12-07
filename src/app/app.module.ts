@@ -10,6 +10,7 @@ import { Forgot } from '../pages/forgot/forgot';
 import { Search } from '../pages/search/search';
 import { Login } from '../pages/login/login';
 import { Map} from '../components/map/map';
+import { IonicSwipeAllModule } from 'ionic-swipe-all';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { Map} from '../components/map/map';
       scrollAssist: true,
       autoFocusAssist: true,
       inputBlurring: false,
-    })
+    }),
+    IonicSwipeAllModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
