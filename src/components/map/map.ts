@@ -24,23 +24,25 @@ export class Map{
 
   ngAfterViewInit() {
     this.plt.ready().then(() => {
-      this.initMap();
+     // this.initMap();
+      this.geolocation.getCurrentPosition().then((resp) => {
+        alert(resp.coords.latitude);
+        alert(resp.coords.longitude);
+      }).catch((error) => {
+        alert('Üzgünüz! Konumuza erişilemedi. Lütfen konum servisini aktif edin.');
+      });
     });
   }
 
   initMap() {
-    let map: GoogleMap = this.googleMaps.create(this.element.nativeElement);
-    console.log(this.setMyPoi);
-    console.log('girdiiii1');
+  //  let map: GoogleMap = this.googleMaps.create(this.element.nativeElement);
 
+
+
+
+    // let coordinates: LatLng = new LatLng(resp.coords.latitude, resp.coords.longitude);
     /*
-    * Is set geolocation marker*/
-
-    this.geolocation.getCurrentPosition().then((resp) => {
-      let coordinates: LatLng = new LatLng(resp.coords.latitude, resp.coords.longitude);
-      alert(resp.coords.latitude);
-      alert(resp.coords.longitude);
-      map.one(GoogleMapsEvent.MAP_READY).then((data: any) => {
+        map.one(GoogleMapsEvent.MAP_READY).then((data: any) => {
         let position = {
           target: coordinates,
           zoom: 17
@@ -56,10 +58,7 @@ export class Map{
             marker.showInfoWindow();
           });
       });
-    }).catch((error) => {
-      alert('Üzgünüz! Konumuza erişilemedi. Lütfen konum servisini aktif edin.');
-    });
-
+      * */
 
   }
 }
