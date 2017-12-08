@@ -16,59 +16,55 @@ import {
   providers: [ GoogleMaps, Geolocation ]
 })
 
+
+
 export class Map{
 
   @ViewChild('map') element;
   @Input('setMyPoi') setMyPoi: boolean;
 
-  private cordinate : any;
-
   constructor(public googleMaps: GoogleMaps, public plt: Platform, public geolocation: Geolocation) { }
 
   ngAfterViewInit() {
     this.plt.ready().then(() => {
-
-      alert('denemeee');
-
-      if(this.setMyPoi) this.cordinate = this.getLocation();
-
-
-      this.initMap(this.cordinate);
+      if(this.setMyPoi) {
+        this.geolocation.getCurrentPosition().then((resp) => {
+          this.initMap(new LatLng(resp.coords.latitude, resp.coords.longitude));
+        }).catch((error) => {
+          alert('Üzgünüz! Konumuza erişilemedi. Lütfen konum servisini aktif edin.');
+        });
+      } else {
+        this.initMap(null);
+      }
     });
   }
 
   initMap(cordi) {
      let map: GoogleMap = this.googleMaps.create(this.element.nativeElement);
-
         map.one(GoogleMapsEvent.MAP_READY).then((data: any) => {
         let position = {
           target: cordi,
-          zoom: 18
+          zoom: 16
         };
         map.animateCamera(position);
 
-        /* Add User Location Poi*/
         if(this.setMyPoi) {
           let markerOptions: MarkerOptions = {
             position: cordi,
             icon: "assets/images/my-poi.png",
-            title: 'Buradasın !'
+            title: 'Buradasın !',
+            animation: 'DROP',
+
           };
           map.addMarker(markerOptions)
             .then((marker: Marker) => {
               marker.showInfoWindow();
             });
         }
+
+
       });
   }
 
-  getLocation(): any {
-    this.geolocation.getCurrentPosition().then((resp) => {
-      alert(resp.coords.latitude + " " +  resp.coords.longitude);
-      return new LatLng(resp.coords.latitude, resp.coords.longitude)
-    }).catch((error) => {
-      alert('Üzgünüz! Konumuza erişilemedi. Lütfen konum servisini aktif edin.');
-  });
-  }
-}
 
+}

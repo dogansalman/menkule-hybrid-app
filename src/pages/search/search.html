@@ -1,16 +1,15 @@
-<ion-header>
+<ion-header no-shadow no-border>
   <ion-navbar color="blue" text-center>
     <ion-buttons start left>
       <button ion-button icon-only menuToggle>
         <ion-icon name="ios-menu"></ion-icon>
       </button>
     </ion-buttons>
-
   </ion-navbar>
 </ion-header>
 <ion-content>
   <ion-grid  ion-fixed no-padding>
-    <div *ngIf="!onSwipedMap">
+    <div *ngIf="!onSwipedMap" class="search-container">
       <ion-toolbar>
         <ion-searchbar placeholder="Nereye Seyahat Edeceksiniz ?" (ionInput)="onInput($event)"></ion-searchbar>
       </ion-toolbar>
@@ -47,24 +46,22 @@
                 <ion-option value="7">7 Misafir</ion-option>
               </ion-select>
             </ion-item>
-
           </ion-list>
-        </ion-col>
-        <ion-col col-12 text-right>
-          <button text-center ion-button icon-left color="blue">
-            <ion-icon name="ios-search-outline"></ion-icon>
-          </button>
         </ion-col>
       </ion-row>
     </div>
-
-    <ion-row no-padding>
-      <ion-col swipeAll (swipeup)="onSwipeMap($event, true)" (swipedown)="onSwipeMap($event, false)" col-12>
-      <h4  style="display: block" text-center text-capitalize ion-text color=soft> Çevrenizdeki İlanlar</h4>
-      </ion-col>
+    <ion-row  class="map-container" no-padding>
       <ion-col col-12>
-      <google-map-component setMyPoi="true"  style="height: calc(100vh - 24px); width: 100%; display: block;"></google-map-component>
+      <google-map-component setMyPoi="true"  style="height: 100%; width: 100%; display: block;"></google-map-component>
       </ion-col>
     </ion-row>
   </ion-grid>
 </ion-content>
+
+<ion-footer no-shadow no-margin no-padding no-border>
+  <ion-toolbar no-shadow no-margin no-padding no-border position="bottom">
+    <button no-shadow no-margin no-padding no-border full text-center ion-button icon-left color="blue">
+      <ion-icon name="ios-search-outline"></ion-icon> Hemen Ara
+    </button>
+  </ion-toolbar>
+</ion-footer>
