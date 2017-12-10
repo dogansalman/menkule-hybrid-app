@@ -1,4 +1,4 @@
-<ion-header no-shadow no-border>
+<ion-header no-shadow no-border #headerArea>
   <ion-navbar color="blue" text-center>
     <ion-buttons start left>
       <button ion-button icon-only menuToggle>
@@ -6,8 +6,21 @@
       </button>
     </ion-buttons>
   </ion-navbar>
+
+  <ion-toolbar>
+    <ion-segment  color="primary">
+      <ion-segment-button value="info" text-capitalize>
+        Chef Info
+      </ion-segment-button>
+      <ion-segment-button value="recipes" text-capitalize>
+        42 Recipes
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+
 </ion-header>
-<ion-content>
+
+<ion-content #scrollArea>
   <ion-grid  ion-fixed no-padding>
     <div *ngIf="!onSwipedMap" class="search-container">
       <ion-toolbar>

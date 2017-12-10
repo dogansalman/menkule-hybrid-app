@@ -11,6 +11,7 @@ import { Search } from '../pages/search/search';
 import { Login } from '../pages/login/login';
 import { Map} from '../components/map/map';
 import { IonicSwipeAllModule } from 'ionic-swipe-all';
+import { ShrinkingHeaderComponentModule } from "../components/shrinking-header/shrinking-header.module";
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { IonicSwipeAllModule } from 'ionic-swipe-all';
   ],
   imports: [
     BrowserModule,
+    ShrinkingHeaderComponentModule,
     IonicModule.forRoot(MyApp, {
       backButtonText: '',
       iconMode: 'ios',
