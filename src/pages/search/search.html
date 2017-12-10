@@ -1,4 +1,4 @@
-<ion-header no-shadow no-border #headerArea>
+<ion-header no-shadow no-border>
   <ion-navbar color="blue" text-center>
     <ion-buttons start left>
       <button ion-button icon-only menuToggle>
@@ -6,23 +6,11 @@
       </button>
     </ion-buttons>
   </ion-navbar>
-
-  <ion-toolbar>
-    <ion-segment  color="primary">
-      <ion-segment-button value="info" text-capitalize>
-        Chef Info
-      </ion-segment-button>
-      <ion-segment-button value="recipes" text-capitalize>
-        42 Recipes
-      </ion-segment-button>
-    </ion-segment>
-  </ion-toolbar>
-
 </ion-header>
 
-<ion-content #scrollArea>
+<ion-content>
   <ion-grid  ion-fixed no-padding>
-    <div *ngIf="!onSwipedMap" class="search-container">
+    <div *ngIf="!onSwipedMap" class="search-container" swipeAll (swipedown)="onSwipeSearch($event, false)"  (swipeup)="onSwipeSearch($event, true)" [style.height]="swipeDown ? '7vh' : '35vh'">
       <ion-toolbar>
         <ion-searchbar placeholder="Nereye Seyahat Edeceksiniz ?" (ionInput)="onInput($event)"></ion-searchbar>
       </ion-toolbar>
@@ -63,7 +51,7 @@
         </ion-col>
       </ion-row>
     </div>
-    <ion-row  class="map-container" no-padding>
+    <ion-row  class="map-container" no-padding [style.height]="swipeDown ? '80vh' : '55vh'">
       <ion-col col-12>
       <google-map-component setMyPoi="true"  style="height: 100%; width: 100%; display: block;"></google-map-component>
       </ion-col>
