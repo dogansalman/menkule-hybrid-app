@@ -13,6 +13,7 @@ export class fillHeightDirective implements AfterViewInit {
 
   @HostListener('window:resize', ['$event'])
   onResize(event) {
+    console.log('fişffs');
     this.calculateAndSetElementHeight();
   }
 

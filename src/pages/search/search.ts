@@ -21,5 +21,6 @@ export class Search implements OnInit {
 
     onChangeMapHeight(): void {
       this.swipeDown = (this.swipeDown ? false : true);
+      window.dispatchEvent(new Event('resize'));
     }
 }
