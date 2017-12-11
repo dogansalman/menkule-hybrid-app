@@ -10,9 +10,9 @@
 
 <ion-content>
   <ion-grid  ion-fixed no-padding>
-    <div *ngIf="!onSwipedMap" class="search-container" swipeAll (swipedown)="onSwipeSearch($event, false)"  (swipeup)="onSwipeSearch($event, true)" [style.height]="swipeDown ? '7vh' : '35vh'">
+    <div [style.height]="swipeDown ? '35vh' : '10vh'" class="search-container animated fadeIn">
       <ion-toolbar>
-        <ion-searchbar placeholder="Nereye Seyahat Edeceksiniz ?" (ionInput)="onInput($event)"></ion-searchbar>
+        <ion-google-places></ion-google-places>
       </ion-toolbar>
       <ion-row no-padding>
         <ion-col col-6 class="title">
@@ -51,17 +51,17 @@
         </ion-col>
       </ion-row>
     </div>
-    <ion-row  class="map-container" no-padding [style.height]="swipeDown ? '80vh' : '55vh'">
-      <ion-col col-12>
+    <div fill-height  [footerElement]="footer" class="animated fadeIn" no-padding>
       <google-map-component setMyPoi="true"  style="height: 100%; width: 100%; display: block;"></google-map-component>
-      </ion-col>
-    </ion-row>
+      <button class="fullsize-map animated fadeInUp" (click)="onChangeMapHeight()" small color="blue" ion-button> <ion-icon name="{{!swipeDown ?  'ios-arrow-down-outline' : 'ios-arrow-up-outline'}}"></ion-icon></button>
+    </div>
+
   </ion-grid>
 </ion-content>
 
-<ion-footer no-shadow no-margin no-padding no-border>
+<ion-footer #footer class="animated bounce" no-shadow no-margin no-padding no-border>
   <ion-toolbar no-shadow no-margin no-padding no-border position="bottom">
-    <button no-shadow no-margin no-padding no-border full text-center ion-button icon-left color="blue">
+    <button  no-shadow no-margin no-padding no-border full text-center ion-button icon-left color="blue">
       <ion-icon name="ios-search-outline"></ion-icon> Hemen Ara
     </button>
   </ion-toolbar>

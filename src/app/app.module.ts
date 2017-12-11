@@ -11,7 +11,9 @@ import { Search } from '../pages/search/search';
 import { Login } from '../pages/login/login';
 import { Map} from '../components/map/map';
 import { IonicSwipeAllModule } from 'ionic-swipe-all';
-import { ShrinkingHeaderComponentModule } from "../components/shrinking-header/shrinking-header.module";
+import { Places } from '../components/places/places';
+import { fillHeightDirective } from '../directives/fillHeight/fillHeight.directive';
+
 
 @NgModule({
   declarations: [
@@ -21,11 +23,12 @@ import { ShrinkingHeaderComponentModule } from "../components/shrinking-header/s
     Forgot,
     Search,
     Login,
-    Map
+    Map,
+    Places,
+    fillHeightDirective
   ],
   imports: [
     BrowserModule,
-    ShrinkingHeaderComponentModule,
     IonicModule.forRoot(MyApp, {
       backButtonText: '',
       iconMode: 'ios',
@@ -38,6 +41,7 @@ import { ShrinkingHeaderComponentModule } from "../components/shrinking-header/s
       inputBlurring: false,
     }),
     IonicSwipeAllModule
+
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -52,7 +56,7 @@ import { ShrinkingHeaderComponentModule } from "../components/shrinking-header/s
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
 export class AppModule {}

@@ -30,9 +30,19 @@ search {
   .search-container{
     height: 35vh;
     overflow: hidden;
+    -moz-transition: height .3s;
+    -ms-transition: height .3s;
+    -o-transition: height .3s;
+    -webkit-transition: height .3s;
+    transition: height .3s;
   }
   .map-container{
     height: 55vh;
+  }
+  .fullsize-map{
+    position: absolute;
+    right: 1%;
+    bottom: 10%;
   }
 }
 

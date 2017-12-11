@@ -11,16 +11,15 @@ export class Search implements OnInit {
     /*
     Swipe state for maps
      */
-    public swipeDown = false;
+    public swipeDown = true;
 
     constructor(public navCtrl: NavController) { }
 
     ngOnInit(): void { }
-
     onInput(e): void { }
     onCancel(e): void { }
 
-    onSwipeSearch(event: any, isDown: boolean): any {
-      this.swipeDown = isDown;
+    onChangeMapHeight(): void {
+      this.swipeDown = (this.swipeDown ? false : true);
     }
 }
