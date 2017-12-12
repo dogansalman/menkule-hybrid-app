@@ -1,13 +1,4 @@
-<ion-header no-shadow no-border>
-  <ion-navbar  transparent>
-    <ion-buttons end>
-      <button ion-button icon-only (click)="onSearch()">
-        <ion-icon color="light" name="ios-search-outline"></ion-icon>
-      </button>
-    </ion-buttons>
-  </ion-navbar>
-</ion-header>
-<ion-content class="background-cover">
+<ion-content  class="background-cover">
     <div (swipe)="onSwipeRight($event)" class="main-container">
         <ng-container padding>
                 <div class="center">
@@ -26,6 +17,8 @@
 </ion-content>
 <ion-footer class="animated fadeInUp">
     <ion-toolbar transparent text-center>
+      <span class="swipe-right-icon"></span>
+      <span class="swipe-right-icon soft"></span>
       <p class="login-footer" color="light" ion-text>
         Yeni hesap oluşturmak için
         <span  color="twitter" (click)="onRegister()" ion-text> Kayıt Ol</span>

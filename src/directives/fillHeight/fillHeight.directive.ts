@@ -13,7 +13,6 @@ export class fillHeightDirective implements AfterViewInit {
 
   @HostListener('window:resize', ['$event'])
   onResize(event) {
-    console.log('fişffs');
     this.calculateAndSetElementHeight();
   }
 
@@ -25,7 +24,7 @@ export class fillHeightDirective implements AfterViewInit {
     const footerElementMargin = this.getfooterElementMargin();
 
     this.el.nativeElement.style.height = windowHeight - footerElementMargin - elementOffsetTop + 'px';
-    console.log([windowHeight, elementOffsetTop, elementMarginBottom, footerElementMargin, this.el.nativeElement.style.height]);
+   //console.log([windowHeight, elementOffsetTop, elementMarginBottom, footerElementMargin, this.el.nativeElement.style.height]);
   }
 
   private getElementOffsetTop() {

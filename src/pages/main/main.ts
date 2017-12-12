@@ -32,10 +32,9 @@ export class Main implements OnInit{
   onRegister(): void {
     this.navCtrl.push(Register, {},{animate:true, animation:'md-transition', direction: 'none', duration:500});
   }
-
   onSwipeRight(e) {
     if (e.direction == 2) {
-    //  this.navCtrl.push(Search, {},{animate:true, direction: 'forward', duration:500});
+       this.navCtrl.push(Search, {},{animate:true, direction: 'forward', duration:500});
     }
   }
   onForgot(): void {

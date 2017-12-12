@@ -12,7 +12,17 @@ main {
     display: table-cell;
     vertical-align: middle;
   }
- 
+  .swipe-right-icon{
+    width: 12px;
+    height: 12px;
+    display: inline-block;
+    background: #44b5f4;
+    border-radius: 50%;
+  }
+  .swipe-right-icon.soft{
+    background: rgba(68, 181, 244, 0.5294117647058824);
+  }
+
 }
 
 

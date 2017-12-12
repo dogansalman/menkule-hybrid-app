@@ -3,17 +3,23 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
+
+// Pages
 import { MyApp } from './app.component';
 import { Main } from '../pages/main/main';
 import { Register } from '../pages/register/register';
 import { Forgot } from '../pages/forgot/forgot';
 import { Search } from '../pages/search/search';
 import { Login } from '../pages/login/login';
+// Custom components
 import { Map} from '../components/map/map';
-import { IonicSwipeAllModule } from 'ionic-swipe-all';
 import { Places } from '../components/places/places';
+// Directives
 import { fillHeightDirective } from '../directives/fillHeight/fillHeight.directive';
+import { IonicSwipeAllModule } from 'ionic-swipe-all';
 
+
+import { Network } from '@ionic-native/network';
 
 @NgModule({
   declarations: [
@@ -25,7 +31,7 @@ import { fillHeightDirective } from '../directives/fillHeight/fillHeight.directi
     Login,
     Map,
     Places,
-    fillHeightDirective
+    fillHeightDirective,
   ],
   imports: [
     BrowserModule,
@@ -56,7 +62,9 @@ import { fillHeightDirective } from '../directives/fillHeight/fillHeight.directi
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    Network
+
   ]
 })
 export class AppModule {}

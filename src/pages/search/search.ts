@@ -13,7 +13,8 @@ export class Search implements OnInit {
      */
     public swipeDown = true;
 
-    constructor(public navCtrl: NavController) { }
+    constructor(public navCtrl: NavController) {
+    }
 
     ngOnInit(): void { }
     onInput(e): void { }
