@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController } from 'ionic-angular';
-
 
 @Component({
     selector: 'search',
@@ -13,8 +11,7 @@ export class Search implements OnInit {
      */
     public swipeDown = true;
 
-    constructor(public navCtrl: NavController) {
-    }
+    constructor() { }
 
     ngOnInit(): void { }
     onInput(e): void { }

@@ -13,7 +13,12 @@ import { Login } from "../pages/login/login";
 export class MyApp {
 
   rootPage:any = Main;
-  pages: Array<{title: string, component: any}>;
+  private pages = [
+    { title: 'home', component: Login, active: false, icon: 'home' },
+    { title: 'seasonal', component: Login, active: false, icon: 'mz-spoon-knife' },
+    { title: 'quick and easy', component: Login, active: false, icon: 'mz-cart' },
+    { title: 'healthy meals', component: Login, active: false, icon: 'heart' }
+  ];
   @ViewChild(Nav) nav: Nav;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, private network: Network, private toastController: ToastController, private menu: MenuController) {
@@ -41,20 +46,16 @@ export class MyApp {
        });
     });
 
-    /*
-    Set pages
-     */
-    this.pages = [
-      { title: 'Home', component: Main },
-      { title: 'Login', component: Login }
-    ];
+
+
   }
 
   openPage(page) {
     // close the menu when clicking a link from the menu
     this.menu.close();
     // navigate to the new page if it is not the current page
-    this.nav.push(page, {}, {animate: true, animation: 'animated fadeIn', direction: 'none', duration: 500});
+    this.nav.setRoot(page.component)
+    // this.nav.push(page, {}, {animate: true, animation: 'animated fadeIn', direction: 'none', duration: 500});
   }
 }
 

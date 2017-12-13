@@ -4,16 +4,14 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 
-// Pages
+// Pages Modules
 import { MyApp } from './app.component';
-import { Main } from '../pages/main/main';
-import { Register } from '../pages/register/register';
-import { Forgot } from '../pages/forgot/forgot';
-import { Search } from '../pages/search/search';
-import { Login } from '../pages/login/login';
-// Custom components
-import { Map} from '../components/map/map';
-import { Places } from '../components/places/places';
+import { MainModule } from '../pages/main/main.module';
+import { RegisterModule } from '../pages/register/register.module';
+import { ForgotModule } from "../pages/forgot/forgot.module";
+import { SearchModule } from '../pages/search/search.module';
+import { LoginModule } from '../pages/login/login.module';
+
 // Directives
 import { fillHeightDirective } from '../directives/fillHeight/fillHeight.directive';
 import { IonicSwipeAllModule } from 'ionic-swipe-all';
@@ -24,14 +22,7 @@ import { Network } from '@ionic-native/network';
 @NgModule({
   declarations: [
     MyApp,
-    Main,
-    Register,
-    Forgot,
-    Search,
-    Login,
-    Map,
-    Places,
-    fillHeightDirective,
+    fillHeightDirective
   ],
   imports: [
     BrowserModule,
@@ -46,18 +37,16 @@ import { Network } from '@ionic-native/network';
       autoFocusAssist: true,
       inputBlurring: false,
     }),
-    IonicSwipeAllModule
-
+    IonicSwipeAllModule,
+    ForgotModule,
+    LoginModule,
+    MainModule,
+    RegisterModule,
+    SearchModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-    MyApp,
-    Main,
-    Register,
-    Forgot,
-    Search,
-    Login,
-    Map
+    MyApp
   ],
   providers: [
     StatusBar,

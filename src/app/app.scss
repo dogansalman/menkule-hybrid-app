@@ -14,3 +14,51 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+
+
+// Side Menu
+.menu {
+  background: linear-gradient(rgb(68, 181, 244), rgba(17, 135, 201, 0.41)), url('../assets/images/bg.png');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  height: 100%;
+  .scroll-content {
+    padding: 13vh 12vw 6vh 12vw;
+  }
+}
+
+.menu__avatar {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  margin: 4vh 0;
+}
+
+.menu__item {
+  background: transparent !important;
+  background-color: transparent !important;
+  color: #ffffff !important;
+  padding-left: 0;
+  font-weight: 600;
+  min-height: 0px;
+
+  &.activated {
+    background: none;
+    color: white;
+  }
+
+  .label-md {
+    margin: 12px 0;
+  }
+}
+
+.menu__label {
+  font-size: 14px;
+}
+
+.menu-under {
+  position: absolute;
+  bottom: 1em;
+}
