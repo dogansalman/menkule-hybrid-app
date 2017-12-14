@@ -25,7 +25,14 @@
 .no-radius{
   border-radius: 0px !important;
 }
-
+.on-transition
+{
+  -moz-transition: height .3s;
+  -ms-transition: height .3s;
+  -o-transition: height .3s;
+  -webkit-transition: height .3s;
+  transition: height .3s;
+}
 
 //Backgrounds
 .background-cover {

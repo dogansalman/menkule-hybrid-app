@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ModalController } from "ionic-angular";
+import { Filter } from "./filter/filter";
 
 @Component({
     selector: 'search',
@@ -6,19 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class Search implements OnInit {
-    /*
-    Swipe state for maps
-     */
-    public swipeDown = true;
 
-    constructor() { }
+    constructor(public modalController: ModalController) { }
 
     ngOnInit(): void { }
-    onInput(e): void { }
-    onCancel(e): void { }
 
-    onChangeMapHeight(): void {
-      this.swipeDown = (this.swipeDown ? false : true);
-      window.dispatchEvent(new Event('resize'));
+    onOpenModal() {
+      let modal = this.modalController.create(Filter);
+      modal.present();
     }
 }
