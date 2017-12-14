@@ -56,7 +56,7 @@
             </ion-col>
           </ion-row>
           <ion-row no-margin no-padding>
-            <button class="animated bounce"  no-shadow no-margin no-padding no-border full text-center ion-button icon-left color="blue">
+            <button no-shadow no-margin no-padding no-border full text-center ion-button icon-left color="blue">
               <ion-icon name="ios-search-outline"></ion-icon> Hemen Ara
             </button>
           </ion-row>
@@ -67,7 +67,7 @@
       <ion-col no-margin no-padding col-12>
           <google-map-component setMyPoi="true"></google-map-component>
       </ion-col>
-      <button class="fullsize-map animated fadeInUp" (click)="onChangeMapHeight()" small color="blue" ion-button> <ion-icon name="{{!swipeDown ?  'ios-arrow-down-outline' : 'ios-arrow-up-outline'}}"></ion-icon></button>
+      <button class="fullsize-map animated bounceInUp" (click)="onChangeMapHeight()" small color="blue" ion-button> <ion-icon name="{{!swipeDown ?  'ios-arrow-down-outline' : 'ios-arrow-up-outline'}}"></ion-icon></button>
     </ion-row>
   </ion-grid>
 </ion-content>

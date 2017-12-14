@@ -1,6 +1,6 @@
 forgot {
 
- 
+
   }
   .back-button.show-back-button{
     color: #ffffff;
@@ -17,10 +17,12 @@ forgot {
     display: table-cell;
     vertical-align: middle;
   }
-  
+
   .forgot-form {
-   
-    max-width: 450px;
+
+    max-width: 400px;
+    width: 300px;
+    min-width: 250px;
     margin:auto;
 
     input {
@@ -55,6 +57,5 @@ forgot {
       }
     }
   }
-  
-  
-  
+
+

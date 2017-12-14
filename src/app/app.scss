@@ -41,7 +41,7 @@
   background-color: transparent !important;
   color: #ffffff !important;
   padding-left: 0;
-  font-weight: 600;
+  font-weight: 400;
   min-height: 0px;
 
   &.activated {
@@ -61,4 +61,10 @@
 .menu-under {
   position: absolute;
   bottom: 1em;
+}
+.menu__close{
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  font-size: 25px;
 }

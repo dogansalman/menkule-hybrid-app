@@ -2,10 +2,11 @@ import { Component, ViewChild } from '@angular/core';
 import { Platform, ToastController, MenuController, Nav  } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { Diagnostic } from '@ionic-native/diagnostic';
 import { Network } from '@ionic-native/network';
 import { Main } from '../pages/main/main';
 import { Login } from "../pages/login/login";
-
+import { AlertController } from 'ionic-angular';
 @Component({
   templateUrl: 'app.html'
 })
@@ -13,15 +14,20 @@ import { Login } from "../pages/login/login";
 export class MyApp {
 
   rootPage:any = Main;
-  private pages = [
-    { title: 'home', component: Login, active: false, icon: 'home' },
-    { title: 'seasonal', component: Login, active: false, icon: 'mz-spoon-knife' },
-    { title: 'quick and easy', component: Login, active: false, icon: 'mz-cart' },
-    { title: 'healthy meals', component: Login, active: false, icon: 'heart' }
+  public pages = [
+    { title: 'İlan', component: Login, active: false, icon: 'ios-home-outline' },
+    { title: 'Rezervasyon', component: Login, active: false, icon: 'ios-bookmarks-outline' },
+    { title: 'Mesaj', component: Login, active: false, icon: 'ios-mail-outline', data: { count: 0}, badge: 'flat_secondary' },
+    { title: 'Bildirim', component: Login, active: false, icon: 'ios-notifications-outline', data: { count: 0},  badge: 'flat_danger' }
   ];
-  @ViewChild(Nav) nav: Nav;
+  public under_pages = [
+    { title: 'Hesabım', component: Login, active: false, icon: 'ios-contact-outline' },
+    { title: 'Oturumu Kapak', component: Login, active: false, icon: 'ios-power-outline' }
+  ];
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, private network: Network, private toastController: ToastController, private menu: MenuController) {
+  @ViewChild('content') content: Nav;
+
+  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, private network: Network, private toastController: ToastController, private menu: MenuController, private diagonistic: Diagnostic, private alertController: AlertController) {
 
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
@@ -29,33 +35,55 @@ export class MyApp {
       statusBar.styleDefault();
       splashScreen.hide();
 
-      /*
-      Enable side menu
-       */
-      this.menu.enable(true, 'menu1');
-      /*
-      Watch connection
-       */
-      this.network.onDisconnect().subscribe(() => {
-         let toastr =  this.toastController.create({
-          message: 'İnternet bağlantısı bekleniyor...',
-          duration: 5000,
-          position: 'bottom'
+      if(platform.is('cordova')) {
+        /* Check location settings */
+        this.diagonistic.isLocationAvailable().then((state) => {
+          if(!state){
+            this.openToastNotify('Lütfen konum hizmetini aktif edin.', 5000, 'bottom');
+            this.openConfirmAlert('Uyarı', 'Konumunuzu hemen aktif etmek istiyor musunuz ?').then(() => this.diagonistic.switchToLocationSettings());
+          }
         });
-         toastr.present();
-       });
+        /* Watch connection */
+        this.network.onDisconnect().subscribe(() => this.openToastNotify('İnternet bağlantısı bekleniyor...', 5000, 'bottom'));
+      }
+
+      /* Enable side menu */
+      this.menu.enable(true, 'menu1');
+
     });
-
-
-
   }
 
   openPage(page) {
     // close the menu when clicking a link from the menu
     this.menu.close();
     // navigate to the new page if it is not the current page
-    this.nav.setRoot(page.component)
-    // this.nav.push(page, {}, {animate: true, animation: 'animated fadeIn', direction: 'none', duration: 500});
+     this.content.push(page.component, {}, {animate: true, animation: 'animated fadeIn', direction: 'none', duration: 500});
   }
+
+  openToastNotify(message, duration, position) {
+    let toastr =  this.toastController.create({
+      message: message,
+      duration: duration,
+      position: position
+    });
+    toastr.present();
+  };
+
+  openConfirmAlert(title, message) {
+     return new Promise((resolve, reject) => {
+       let alert = this.alertController.create({
+         title: title,
+         message: message,
+         buttons: [
+           { text: 'Kapat', role: 'cancel', handler: () => { }},
+           { text: 'Tamam', handler: () => { resolve() }},
+         ]
+       });
+       alert.present();
+     })
+
+
+  }
+
 }
 

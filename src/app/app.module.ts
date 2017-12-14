@@ -3,7 +3,7 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
-
+import { Diagnostic } from "@ionic-native/diagnostic";
 // Pages Modules
 import { MyApp } from './app.component';
 import { MainModule } from '../pages/main/main.module';
@@ -52,7 +52,8 @@ import { Network } from '@ionic-native/network';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    Network
+    Network,
+    Diagnostic
 
   ]
 })

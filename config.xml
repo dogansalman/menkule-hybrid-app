@@ -59,4 +59,5 @@
         <variable name="API_KEY_FOR_IOS" value="AIzaSyBN8Rnz_WFo5x4cSKd279_phOWYqBWJZnY" />
     </plugin>
     <plugin name="cordova-plugin-network-information" spec="^1.3.4" />
+    <plugin name="cordova.plugins.diagnostic" spec="^3.7.2" />
 </widget>

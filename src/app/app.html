@@ -1,15 +1,24 @@
 <!-- Authorized -->
-<ion-menu [content]="content"  type="push" [swipeEnabled]="true" side="right" >
+<ion-menu [content]="content"  type="push" [swipeEnabled]="false" side="right">
+
   <ion-content class="menu">
-    <img class="menu__avatar" src="https://masonz.github.io/images/avatar.png" />
+    <button class="menu__close" ion-button clear menuClose><ion-icon name="ios-close-outline" item-start color="light"></ion-icon></button>
+    <ion-row>
+      <ion-col col-12>
+        <img class="menu__avatar" src="https://masonz.github.io/images/avatar.png" />
+      </ion-col>
+    </ion-row>
     <ion-list>
-      <button class="menu__item"  *ngFor="let m of pages" (click)="openPage(m)" ion-item no-lines menuClose>
-        <span class="menu__label" ion-text vertical-align text-uppercase>{{ m.title }}</span>
+      <button detail-none transparent ion-item class="menu__item"  *ngFor="let m of pages" (click)="openPage(m)" ion-item no-lines menuClose>
+        <ion-icon name="{{m.icon}}" item-start color="light"></ion-icon>
+        <ion-label class="menu__label" ion-text vertical-align text-uppercase>{{ m.title }}</ion-label>
+        <ion-badge  *ngIf="m.data" color="{{m.badge}}" item-end>{{m.data.count}}</ion-badge>
       </button>
     </ion-list>
     <ion-list class="menu-under">
-      <button class="menu__item"  *ngFor="let m of pages" (click)="openPage(m)" ion-item no-lines menuClose>
-        <span class="menu__label" ion-text vertical-align text-uppercase>{{ m.title }}</span>
+      <button detail-none transparent ion-item class="menu__item"  *ngFor="let um of under_pages" (click)="openPage(um)" ion-item no-lines menuClose>
+        <ion-icon name="{{um.icon}}" item-start color="light"></ion-icon>
+        <ion-label class="menu__label" ion-text vertical-align text-uppercase>{{ um.title }}</ion-label>
       </button>
     </ion-list>
   </ion-content>

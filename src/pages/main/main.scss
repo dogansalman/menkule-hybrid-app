@@ -11,6 +11,9 @@ main {
   .main-container {
     display: table-cell;
     vertical-align: middle;
+    max-width: 400px;
+    width: 300px;
+    min-width: 250px;
   }
   .swipe-right-icon{
     width: 12px;
