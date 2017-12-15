@@ -1,12 +1,13 @@
 import { Component, ViewChild } from '@angular/core';
-import { Platform, ToastController, MenuController, Nav  } from 'ionic-angular';
+import { Platform, ToastController, MenuController, Nav, AlertController  } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Diagnostic } from '@ionic-native/diagnostic';
 import { Network } from '@ionic-native/network';
 import { Main } from '../pages/main/main';
 import { Login } from "../pages/login/login";
-import { AlertController } from 'ionic-angular';
+import { ToastServices } from "../services/toast/toast.services";
+
 @Component({
   templateUrl: 'app.html'
 })
@@ -27,7 +28,9 @@ export class MyApp {
 
   @ViewChild('content') content: Nav;
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, private network: Network, private toastController: ToastController, private menu: MenuController, private diagonistic: Diagnostic, private alertController: AlertController) {
+  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,
+              private network: Network,
+              private _toast: ToastServices, private menu: MenuController, private diagonistic: Diagnostic, private alertController: AlertController) {
 
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
@@ -39,12 +42,12 @@ export class MyApp {
         /* Check location settings */
         this.diagonistic.isLocationAvailable().then((state) => {
           if(!state){
-            this.openToastNotify('Lütfen konum hizmetini aktif edin.', 5000, 'bottom');
+            this._toast.showToast('Lütfen konum hizmetini aktif edin.', 5000, 'bottom');
             this.openConfirmAlert('Uyarı', 'Konumunuzu hemen aktif etmek istiyor musunuz ?').then(() => this.diagonistic.switchToLocationSettings());
           }
         });
         /* Watch connection */
-        this.network.onDisconnect().subscribe(() => this.openToastNotify('İnternet bağlantısı bekleniyor...', 5000, 'bottom'));
+        this.network.onDisconnect().subscribe(() => this._toast.showToast('İnternet bağlantısı bekleniyor...', 5000, 'bottom'));
       }
 
       /* Enable side menu */
@@ -59,15 +62,6 @@ export class MyApp {
     // navigate to the new page if it is not the current page
      this.content.push(page.component, {}, {animate: true, animation: 'animated fadeIn', direction: 'none', duration: 500});
   }
-
-  openToastNotify(message, duration, position) {
-    let toastr =  this.toastController.create({
-      message: message,
-      duration: duration,
-      position: position
-    });
-    toastr.present();
-  };
 
   openConfirmAlert(title, message) {
      return new Promise((resolve, reject) => {

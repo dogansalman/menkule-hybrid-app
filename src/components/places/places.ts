@@ -1,5 +1,5 @@
-import {Component, NgZone, OnInit} from '@angular/core';
-import {NavController, ModalController, LoadingController} from 'ionic-angular';
+import { Component, NgZone, ElementRef, Renderer2 } from '@angular/core';
+import { LoaderServices } from "../../services/loader/loader.services";
 
 declare var google:any;
 
@@ -15,11 +15,13 @@ export class Places {
   geocoder: any
   autocompleteItems: any;
   nearbyItems: any = new Array<any>();
-  loading: any;
+
 
   constructor(
     public zone: NgZone,
-    public loadingCtrl: LoadingController
+    public load : LoaderServices,
+    public el: ElementRef,
+    public rndrr: Renderer2
   ) {
 
     this.geocoder = new google.maps.Geocoder;
@@ -30,7 +32,6 @@ export class Places {
       input: ''
     };
     this.autocompleteItems = [];
-    this.loading = this.loadingCtrl.create();
   }
 
   updateSearchResults(){
@@ -52,7 +53,8 @@ export class Places {
   }
 
   selectSearchResult(item){
-    this.loading.present();
+    this.rndrr.setValue(this.el.nativeElement.children[0], item.structured_formatting.main_text);
+    this.load.showLoading();
     this.autocompleteItems = [];
     this.geocoder.geocode({'placeId': item.place_id}, (results, status) => {
       if(status === 'OK' && results[0]){
@@ -60,8 +62,8 @@ export class Places {
         this.GooglePlaces.nearbySearch({
           location: results[0].geometry.location,
           radius: '500',
-          country: ['tr'],
-          types: ['cities'], //check other types here https://developers.google.com/places/web-service/supported_types
+          country: ['(tr)'],
+          types: ['(cities)'], //check other types here https://developers.google.com/places/web-service/supported_types
           key: 'AIzaSyBWsnpeDue8z9EevJ74Aj7uo5cJFv0p9K0'
         }, (near_places) => {
           this.zone.run(() => {
@@ -69,7 +71,7 @@ export class Places {
             for (var i = 0; i < near_places.length; i++) {
               this.nearbyItems.push(near_places[i]);
             }
-            this.loading.dismiss();
+            this.load.dismissLoading();
           });
         })
       }
