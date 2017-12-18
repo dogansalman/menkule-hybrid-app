@@ -1,0 +1,17 @@
+tabs{
+  .tabs .tab-item .icon.profile {
+    background-repeat: no-repeat;
+    background-position: 50%;
+    height: 100%;
+    content: url('https://masonz.github.io/images/avatar.png');
+    background-size:contain;
+  }
+  .ion-ios-customicon-outline,
+  .ion-ios-customicon,.ion-md-customicon,.ion-md-customicon-outline {
+    content: url('https://masonz.github.io/images/avatar.png');
+    height: 25px;
+    width: auto;
+    border-radius: 50%;
+  }
+
+}

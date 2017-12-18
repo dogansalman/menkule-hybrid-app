@@ -1,6 +1,5 @@
 <!-- Authorized -->
-<ion-menu [content]="content"  type="push" [swipeEnabled]="false" side="left">
-
+<ion-menu *ngIf="isLogin" [content]="content"  type="push" [swipeEnabled]="false" side="left">
   <ion-content class="menu">
     <button class="menu__close" ion-button clear menuClose><ion-icon name="ios-close-outline" item-start color="light"></ion-icon></button>
     <ion-row>

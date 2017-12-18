@@ -16,6 +16,7 @@ import { RegisterModule } from '../pages/register/register.module';
 import { ForgotModule } from "../pages/forgot/forgot.module";
 import { SearchModule } from '../pages/search/search.module';
 import { LoginModule } from '../pages/login/login.module';
+import { TabsPage } from '../pages/tabs/tabs';
 // Directives
 import { fillHeightDirective } from '../directives/fillHeight/fillHeight.directive';
 import { IonicSwipeAllModule } from 'ionic-swipe-all';
@@ -27,7 +28,8 @@ import { LoaderServices } from "../services/loader/loader.services";
 @NgModule({
   declarations: [
     MyApp,
-    fillHeightDirective
+    fillHeightDirective,
+    TabsPage
   ],
   imports: [
     BrowserModule,
@@ -52,7 +54,8 @@ import { LoaderServices } from "../services/loader/loader.services";
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-    MyApp
+    MyApp,
+    TabsPage
   ],
   providers: [
     StatusBar,

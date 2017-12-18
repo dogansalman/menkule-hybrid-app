@@ -6,15 +6,18 @@ import { Diagnostic } from '@ionic-native/diagnostic';
 import { Network } from '@ionic-native/network';
 import { Main } from '../pages/main/main';
 import { Login } from "../pages/login/login";
+import { Search } from "../pages/search/search";
 import { ToastServices } from "../services/toast/toast.services";
-
+import {TabsPage} from "../pages/tabs/tabs";
 @Component({
   templateUrl: 'app.html'
 })
 
 export class MyApp {
 
-  rootPage:any = Main;
+  isLogin: any = true;
+  rootPage:any = this.isLogin ? TabsPage : Main;
+
   public pages = [
     { title: 'İlan', component: Login, active: false, icon: 'ios-home-outline' },
     { title: 'Rezervasyon', component: Login, active: false, icon: 'ios-bookmarks-outline' },

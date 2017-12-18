@@ -1,5 +1,5 @@
 <ion-header no-shadow no-border>
-  <ion-toolbar color="blue" text-center>
+  <ion-navbar color="blue" text-center>
     <ion-buttons left start>
       <button [menuToggle]="activeMenu" ion-button icon-only >
         <ion-icon name="menu"></ion-icon>
@@ -10,15 +10,12 @@
         <ion-icon name="ios-search-outline"></ion-icon>
       </button>
     </ion-buttons>
-  </ion-toolbar>
+  </ion-navbar>
 </ion-header>
 
 <ion-content>
-
-  <div class="map-container" no-margin no-padding col-12>
+  <div ion-fixed class="map-container" no-margin no-padding col-12>
     <google-map-component class="map"  setMyPoi="true"></google-map-component>
   </div>
-
-
 </ion-content>
 
