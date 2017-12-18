@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from "ionic-angular";
 import { Filter } from "./filter/filter";
+import { NavController } from 'ionic-angular';
 
 @Component({
     selector: 'search',
@@ -9,7 +10,7 @@ import { Filter } from "./filter/filter";
 
 export class Search implements OnInit {
 
-    constructor(public modalController: ModalController) { }
+    constructor(public modalController: ModalController, private Nav: NavController) { }
 
     ngOnInit(): void { }
 

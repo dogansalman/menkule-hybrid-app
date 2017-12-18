@@ -1,4 +1,4 @@
-import { Component, NgZone, ElementRef, Renderer2 } from '@angular/core';
+import { Component, NgZone, ElementRef } from '@angular/core';
 import { LoaderServices } from "../../services/loader/loader.services";
 
 declare var google:any;
@@ -9,6 +9,7 @@ declare var google:any;
 })
 
 export class Places {
+
   autocomplete: any;
   GoogleAutocomplete: any;
   GooglePlaces: any;
@@ -16,12 +17,10 @@ export class Places {
   autocompleteItems: any;
   nearbyItems: any = new Array<any>();
 
-
   constructor(
     public zone: NgZone,
     public load : LoaderServices,
     public el: ElementRef,
-    public rndrr: Renderer2
   ) {
 
     this.geocoder = new google.maps.Geocoder;
@@ -34,26 +33,26 @@ export class Places {
     this.autocompleteItems = [];
   }
 
-  updateSearchResults(){
+  updateSearchResults() {
     if (this.autocomplete.input == '') {
       this.autocompleteItems = [];
       return;
     }
-    this.GoogleAutocomplete.getPlacePredictions({ input: this.autocomplete.input },
+    this.GoogleAutocomplete.getPlacePredictions({ input: this.autocomplete.input , componentRestrictions: {country: 'tr'}, types: ['(cities)']},
       (predictions, status) => {
         this.autocompleteItems = [];
-        if(predictions){
-          this.zone.run(() => {
-            predictions.forEach((prediction) => {
-              this.autocompleteItems.push(prediction);
-            });
-          });
-        }
+        if(!predictions) return;
+        console.log(predictions);
+        predictions.forEach(p => {
+          const first = p.description.split(',')[0].toLocaleLowerCase();
+          if(first.indexOf(this.autocomplete.input.toLocaleLowerCase()) > -1) this.zone.run(() => this.autocompleteItems.push(p));
+        })
       });
   }
 
   selectSearchResult(item){
-    this.rndrr.setValue(this.el.nativeElement.children[0], item.structured_formatting.main_text);
+    this.autocomplete.input = item.structured_formatting.main_text;
+    console.log(item);
     this.load.showLoading();
     this.autocompleteItems = [];
     this.geocoder.geocode({'placeId': item.place_id}, (results, status) => {
@@ -61,10 +60,10 @@ export class Places {
         this.autocompleteItems = [];
         this.GooglePlaces.nearbySearch({
           location: results[0].geometry.location,
-          radius: '500',
-          country: ['(tr)'],
-          types: ['(cities)'], //check other types here https://developers.google.com/places/web-service/supported_types
-          key: 'AIzaSyBWsnpeDue8z9EevJ74Aj7uo5cJFv0p9K0'
+          radius: 500,
+          key: 'AIzaSyBWsnpeDue8z9EevJ74Aj7uo5cJFv0p9K0',
+          sensor: false,
+          types: ['(cities)']
         }, (near_places) => {
           this.zone.run(() => {
             this.nearbyItems = [];
@@ -77,4 +76,6 @@ export class Places {
       }
     })
   }
+
+
 }

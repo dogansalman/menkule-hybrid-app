@@ -34,7 +34,8 @@ export class Main implements OnInit{
   }
   onSwipeRight(e) {
     if (e.direction == 2) {
-       this.navCtrl.push(Search, {},{animate:true, direction: 'forward', duration:500});
+     // this.navCtrl.setRoot(Search, {},{animate:true, direction: 'forward', duration:500});
+      this.navCtrl.push(Search, {},{animate:true, direction: 'forward', duration:500});
     }
   }
   onForgot(): void {

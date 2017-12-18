@@ -1,6 +1,6 @@
 <ion-searchbar #searchInput placeholder="Nereye Seyahat Edeceksiniz ?" [(ngModel)]="autocomplete.input" (ionInput)="updateSearchResults()" ></ion-searchbar>
   <ion-list class="result" [hidden]="autocompleteItems.length == 0">
     <ion-item *ngFor="let item of autocompleteItems" tappable (click)="selectSearchResult(item)">
-      {{ item.description }}
+      <ion-label> {{ item.structured_formatting.main_text}}</ion-label>    <ion-label style="font-size: 12px; color: #a0a0a0;"> {{ item.structured_formatting.secondary_text}} </ion-label>
     </ion-item>
   </ion-list>

@@ -41,7 +41,7 @@ import { LoaderServices } from "../services/loader/loader.services";
       pageTransition: 'ios-transition',
       scrollAssist: true,
       autoFocusAssist: true,
-      inputBlurring: false,
+      inputBlurring: false
     }),
     IonicSwipeAllModule,
     ForgotModule,
