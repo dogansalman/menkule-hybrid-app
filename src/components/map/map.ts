@@ -1,5 +1,5 @@
 import { Component, ViewChild, Input } from '@angular/core';
-import {Platform, NavController } from 'ionic-angular';
+import {Platform } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
 import {
   GoogleMaps,

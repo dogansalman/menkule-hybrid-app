@@ -4,7 +4,6 @@ import { Register } from '../register/register';
 import { Forgot } from '../forgot/forgot';
 import { Login } from '../login/login';
 import { Search } from '../search/search';
-import { TabsPage } from '../tabs/tabs';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Platform } from 'ionic-angular';
 
@@ -34,15 +33,10 @@ export class Main implements OnInit{
   }
   onSwipeRight(e) {
     if (e.direction == 2) {
-     // this.navCtrl.setRoot(Search, {},{animate:true, direction: 'forward', duration:500});
-      this.navCtrl.push(TabsPage, {},{animate:true, direction: 'forward', duration:500});
+      this.navCtrl.push(Search, {},{animate:true, direction: 'forward', duration:500});
     }
   }
   onForgot(): void {
     this.navCtrl.push(Forgot, {}, {animate: true, animation: 'animated fadeIn', direction: 'none', duration: 500});
-  }
-
-  onSearch(): void {
-    this.navCtrl.push(Search, {}, {animate: true, animation: 'animated fadeIn', direction: 'none', duration: 500});
   }
 }

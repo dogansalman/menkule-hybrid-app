@@ -9,6 +9,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { Diagnostic } from "@ionic-native/diagnostic";
 import { Network } from '@ionic-native/network';
+import { NativeStorage } from '@ionic-native/native-storage';
+import { File } from "@ionic-native/file";
 // Pages Modules
 import { MyApp } from './app.component';
 import { MainModule } from '../pages/main/main.module';
@@ -16,20 +18,21 @@ import { RegisterModule } from '../pages/register/register.module';
 import { ForgotModule } from "../pages/forgot/forgot.module";
 import { SearchModule } from '../pages/search/search.module';
 import { LoginModule } from '../pages/login/login.module';
-import { TabsPage } from '../pages/tabs/tabs';
+import { TabsModule } from "../pages/tabs/tabs.module";
 // Directives
 import { fillHeightDirective } from '../directives/fillHeight/fillHeight.directive';
 import { IonicSwipeAllModule } from 'ionic-swipe-all';
+import { UserRequiredModule } from "../directives/userRequired/user-required.module";
 // Services
 import { ApiServices } from "../services/api/api.services";
 import { ToastServices } from "../services/toast/toast.services";
 import { LoaderServices } from "../services/loader/loader.services";
+import { AuthServices } from "../services/auth/auth.services";
+
 
 @NgModule({
   declarations: [
     MyApp,
-    fillHeightDirective,
-    TabsPage
   ],
   imports: [
     BrowserModule,
@@ -50,12 +53,13 @@ import { LoaderServices } from "../services/loader/loader.services";
     LoginModule,
     MainModule,
     RegisterModule,
-    SearchModule
+    SearchModule,
+    TabsModule,
+    UserRequiredModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-    MyApp,
-    TabsPage
+    MyApp
   ],
   providers: [
     StatusBar,
@@ -66,8 +70,10 @@ import { LoaderServices } from "../services/loader/loader.services";
     ApiServices,
     LoaderServices,
     ToastServices,
-    HTTP
-
+    AuthServices,
+    HTTP,
+    NativeStorage,
+    File
   ]
 })
 export class AppModule {}

@@ -8,7 +8,7 @@ import { Login } from '../login/login';
   selector: 'tabs',
   templateUrl: 'tabs.html'
 })
-export class TabsPage {
+export class Tabs {
 
   tab1Root = Search;
   tab2Root = Login;

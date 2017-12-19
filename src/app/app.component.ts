@@ -6,18 +6,17 @@ import { Diagnostic } from '@ionic-native/diagnostic';
 import { Network } from '@ionic-native/network';
 import { Main } from '../pages/main/main';
 import { Login } from "../pages/login/login";
-import { Search } from "../pages/search/search";
+import { AuthServices } from "../services/auth/auth.services";
 import { ToastServices } from "../services/toast/toast.services";
-import {TabsPage} from "../pages/tabs/tabs";
+import { Tabs } from "../pages/tabs/tabs";
+
 @Component({
   templateUrl: 'app.html'
 })
 
 export class MyApp {
 
-  isLogin: any = true;
-  rootPage:any = this.isLogin ? TabsPage : Main;
-
+  rootPage: any = Main;
   public pages = [
     { title: 'İlan', component: Login, active: false, icon: 'ios-home-outline' },
     { title: 'Rezervasyon', component: Login, active: false, icon: 'ios-bookmarks-outline' },
@@ -33,15 +32,22 @@ export class MyApp {
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,
               private network: Network,
-              private _toast: ToastServices, private menu: MenuController, private diagonistic: Diagnostic, private alertController: AlertController) {
+              private _toast: ToastServices, private menu: MenuController, private diagonistic: Diagnostic, private alertController: AlertController, private authServ: AuthServices) {
+
 
     platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
       splashScreen.hide();
 
+
+      this.authServ.getToken().then(() =>  {
+        this.rootPage = Tabs;
+      }).catch((err) => {
+        this.rootPage =  Main;
+      });
+
       if(platform.is('cordova')) {
+
         /* Check location settings */
         this.diagonistic.isLocationAvailable().then((state) => {
           if(!state){
