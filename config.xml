@@ -21,8 +21,10 @@
     <preference name="SplashScreen" value="screen" />
     <preference name="SplashScreenDelay" value="3000" />
     <preference name="AutoHideSplashScreen" value="false" />
-    <preference name="AndroidPersistentFileLocation" value="Internal" />
-    <preference name="iosPersistentFileLocation" value="Library" />
+    <preference name="AndroidPersistentFileLocation" value="Compatibility" />
+    <preference name="iosPersistentFileLocation" value="Compatibility" />
+    <preference name="iosExtraFilesystems" value="library,library-nosync,documents,documents-nosync,cache,bundle,root" />
+    <preference name="AndroidExtraFilesystems" value="files,files-external,documents,sdcard,cache,cache-external,assets,root" />
     <platform name="android">
         <preference name="android-manifest/application/activity/@android:windowSoftInputMode" value="adjustPan" />
         <allow-intent href="market:*" />
