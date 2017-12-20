@@ -10,28 +10,34 @@ export class AuthServices {
   constructor(private file: File) { }
 
   setToken(token): any {
-  return this.file.writeFile(this.file.dataDirectory,'token.tkn',token, { append: false, replace: true });
+  return this.file.writeFile(this.file.dataDirectory,'token.mkl',token, { append: false, replace: true });
   }
 
   getToken(): any {
-    return this.readFile(this.file.dataDirectory, 'token.tkn');
+    return this.readFile(this.file.dataDirectory, 'token.mkl');
   }
 
   deleteToken(): any {
-    return this.file.removeFile(this.file.dataDirectory,'token.tkn');
+    return new Promise((resolve, reject) => {
+      this.file.checkFile(this.file.dataDirectory, 'token.mkl')
+        .then(() => this.file.removeFile(this.file.dataDirectory,'token.mkl'))
+        .then(() => resolve())
+        .catch((err) => reject(err));
+    })
+
   }
 
   setUser(user): any {
-    return this.file.writeFile(this.file.dataDirectory, 'profile.prf', user, {append: false, replace: true});
+    return this.file.writeFile(this.file.dataDirectory, 'profile.mkl', user, {append: false, replace: true});
   }
 
   getUser(force = false): any {
-    if(!force) return this.readFile(this.file.dataDirectory,'profile.prf');
-    alert('get api');
+    if(!force) return this.readFile(this.file.dataDirectory,'profile.mkl');
+    //todo force get user info from api
   }
 
-  deleteUser(): void {
-    this.file.removeFile(this.file.dataDirectory,'profile.prf');
+  deleteUser(): any {
+    return this.file.checkFile(this.file.dataDirectory, 'profile.mkl').then(() => this.file.removeFile(this.file.dataDirectory,'profile.mkl'));
   }
 
   readFile(directoryPath: any, filename: string): any {

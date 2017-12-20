@@ -28,7 +28,7 @@ import { ApiServices } from "../services/api/api.services";
 import { ToastServices } from "../services/toast/toast.services";
 import { LoaderServices } from "../services/loader/loader.services";
 import { AuthServices } from "../services/auth/auth.services";
-
+import { AlertServices } from "../services/alert/alert.services";
 
 @NgModule({
   declarations: [
@@ -71,6 +71,7 @@ import { AuthServices } from "../services/auth/auth.services";
     LoaderServices,
     ToastServices,
     AuthServices,
+    AlertServices,
     HTTP,
     NativeStorage,
     File

@@ -1,14 +1,16 @@
 import { Component, ViewChild } from '@angular/core';
-import { Platform, MenuController, Nav, AlertController  } from 'ionic-angular';
+import { Platform, MenuController, Nav, AlertController, Events  } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Diagnostic } from '@ionic-native/diagnostic';
 import { Network } from '@ionic-native/network';
 import { Main } from '../pages/main/main';
 import { Login } from "../pages/login/login";
+import { Tabs } from "../pages/tabs/tabs";
 import { AuthServices } from "../services/auth/auth.services";
 import { ToastServices } from "../services/toast/toast.services";
-import { Tabs } from "../pages/tabs/tabs";
+import { AlertServices } from "../services/alert/alert.services";
+
 
 @Component({
   templateUrl: 'app.html'
@@ -17,22 +19,61 @@ import { Tabs } from "../pages/tabs/tabs";
 export class MyApp {
 
   rootPage: any = Main;
+  imageBaseUrl : string = "https://res.cloudinary.com/www-menkule-com-tr/image/upload/";
+
+  /* User Info */
+  public user: any = {
+    "id": null,
+    "name": null,
+    "lastname": null,
+    "email": null,
+    "gsm": null,
+    "gender": null,
+    "photo": null,
+    "ownershiping": false,
+    "advert_size": 0,
+    "notification_size": 0,
+    "state": false,
+    "email_state": false,
+    "gsm_state": false,
+    "created_date": null
+  };
+
+  /* Menu Side Pages */
   public pages = [
-    { title: 'İlan', component: Login, active: false, icon: 'ios-home-outline' },
-    { title: 'Rezervasyon', component: Login, active: false, icon: 'ios-bookmarks-outline' },
-    { title: 'Mesaj', component: Login, active: false, icon: 'ios-mail-outline', data: { count: 0}, badge: 'flat_secondary' },
-    { title: 'Bildirim', component: Login, active: false, icon: 'ios-notifications-outline', data: { count: 0},  badge: 'flat_danger' }
+    { title: 'İlan', component: Login, is_event: false, icon: 'ios-home-outline' },
+    { title: 'Rezervasyon', component: Login, is_event: false, icon: 'ios-bookmarks-outline' },
+    { title: 'Mesaj', component: Login, is_event: false, icon: 'ios-mail-outline', data: { count: 0}, badge: 'flat_secondary' },
+    { title: 'Bildirim', component: Login, is_event: false, icon: 'ios-notifications-outline', data: { count: this.user.notification_size},  badge: 'flat_danger' }
   ];
   public under_pages = [
-    { title: 'Hesabım', component: Login, active: false, icon: 'ios-contact-outline' },
-    { title: 'Oturumu Kapak', component: Login, active: false, icon: 'ios-power-outline' }
+    { title: 'Hesabım', component: Login, is_event: false, icon: 'ios-contact-outline' },
+    { title: 'Oturumu Kapat', event: 'menuLogout', is_event: true, icon: 'ios-power-outline' }
   ];
+
+  menuLogout(): void {
+    this.auth.deleteToken()
+      .then(() => this.auth.deleteUser())
+      .then(() => this.content.setRoot(Main, {}, {animate: true, animation: 'animated fadeIn', direction: 'none', duration: 500}) )
+      .catch((err) => console.log(err));
+  }
+
+
 
   @ViewChild('content') content: Nav;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,
               private network: Network,
-              private _toast: ToastServices, private menu: MenuController, private diagonistic: Diagnostic, private alertController: AlertController, private authServ: AuthServices) {
+              private menu: MenuController,
+              private diagonistic: Diagnostic,
+              public  auth: AuthServices,
+              private alert: AlertServices,
+              private _toast: ToastServices,
+              private evt: Events) {
+
+
+    /* Event listeners */
+    this.evt.subscribe('user:login', (user) => Object.assign(this.user, user));
 
     platform.ready().then(() => {
       statusBar.styleDefault();
@@ -40,19 +81,25 @@ export class MyApp {
 
       if(platform.is('cordova')) {
 
+
         /* Set root page with authentication */
-        this.authServ.getToken().then((token) => this.rootPage = token != null ? Tabs : Main).catch((err) =>  this.rootPage =  Main);
+        this.auth.getToken().then((token) => this.rootPage = token != null ? Tabs : Main).catch((err) =>  this.rootPage =  Main);
+
+        /* Set user info */
+        this.auth.getUser().then((u) => this.evt.publish('user:login', u));
+
+        console.log(this.user.notification_size);
 
         /* Check location settings */
         this.diagonistic.isLocationAvailable().then((state) => {
           if(!state){
-            this._toast.showToast('Lütfen konum hizmetini aktif edin.', 5000, 'bottom');
-            this.openConfirmAlert('Uyarı', 'Konumunuzu hemen aktif etmek istiyor musunuz ?').then(() => this.diagonistic.switchToLocationSettings());
+            this._toast.showToast('Lütfen konum hizmetini aktif edin.', 10000, 'bottom');
+            this.alert.confirm('Konumunuzu hemen aktif etmek istiyor musunuz ?', 'Uyarı').then(() => this.diagonistic.switchToLocationSettings());
           }
         });
 
         /* Watch connection */
-        this.network.onDisconnect().subscribe(() => this._toast.showToast('İnternet bağlantısı bekleniyor...', 5000, 'bottom'));
+        this.network.onDisconnect().subscribe(() => this._toast.showToast('İnternet bağlantısı bekleniyor...' + this.network.type, 10000, 'bottom'));
 
       }
 
@@ -60,30 +107,19 @@ export class MyApp {
       this.menu.enable(true, 'menu1');
 
     });
+
+
   }
 
   openPage(page) {
     // close the menu when clicking a link from the menu
     this.menu.close();
     // navigate to the new page if it is not the current page
-     this.content.push(page.component, {}, {animate: true, animation: 'animated fadeIn', direction: 'none', duration: 500});
-  }
-
-  openConfirmAlert(title, message) {
-     return new Promise((resolve, reject) => {
-       let alert = this.alertController.create({
-         title: title,
-         message: message,
-         buttons: [
-           { text: 'Kapat', role: 'cancel', handler: () => { }},
-           { text: 'Tamam', handler: () => { resolve() }},
-         ]
-       });
-       alert.present();
-     })
-
+    !page.is_event ? this.content.push(page.component, {}, {animate: true, animation: 'animated fadeIn', direction: 'none', duration: 500}) : this[page.event]();
 
   }
+
+
 
 }
 
