@@ -34,19 +34,14 @@ export class MyApp {
               private network: Network,
               private _toast: ToastServices, private menu: MenuController, private diagonistic: Diagnostic, private alertController: AlertController, private authServ: AuthServices) {
 
-
     platform.ready().then(() => {
       statusBar.styleDefault();
       splashScreen.hide();
 
-
-      this.authServ.getToken().then(() =>  {
-        this.rootPage = Tabs;
-      }).catch((err) => {
-        this.rootPage =  Main;
-      });
-
       if(platform.is('cordova')) {
+
+        /* Set root page with authentication */
+        this.authServ.getToken().then((token) => this.rootPage = token != null ? Tabs : Main).catch((err) =>  this.rootPage =  Main);
 
         /* Check location settings */
         this.diagonistic.isLocationAvailable().then((state) => {
@@ -55,8 +50,10 @@ export class MyApp {
             this.openConfirmAlert('Uyarı', 'Konumunuzu hemen aktif etmek istiyor musunuz ?').then(() => this.diagonistic.switchToLocationSettings());
           }
         });
+
         /* Watch connection */
         this.network.onDisconnect().subscribe(() => this._toast.showToast('İnternet bağlantısı bekleniyor...', 5000, 'bottom'));
+
       }
 
       /* Enable side menu */

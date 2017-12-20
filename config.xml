@@ -3,7 +3,7 @@
     <name>Menkule</name>
     <description>Menkule.</description>
     <author email="iletisim@menkule.com.tr" href="http://menkule.com.tr/">Menkule - Keşfedeceğiniz heryerde eviniz var</author>
-    <content original-src="index.html" src="http://192.168.99.64:8100" />
+    <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -45,23 +45,6 @@
         <splash density="port-xxhdpi" src="resources/android/splash/drawable-port-xxhdpi-screen.png" />
         <splash density="port-xxxhdpi" src="resources/android/splash/drawable-port-xxxhdpi-screen.png" />
     </platform>
-    <allow-navigation href="http://192.168.1.240:8100" />
-    <allow-navigation href="http://192.168.99.108:8100" />
-    <allow-navigation href="http://192.168.99.82:8100" />
-    <allow-navigation href="http://192.168.99.125:8100" />
-    <allow-navigation href="http://192.168.99.65:8100" />
-    <allow-navigation href="http://192.168.99.58:8100" />
-    <allow-navigation href="http://192.168.99.97:8100" />
-    <allow-navigation href="http://192.168.99.124:8100" />
-    <allow-navigation href="http://192.168.99.35:8100" />
-    <allow-navigation href="http://192.168.99.114:8100" />
-    <allow-navigation href="http://192.168.99.11:8100" />
-    <allow-navigation href="http://192.168.99.100:8100" />
-    <allow-navigation href="http://192.168.99.95:8100" />
-    <allow-navigation href="http://192.168.99.8:8100" />
-    <allow-navigation href="http://192.168.99.91:8100" />
-    <allow-navigation href="http://192.168.99.56:8100" />
-    <allow-navigation href="http://192.168.99.64:8100" />
     <engine name="android" spec="6.3.0" />
     <plugin name="ionic-plugin-keyboard" spec="^2.2.1" />
     <plugin name="cordova-plugin-whitelist" spec="^1.3.3" />

@@ -31,7 +31,7 @@ export class Map{
         this.geolocation.getCurrentPosition().then((resp) => {
           this.initMap(new LatLng(resp.coords.latitude, resp.coords.longitude));
         }).catch((error) => {
-          alert('Üzgünüz! Konumuza erişilemedi. Lütfen konum servisini aktif edin.');
+         //todo save error log file
         });
       } else {
         this.initMap(null);

@@ -29,9 +29,12 @@ export class Login implements OnInit {
         this.navCtrl.push(Forgot, {}, {animate: true, animation: 'animated fadeIn', direction: 'none', duration: 500});
     }
     onLogin(): void {
-     this.api.post('auth', this.loginForm.value, {'Content-Type': 'application/x-www-form-urlencoded'}).then((token) => {
-       this.auth.setToken(token).then(() => this.navCtrl.setRoot(Tabs, {}, {animate: true, animation: 'animated fadeIn', direction: 'none', duration: 500}));
-     }).catch((err) => {
+     this.api.post('auth', this.loginForm.value, {'Content-Type': 'application/x-www-form-urlencoded'})
+       .then((token) => this.auth.setToken(token)
+       .then(() => this.api.get('user', {}))
+       .then((user) => this.auth.setUser(user))
+       .then(() => this.navCtrl.setRoot(Tabs, {}, {animate: true, animation: 'animated fadeIn', direction: 'none', duration: 500}))
+     ).catch((err) => {
        this._toast.showToast('Eposta veya şifre hatalı.',3000, 'bottom');
      })
     }
