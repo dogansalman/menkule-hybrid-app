@@ -28,7 +28,7 @@ export class ApiServices {
 
   get(url: string, header: any): any {
     return new Promise((resolve, reject) => {
-      this.auth.getToken().then((token) => new Promise((resolve) => resolve( token ? Object.assign({ Authorization: 'Bearer ' + token.access_token }) : header)))
+       this.auth.getToken().then((token) => new Promise((resolve) => resolve( token ? Object.assign({ Authorization: 'Bearer ' + token.access_token }) : header)))
         .then((_header) => this.http.get(this.apiUrl + '/' + url, {}, _header))
         .then((result) => resolve( JSON.parse(result.data)))
         .catch((err) => reject(err))

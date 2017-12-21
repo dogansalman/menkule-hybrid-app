@@ -58,8 +58,6 @@ export class MyApp {
       .catch((err) => console.log(err));
   }
 
-
-
   @ViewChild('content') content: Nav;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,
@@ -81,14 +79,11 @@ export class MyApp {
 
       if(platform.is('cordova')) {
 
-
         /* Set root page with authentication */
         this.auth.getToken().then((token) => this.rootPage = token != null ? Tabs : Main).catch((err) =>  this.rootPage =  Main);
 
         /* Set user info */
         this.auth.getUser().then((u) => this.evt.publish('user:login', u));
-
-        console.log(this.user.notification_size);
 
         /* Check location settings */
         this.diagonistic.isLocationAvailable().then((state) => {
@@ -98,16 +93,16 @@ export class MyApp {
           }
         });
 
+        /* Check connection*/
+        if( this.network.type === 'none') this._toast.showToast('İnternet bağlantısı bekleniyor...', 10000, 'bottom');
         /* Watch connection */
-        this.network.onDisconnect().subscribe(() => this._toast.showToast('İnternet bağlantısı bekleniyor...' + this.network.type, 10000, 'bottom'));
-
+        this.network.onDisconnect().subscribe(() => this._toast.showToast('İnternet bağlantısı bekleniyor...', 10000, 'bottom'));
       }
 
       /* Enable side menu */
       this.menu.enable(true, 'menu1');
 
     });
-
 
   }
 
