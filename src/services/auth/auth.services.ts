@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import {DirectoryEntry, File} from "@ionic-native/file";
+import { File } from "@ionic-native/file";
 
 @Injectable()
 export class AuthServices {

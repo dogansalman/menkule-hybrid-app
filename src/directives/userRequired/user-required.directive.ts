@@ -8,6 +8,6 @@ export class UserRequiredDirective implements OnInit{
   constructor(private el: ElementRef, private auth: AuthServices) { }
 
   ngOnInit() : void {
-  //  if(!this.auth.getToken()) this.el.nativeElement.remove();
+    if(!this.auth.getToken()) this.el.nativeElement.remove();
   }
 }

@@ -19,10 +19,6 @@ import { ForgotModule } from "../pages/forgot/forgot.module";
 import { SearchModule } from '../pages/search/search.module';
 import { LoginModule } from '../pages/login/login.module';
 import { TabsModule } from "../pages/tabs/tabs.module";
-// Directives
-import { fillHeightDirective } from '../directives/fillHeight/fillHeight.directive';
-import { IonicSwipeAllModule } from 'ionic-swipe-all';
-import { UserRequiredModule } from "../directives/userRequired/user-required.module";
 // Services
 import { ApiServices } from "../services/api/api.services";
 import { ToastServices } from "../services/toast/toast.services";
@@ -48,14 +44,12 @@ import { AlertServices } from "../services/alert/alert.services";
       autoFocusAssist: true,
       inputBlurring: false
     }),
-    IonicSwipeAllModule,
     ForgotModule,
     LoginModule,
     MainModule,
     RegisterModule,
     SearchModule,
     TabsModule,
-    UserRequiredModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

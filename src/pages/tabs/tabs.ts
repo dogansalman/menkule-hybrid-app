@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Main } from "../main/main";
 import { Search } from "../search/search";
 import { Login } from '../login/login';
 

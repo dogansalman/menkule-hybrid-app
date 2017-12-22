@@ -1,15 +1,15 @@
 {
   "android": {
     "debug": {
-      "keystore": "../Menkule.keystore",
-      "storePassword": "",
+      "keystore": "menkule.keystore",
+      "storePassword": "mercksap",
       "alias": "Menkule",
-      "password" : "password",
+      "password" : "mercksap",
       "keystoreType": ""
     },
     "release": {
-      "keystore": "../Menkule.keystore",
-      "storePassword": "",
+      "keystore": "menkule.keystore",
+      "storePassword": "mercksap",
       "alias": "Menkule",
       "password" : "mercksap",
       "keystoreType": ""
