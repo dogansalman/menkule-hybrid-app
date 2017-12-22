@@ -41,7 +41,7 @@ export class Login implements OnInit {
          .then((user) => this.auth.setUser(user) && this.evt.publish('user:login', user))
          .then(() => this.navCtrl.setRoot(Tabs, {}, {animate: true, animation: 'animated fadeIn', direction: 'none', duration: 500}))
         .catch((err) => {
-         this._toast.showToast('Eposta veya şifre hatalı.',3000, 'bottom');
+         this._toast.showToast(err ? err : 'Eposta veya şifre hatalı.',3000, 'bottom');
        });
     }
 

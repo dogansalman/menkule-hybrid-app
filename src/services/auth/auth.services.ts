@@ -11,7 +11,7 @@ export class AuthServices {
 
   setToken(token): any {
     return new Promise((resolve, reject) => {
-     this.file.writeFile(this.file.cacheDirectory,'token.men',token, { append: false, replace: true }).then((e) => resolve(e)).catch((err) => reject(err))
+     this.file.writeFile(this.file.cacheDirectory,'token.men',token, { append: false, replace: true }).then((e) => resolve(e)).catch((err) => reject('Üzgünüz. Token kayıt edilemedi. Daha sonra tekrar deneyin.'))
     });
   }
 
@@ -32,7 +32,7 @@ export class AuthServices {
 
   setUser(user): any {
     return new Promise((resolve,reject) => {
-      this.file.writeFile(this.file.cacheDirectory, 'profile.men', user, {append: false, replace: true}).then(() => resolve(user)).catch((err) => reject(err))
+      this.file.writeFile(this.file.cacheDirectory, 'profile.men', user, {append: false, replace: true}).then(() => resolve(user)).catch((err) => reject('Profil bilgisi kayıt edilemedi. Daha sonra tekrar deneyin.'))
     });
   }
 

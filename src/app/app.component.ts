@@ -114,7 +114,5 @@ export class MyApp {
 
   }
 
-
-
 }
 
