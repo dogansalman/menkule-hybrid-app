@@ -19,20 +19,35 @@ export class ApiServices {
 
     this.loader.showLoading();
     return new Promise((resolve, reject) => {
-      this.http.post(this.apiUrl + '/' + url, data, header)
-        .then((result) =>  resolve( JSON.parse(result.data)))
-        .catch((err) =>  this.network.type === 'none' ? reject(this.handleError({status: 1})) : reject(this.handleError(err)))
+      this.auth.getToken().then((token) => new Promise((resolve) => resolve( token ? Object.assign({ Authorization: 'Bearer ' + token.access_token }) : header)))
+        .then((header) => this.http.post(this.apiUrl + '/' + url, data, header) )
+        .then((result) => {
+          const _data = () => { try { return JSON.parse(result.data)} catch(e) { return null }};
+          resolve(_data());
+        })
+        .catch((err) => {
+          console.log(err);
+          this.network.type === 'none' ? reject(this.handleError({status: 1})) : reject(this.handleError(err));
+        })
         .then(() =>  this.loader.dismissLoading());
     })
   }
 
   get(url: string, header: any): any {
     if(this.network.type === 'none') return this.toast.showToast('İnternet bağlantısı bekleniyor...', 2000, 'bottom');
+    this.loader.showLoading();
     return new Promise((resolve, reject) => {
        this.auth.getToken().then((token) => new Promise((resolve) => resolve( token ? Object.assign({ Authorization: 'Bearer ' + token.access_token }) : header)))
         .then((_header) => this.http.get(this.apiUrl + '/' + url, {}, _header))
-        .then((result) => resolve( JSON.parse(result.data)))
-        .catch((err) => reject(this.handleError(err)))
+        .then((result) => {
+          const _data = () => { try { return JSON.parse(result.data)} catch(e) { return null }};
+          resolve(_data());
+        })
+        .catch((err) => {
+          console.log(err);
+          reject(this.handleError(err));
+        })
+        .then(() =>  this.loader.dismissLoading())
     })
   }
 

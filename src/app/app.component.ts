@@ -6,6 +6,7 @@ import { Diagnostic } from '@ionic-native/diagnostic';
 import { Network } from '@ionic-native/network';
 import { Main } from '../pages/main/main';
 import { Login } from "../pages/login/login";
+import { Activation } from "../pages/activation/activation";
 import { Tabs } from "../pages/tabs/tabs";
 import { AuthServices } from "../services/auth/auth.services";
 import { ToastServices } from "../services/toast/toast.services";
@@ -18,7 +19,7 @@ import { AlertServices } from "../services/alert/alert.services";
 
 export class MyApp {
 
-  rootPage: any = Main;
+  rootPage: any = Activation;
   imageBaseUrl : string = "https://res.cloudinary.com/www-menkule-com-tr/image/upload/";
 
   /* User Info */
@@ -52,10 +53,9 @@ export class MyApp {
   ];
 
   menuLogout(): void {
-    this.auth.deleteToken()
-      .then(() => this.auth.deleteUser())
-      .then(() => this.content.setRoot(Main, {}, {animate: true, animation: 'animated fadeIn', direction: 'none', duration: 500}) )
-      .catch((err) => console.log(err));
+    this.auth.deleteToken();
+    this.auth.deleteUser();
+    this.content.setRoot(Main, {}, {animate: true, animation: 'animated fadeIn', direction: 'none', duration: 500});
   }
 
   @ViewChild('content') content: Nav;
@@ -70,8 +70,6 @@ export class MyApp {
               private evt: Events) {
 
 
-    /* Event listeners */
-    this.evt.subscribe('user:login', (user) => Object.assign(this.user, user));
 
     platform.ready().then(() => {
       statusBar.styleDefault();
@@ -80,10 +78,11 @@ export class MyApp {
       if(platform.is('cordova')) {
 
         /* Set root page with authentication */
-        this.auth.getToken().then((token) => this.rootPage = token != null ? Tabs : Main).catch((err) =>  this.rootPage =  Main);
-
-        /* Set user info */
-        this.auth.getUser().then((u) => this.evt.publish('user:login', u));
+        this.auth.getToken().then((token) => {
+          this.auth.getUser().then((user) => {
+            if(token && user) this.rootPage = Tabs && this.evt.publish('user:login', user);
+          })
+        }).catch((err) =>  this.rootPage =  Main);
 
         /* Check location settings */
         this.diagonistic.isLocationAvailable().then((state) => {
@@ -104,7 +103,18 @@ export class MyApp {
 
     });
 
+    /* Event listeners */
+    this.evt.subscribe('user:login', (user) => {
+      if(user) {
+        // set user
+        Object.assign(this.user, user);
+        // check user state
+        this.content.setRoot(user.state ? Tabs : Activation, {}, {animate: true, animation: 'animated fadeIn', direction: 'none', duration: 500});
+      }
+    });
+
   }
+
 
   openPage(page) {
     // close the menu when clicking a link from the menu

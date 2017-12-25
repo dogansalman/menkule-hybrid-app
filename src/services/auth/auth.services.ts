@@ -42,7 +42,12 @@ export class AuthServices {
   }
 
   deleteUser(): any {
-    return new Promise((resolve, reject) => {this.file.checkFile(this.file.cacheDirectory, 'profile.men').then(() => this.file.removeFile(this.file.cacheDirectory,'profile.men')).then(() => resolve(true)).catch((err) => reject(err))});
+    return new Promise((resolve, reject) => {
+      this.file.checkFile(this.file.cacheDirectory, 'profile.men')
+        .then(() => this.file.removeFile(this.file.cacheDirectory,'profile.men'))
+        .then(() => resolve())
+        .catch((err) => reject(err));
+    })
   }
 
   readFile(directoryPath: any, filename: string): any {

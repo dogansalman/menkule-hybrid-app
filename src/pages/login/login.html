@@ -15,8 +15,9 @@
         <ion-buttons  start>
           <button [disabled]="!loginForm.valid" (click)="onLogin()" [round]="true" class="animated fadeIn" ion-button icon-only full color="blue">Oturum Aç</button>
         </ion-buttons>
-        <ng-container>
-          <a (click)="onForgot()" class="floatright animated fadeInUp">Şifremi Unuttum</a>
-        </ng-container>
+
+        <div padding>
+          <a (click)="onForgot()" float-right class="animated fadeInUp">Şifremi Unuttum</a>
+        </div>
       </form>
 </ion-content>

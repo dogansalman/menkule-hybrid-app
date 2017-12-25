@@ -44,9 +44,10 @@ export class Map{
         map.one(GoogleMapsEvent.MAP_READY).then((data: any) => {
         let position = {
           target: cordi,
-          zoom: 16
+          zoom: 16,
+          duration: 0
         };
-        map.animateCamera(position);
+        map.moveCamera(position);
 
         if(this.setMyPoi) {
           let markerOptions: MarkerOptions = {
