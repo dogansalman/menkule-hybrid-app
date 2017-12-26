@@ -32,7 +32,6 @@ export class ApiServices {
         .then(() =>  this.loader.dismissLoading());
     })
   }
-
   get(url: string, header: any): any {
     if(this.network.type === 'none') return this.toast.showToast('İnternet bağlantısı bekleniyor...', 2000, 'bottom');
     this.loader.showLoading();
@@ -50,7 +49,6 @@ export class ApiServices {
         .then(() =>  this.loader.dismissLoading())
     })
   }
-
   handleError(error): any {
    return this.errors[error.status] ? this.errors[error.status] : null;
   }

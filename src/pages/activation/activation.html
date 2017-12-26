@@ -10,10 +10,10 @@
     <button [round]="true" [disabled]="!activationForm.valid"  (click)="OnActivate()" ion-button icon-only full color="flat_secondary">Tamam</button>
     <button [round]="true" (click)="onLogOut()" ion-button icon-only full color="blue">Oturumu Kapat</button>
   </ion-buttons>
-    <div padding>
-      <a (click)="onResendCode()" float-right class="resend animated fadeInUp">Tekrar gönder</a>
-    </div>
+    <a (click)="onResendCode()" float-right class="resend animated fadeInUp">Tekrar gönder</a>
   </form>
 </ion-content>
-
+<ion-footer>
+  <timer *ngIf="isResend" #timer timeInSeconds="240"></timer>
+</ion-footer>
 

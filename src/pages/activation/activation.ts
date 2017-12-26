@@ -15,6 +15,7 @@ import { AuthServices } from "../../services/auth/auth.services";
 export class Activation {
 
   public activationForm: FormGroup;
+  public isResend: boolean = false;
 
   constructor(private api: ApiServices, private toast: ToastServices, private fb: FormBuilder, private nav: NavController, private auth: AuthServices) {
     this.activationForm = this.fb.group({
@@ -25,8 +26,8 @@ export class Activation {
   OnActivate(): void {
     this.api.post('users/approve/gsm', this.activationForm.value, {})
       .then(() => this.toast.showToast('Üyeliğiniz akktif edildi.', 3000, 'bottom'))
-      .then(() => setTimeout(() => { this.nav.setRoot(Tabs,{}, {animate:true, animation:'md-transition', direction: 'none', duration:500})}, 3000))
-      .catch((err) => this.toast.showToast( 'Aktivasyon kodu hatalı.',4000, 'bottom'));
+      .then(() => setTimeout(() => { this.nav.setRoot(Tabs,{}, {animate:true, animation:'md-transition', direction: 'none', duration:500})}, 1500))
+      .catch((err) => this.toast.showToast( 'Aktivasyon kodu hatalı.',1500, 'bottom'));
   }
   onLogOut(): void {
     this.auth.deleteToken();
@@ -35,6 +36,7 @@ export class Activation {
   }
   onResendCode(): void {
     this.api.get('users/validate/gsm/send', {}).then(() => this.toast.showToast('Aktivasyon kodu gönderildi.', 3000, 'bottom'))
+      .then(() => this.isResend = true)
       .catch((err) => this.toast.showToast('Yeni aktivasyon kodu için 4 dakika beklemeniz gerekmektedir.',3000, 'bottom') )
   }
 }

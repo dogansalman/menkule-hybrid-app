@@ -5,6 +5,7 @@ import { ApiServices } from "../../services/api/api.services";
 import { ToastServices } from "../../services/toast/toast.services";
 
 @Component({
+    selector: 'forgot',
     templateUrl: 'forgot.html'
 })
 

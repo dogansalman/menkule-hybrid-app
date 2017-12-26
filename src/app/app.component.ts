@@ -19,7 +19,7 @@ import { AlertServices } from "../services/alert/alert.services";
 
 export class MyApp {
 
-  rootPage: any = Activation;
+  rootPage: any = Main;
   imageBaseUrl : string = "https://res.cloudinary.com/www-menkule-com-tr/image/upload/";
 
   /* User Info */
@@ -78,11 +78,12 @@ export class MyApp {
       if(platform.is('cordova')) {
 
         /* Set root page with authentication */
+
         this.auth.getToken().then((token) => {
-          this.auth.getUser().then((user) => {
-            if(token && user) this.rootPage = Tabs && this.evt.publish('user:login', user);
-          })
+          if(token) this.auth.getUser(true).then((user) => { if(token && user ) this.evt.publish('user:login', user);})
         }).catch((err) =>  this.rootPage =  Main);
+
+
 
         /* Check location settings */
         this.diagonistic.isLocationAvailable().then((state) => {
@@ -105,6 +106,7 @@ export class MyApp {
 
     /* Event listeners */
     this.evt.subscribe('user:login', (user) => {
+      console.log('publish');
       if(user) {
         // set user
         Object.assign(this.user, user);
@@ -112,9 +114,7 @@ export class MyApp {
         this.content.setRoot(user.state ? Tabs : Activation, {}, {animate: true, animation: 'animated fadeIn', direction: 'none', duration: 500});
       }
     });
-
   }
-
 
   openPage(page) {
     // close the menu when clicking a link from the menu
