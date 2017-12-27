@@ -1,41 +1,51 @@
 login {
-
-
-    
-}
-
-.sing-in {
-  width: 300px;
-  margin: auto;
-  input {
-    display: block;
-    width: 100%;
-    height: 45px;
-    padding: 5px;
-    border: none;
-    outline: none;
-    margin: 0px 0px 10px 0px;
-    color: #fff;
-    background: rgba(0, 0, 0, 0.33);
+  .scroll-content {
+    display: table !important;
+    width: 100% !important;
+    height: 100% !important;
+    margin-top: -50px !important;
+    text-align: center;
+    position: inherit !important;
   }
-  input::-webkit-input-placeholder { /* Chrome/Opera/Safari */
-    color: #fff;
-    padding-left:5px;
-  }
-  input::-moz-placeholder { /* Firefox 19+ */
-    color: #fff;
-    padding-left:5px;
-  }
-  input::-moz-placeholder { /* Firefox 19+ */
-    :-ms-input-placeholder { /* IE 10+ */
+  .sing-in {
+    display: table-cell;
+    vertical-align: middle;
+    max-width: 400px;
+    width: 350px;
+    min-width: 250px;
+    input {
+      display: block;
+      width: 100%;
+      height: 45px;
+      padding: 5px;
+      border: none;
+      outline: none;
+      margin: 0px 0px 10px 0px;
+      color: #fff;
+      background: rgba(0, 0, 0, 0.33);
+    }
+    input::-webkit-input-placeholder { /* Chrome/Opera/Safari */
       color: #fff;
       padding-left:5px;
     }
-  }
-  input::-moz-placeholder { /* Firefox 19+ */
-    :-moz-placeholder { /* Firefox 18- */
+    input::-moz-placeholder { /* Firefox 19+ */
       color: #fff;
       padding-left:5px;
     }
+    input::-moz-placeholder { /* Firefox 19+ */
+      :-ms-input-placeholder { /* IE 10+ */
+        color: #fff;
+        padding-left:5px;
+      }
+    }
+    input::-moz-placeholder { /* Firefox 19+ */
+      :-moz-placeholder { /* Firefox 18- */
+        color: #fff;
+        padding-left:5px;
+      }
+    }
   }
+
 }
+
+

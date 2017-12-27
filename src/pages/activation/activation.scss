@@ -1,8 +1,20 @@
 activation {
-
+  .scroll-content {
+    display: table !important;
+    width: 100% !important;
+    height: 100% !important;
+    margin-top: -50px !important;
+    text-align: center;
+    position: inherit !important;
+  }
   .activation {
-    width: 325px;
-    margin: auto;
+    display: table-cell;
+    vertical-align: middle;
+    max-width: 400px;
+    width: 350px;
+    min-width: 250px;
+
+
     input {
       display: block;
       width: 100%;
@@ -34,11 +46,11 @@ activation {
         padding-left:5px;
       }
     }
+
   }
+
   a[disabled], button[disabled], [ion-button][disabled] {
     opacity: 1;
   }
-  .resend {
-    margin-top:30px;
-  }
+
 }

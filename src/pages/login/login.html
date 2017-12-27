@@ -8,16 +8,26 @@
     </ion-navbar>
   </ion-header>
 <ion-content fullscreen class="background-cover">
-    <form [formGroup]="loginForm" class="sing-in">
-        <h2 class="title animated fadeInUp">Keşfedeceğiniz Heryerde Eviniz Var</h2>
-        <input formControlName="username" autofocus #mail ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/"  class="form-control animated fadeInUp" type="email" placeholder="E-posta">
-        <input formControlName="password" type="password" class="animated fadeInUp" placeholder="Şifre">
+
+    <form padding [formGroup]="loginForm" class="sing-in">
+      <div class="center">
+        <img src="assets/images/logo_flat.png" class="animated flipInY" style="  width: 100px;">
+      </div>
+        <h2 class="title animated fadeInUp">Devam etmek için lütfen oturum açın.</h2>
+        <input formControlName="username" autofocus #mail ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/"  type="email" placeholder="E-posta">
+        <input formControlName="password" type="password" placeholder="Şifre">
         <ion-buttons  start>
           <button [disabled]="!loginForm.valid" (click)="onLogin()" [round]="true" class="animated fadeIn" ion-button icon-only full color="blue">Oturum Aç</button>
         </ion-buttons>
 
         <div padding>
-          <a (click)="onForgot()" float-right class="animated fadeInUp">Şifremi Unuttum</a>
+          <a (click)="onForgot()" float-right>Şifremi Unuttum</a>
         </div>
       </form>
 </ion-content>
+<ion-footer>
+  <p class="animated fadeInUp" text-center color="light" ion-text>
+    Yeni hesap oluşturmak için
+    <span  color="twitter" (click)="onRegister()" ion-text> Kayıt Ol</span>
+  </p>
+</ion-footer>

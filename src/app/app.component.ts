@@ -78,12 +78,9 @@ export class MyApp {
       if(platform.is('cordova')) {
 
         /* Set root page with authentication */
-
         this.auth.getToken().then((token) => {
           if(token) this.auth.getUser(true).then((user) => { if(token && user ) this.evt.publish('user:login', user);})
         }).catch((err) =>  this.rootPage =  Main);
-
-
 
         /* Check location settings */
         this.diagonistic.isLocationAvailable().then((state) => {
@@ -106,7 +103,6 @@ export class MyApp {
 
     /* Event listeners */
     this.evt.subscribe('user:login', (user) => {
-      console.log('publish');
       if(user) {
         // set user
         Object.assign(this.user, user);

@@ -5,21 +5,21 @@
                     <img src="assets/images/logo_flat.png" class="animated flipInY" style="  width: 100px;">
                 </div>
                 <h2 class="title animated fadeInUp">Keşfedeceğiniz Heryerde Eviniz Var</h2>
-                <ion-buttons padding class="animated fadeInUp"  start>
+                <ion-buttons start>
                   <button [round]="true" (click)="onLogin()" ion-button icon-only full color="blue">Giriş</button>
                   <button [round]="true" ion-button  full color="facebook">Facebook İle Bağlan</button>
                 </ion-buttons>
-                <div padding>
-                  <a (click)="onForgot()" float-right class="animated fadeInUp">Şifremi Unuttum</a>
+                <div>
+                  <a (click)="onForgot()" float-right>Şifremi Unuttum</a>
                 </div>
         </ng-container>
       </div>
 </ion-content>
-<ion-footer class="animated fadeInUp">
+<ion-footer>
     <ion-toolbar transparent text-center>
       <span class="swipe-right-icon"></span>
       <span class="swipe-right-icon soft"></span>
-      <p class="login-footer" color="light" ion-text>
+      <p class="animated fadeInUp" text-center color="light" ion-text>
         Yeni hesap oluşturmak için
         <span  color="twitter" (click)="onRegister()" ion-text> Kayıt Ol</span>
       </p>

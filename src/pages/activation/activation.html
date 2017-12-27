@@ -3,17 +3,37 @@
 </ion-header>
 <ion-content fullscreen color="white" padding class="background-cover">
   <form class="activation" [formGroup]="activationForm">
-  <h2 ion-text color="light"> Hesabınızı Onaylayın !</h2>
-  <p ion-text color="light">Menkule üye bilgilerinin doğruluğuna önem vermektedir. Ayrıca rezervasyon bildirimleri gsm numaranıza iletilmektedir. Lütfen gsm numaranızı doğrulayın.</p>
-    <input formControlName="code" type="number" class="animated fadeInUp" placeholder="Aktivasyon Kodu">
-  <ion-buttons>
-    <button [round]="true" [disabled]="!activationForm.valid"  (click)="OnActivate()" ion-button icon-only full color="flat_secondary">Tamam</button>
-    <button [round]="true" (click)="onLogOut()" ion-button icon-only full color="blue">Oturumu Kapat</button>
-  </ion-buttons>
-    <a (click)="onResendCode()" float-right class="resend animated fadeInUp">Tekrar gönder</a>
+    <ion-grid>
+      <ion-row>
+        <ion-col col-12>
+          <h2 text-left ion-text color="light"> Hesabınızı Onaylayın !</h2>
+          <p text-left ion-text color="light">Menkule üye bilgilerinin doğruluğuna önem vermektedir. Ayrıca rezervasyon bildirimleri gsm numaranıza iletilmektedir. Lütfen gsm numaranızı doğrulayın.</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-12>
+          <input formControlName="code" type="number" placeholder="Aktivasyon Kodu">
+        </ion-col>
+      </ion-row>
+    <ion-row>
+      <ion-col col-12>
+        <ion-buttons>
+          <button [round]="true" [disabled]="!activationForm.valid"  (click)="OnActivate()" ion-button icon-only full color="flat_secondary">Tamam</button>
+          <button [round]="true" (click)="onLogOut()" ion-button icon-only full color="primary">Oturumu Kapat</button>
+        </ion-buttons>
+        <ion-buttons>
+          <button ion-button small clear color="white" (click)="onResendCode()"  icon-left float-right class="animated bounceInLeft">
+            <ion-icon name="ios-refresh-outline"></ion-icon> Tekrar gönder</button>
+          <button ion-button small clear color="white" icon-left float-left class="animated bounceInRight">
+            <ion-icon name="md-person"></ion-icon>Hesabım</button>
+        </ion-buttons>
+      </ion-col>
+    </ion-row>
+
+    </ion-grid>
   </form>
 </ion-content>
 <ion-footer>
-  <timer *ngIf="isResend" #timer timeInSeconds="240"></timer>
+  <timer *ngIf="false" #timer timeInSeconds="240"></timer>
 </ion-footer>
 

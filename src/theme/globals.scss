@@ -21,11 +21,15 @@
   background-attachment: fixed;
   height: 100%;
 
+  a[disabled], button[disabled], [ion-button][disabled] {
+    opacity: 1 !important;
+  }
 }
 .background-cover a {
   color: #fff;
   text-decoration: none;
 }
+
 .title {
   font-size: 20px;
   text-align: center;

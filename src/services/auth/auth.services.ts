@@ -85,13 +85,21 @@ export class AuthServices {
 
   getForceUser(): any {
     return new Promise((resolve, reject) => {
-      this.getToken().then((token) => {
-        this.http.get(this.apiUrl + '/users', {}, { Authorization: 'Bearer ' + token.access_token })
-          .then((user) => {
-            console.log(user);
-          })
-        resolve(token);
-      })
+      this.getToken()
+        .then((token) => this.http.get(this.apiUrl + '/users', {}, { Authorization: 'Bearer ' + token.access_token }))
+        .then((result) => this.tryToParse(result.data))
+        .then((user) => this.setUser(user))
+        .then((user) => {resolve(user)})
+        .catch((err) => reject(err))
     })
   }
+  tryToParse(str): any {
+    return new Promise((resolve) => {
+      const _data = () => { try { return JSON.parse(str)} catch(e) { return null }};
+      resolve(_data());
+    })
+  }
+
 }
+
+

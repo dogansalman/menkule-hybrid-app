@@ -6,18 +6,18 @@
     <form [formGroup]="forgotForm" padding class="forgot-form">
       <h2 ion-text center color="light"><ion-icon ios="ios-lock" md="md-lock"></ion-icon> Şifremi Unuttum !</h2>
       <p ion-text center color="light">Kayıtlı e-posta adresinizi yazınız. Şifre bilginiz e-posta adresinize iletilecektir.</p>
-      <input ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/"  formControlName="email" class="form-control animated fadeInUp" type="email" placeholder="E-posta">
+      <input ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/"  formControlName="email" type="email" placeholder="E-posta">
       <ion-buttons start>
-        <button round class="animated fadeInUp" ion-button  full color="blue" [disabled]="!forgotForm.valid" (click)="onForgot()" >Tamam</button>
+        <button round ion-button  full color="blue" [disabled]="!forgotForm.valid" (click)="onForgot()" >Tamam</button>
       </ion-buttons>
     </form>
   </div>
 </ion-content>
-<ion-footer class="animated fadeInUp">
+<ion-footer >
   <ion-toolbar transparent text-center>
-          <p class="login-footer" color="light" ion-text>
-          Hesabınıza erişim ile ilgili sorun yaşıyorsanız  aşağıdaki adresi kullanarak bizim ile iletişime geçin. <br>
-          <b>Destek için</b> yardim@menkule.com.tr
-          </p>
+      <p class="animated fadeInUp" color="light" ion-text>
+        Hesabınıza erişim ile ilgili sorun yaşıyorsanız  aşağıdaki adresi kullanarak bizim ile iletişime geçin. <br>
+        <b>Destek için</b> yardim@menkule.com.tr
+      </p>
   </ion-toolbar>
 </ion-footer>

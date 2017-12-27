@@ -1,5 +1,10 @@
 import { Component, OnInit} from '@angular/core';
-import {NavController} from 'ionic-angular';
+import { NavController } from 'ionic-angular';
+import { FormGroup, Validators, FormBuilder } from "@angular/forms";
+import { ApiServices } from "../../services/api/api.services";
+import { AuthServices } from "../../services/auth/auth.services";
+import { ToastServices } from "../../services/toast/toast.services";
+import { Activation } from "../activation/activation";
 
 @Component({
   selector: 'register',
@@ -7,10 +12,22 @@ import {NavController} from 'ionic-angular';
 })
 
 export class Register implements OnInit {
-  constructor(public navCtrl: NavController){
+  public registerForm: FormGroup;
 
+  constructor(private navCtrl: NavController, private auth: AuthServices, private toast: ToastServices, private api: ApiServices, private fb: FormBuilder){
+    /* register form */
+    this.registerForm = this.fb.group({
+      name: [null, Validators.required],
+      lastname: [null, Validators.required],
+      email: [null, [Validators.email, Validators.required]],
+      gsm: [null, [Validators.minLength(9), Validators.maxLength(9), Validators.required]],
+      gender: [null, [Validators.required]]
+    })
   }
-  ngOnInit() {
-
+  ngOnInit() { }
+  onRegister(): any {
+    this.api.post('users', this.registerForm.value, {})
+      .then(() => this.navCtrl.setRoot(Activation, {}, {animate:true, animation:'md-transition', direction: 'none', duration:500}))
+      .catch((err) => console.log(err))
   }
 }
