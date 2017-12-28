@@ -1,6 +1,9 @@
 .scroll-content {
   overflow-y: auto;
 }
+.back-button.show-back-button {
+  color:#ffffff !important;
+}
 .no-radius{
   border-radius: 0px !important;
 }
@@ -12,8 +15,15 @@
   -webkit-transition: height .3s;
   transition: height .3s;
 }
+// Toast Custom Style
+.toast_err {
+  background:#e74c3c !important;
+}
+.toast_success{
+  background:#27ae60 !important;
+}
 
-//Backgrounds
+//Backgrounds cover & forms
 .background-cover {
   background: url('../assets/images/bg.png') no-repeat;
   background-position: center;
@@ -24,18 +34,85 @@
   a[disabled], button[disabled], [ion-button][disabled] {
     opacity: 1 !important;
   }
+  .item-inner, ion-item {
+    border-bottom-color: transparent !important;
+    box-shadow: none !important;
+  }
+  ion-item {
+
+    background: transparent !important;
+    .item-inner {
+      border: none !important;
+    }
+    .item-inner{
+      padding: 0px !important;
+    }
+    ion-label{
+      white-space: normal;
+      margin: 11px 0px 11px 0;
+    }
+  }
+  ion-list-header {
+    background: transparent;
+    border: none;
+    ion-label{
+      color: #ffffff;
+      text-transform: initial;
+      font-size: 22px !important;
+      font-weight: 300;
+      white-space: normal
+    }
+  }
+    .form-cover {
+    ion-select {
+      text-align: left;
+      max-width: 100% !important;
+      width: 100%;
+      height: 45px;
+      border: none;
+      outline: none;
+      margin: 0px 0px 10px 0px;
+      color: #fff;
+      background: rgba(0, 0, 0, 0.33);
+      padding: 13px 8px 12px 9px;
+    }
+    .select-ios .select-placeholder { color:#ffffff;}
+    input, select {
+      display: block;
+      width: 100%;
+      height: 45px;
+      padding: 5px;
+      border: none;
+      outline: none;
+      margin: 0px 0px 10px 0px;
+      color: #fff;
+      background: rgba(0, 0, 0, 0.33);
+    }
+    input::-webkit-input-placeholder{ /* Chrome/Opera/Safari */
+      color: #fff;
+      padding-left:5px;
+    }
+    input::-moz-placeholder { /* Firefox 19+ */
+      color: #fff;
+      padding-left:5px;
+    }
+    input::-moz-placeholder { /* Firefox 19+ */
+      :-ms-input-placeholder { /* IE 10+ */
+        color: #fff;
+        padding-left:5px;
+      }
+    }
+    input::-moz-placeholder { /* Firefox 19+ */
+      :-moz-placeholder { /* Firefox 18- */
+        color: #fff;
+        padding-left:5px;
+      }
+    }
+  }
 }
 .background-cover a {
   color: #fff;
   text-decoration: none;
 }
 
-.title {
-  font-size: 20px;
-  text-align: center;
-  color: #fff;
-  font-weight: 300
-}
-.back-button.show-back-button {
-  color:#ffffff !important;
-}
+

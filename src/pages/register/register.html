@@ -2,23 +2,39 @@
     <ion-navbar transparent text-center></ion-navbar>
 </ion-header>
 
-<ion-content  swipeBackEnabled="true" animation="none" padding class="register background-cover">
+<ion-content [fullscreen]="true" swipeBackEnabled="true" animation="none" padding class="register background-cover">
   <div center padding>
-      <h2 class="title animated fadeInUp">Yeni Hesap Oluştur</h2>
-      <form class="sing-up">
-          <ion-input placeholder="E-Posta" type="email"></ion-input>
-          <ion-input placeholder="Adınız" type="text"></ion-input>
-          <ion-input placeholder="Soyadınız" type="text"></ion-input>
-          <select placeholder="Cinsiyet">
-            <option value="Bay">Bay</option>
-            <option value="Bayan">Bayan</option>
-          </select>
-          <ion-input placeholder="Gsm" type="text"></ion-input>
-          <ion-input placeholder="Şifre" type="password"></ion-input>
+    <form [formGroup]="registerForm" class="sing-up form-cover">
+      <ion-list no-padding no-border no-lines>
+        <ion-list-header class="animated fadeInUp">Yeni Hesap Oluştur</ion-list-header>
+        <ion-item no-padding>
+          <ion-input formControlName="email" placeholder="E-Posta" type="email"></ion-input>
+        </ion-item>
+        <ion-item no-padding>
+          <ion-input formControlName="name" placeholder="Adınız" type="text"></ion-input>
+        </ion-item>
+        <ion-item no-padding>
+          <ion-input formControlName="lastname" placeholder="Soyadınız" type="text"></ion-input>
+        </ion-item>
+        <ion-item no-padding>
+          <ion-select formControlName="gender"  placeholder="Cinsiyet">
+            <ion-option value="Bay">Bay</ion-option>
+            <ion-option value="Bayan">Bayan</ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item no-padding>
+          <ion-input [regex]="'^[0-9]+$'"  formControlName="gsm"  placeholder="Örn: 5340000000" type="text"></ion-input>
+        </ion-item>
+        <ion-item no-padding>
+          <ion-input formControlName="password" placeholder="Şifre" type="password"></ion-input>
+        </ion-item>
+        <ion-item no-padding>
           <ion-input placeholder="Şifre Tekrar" type="password"></ion-input>
-          <ion-buttons start>
-              <button round ion-button [disabled]="!registerForm.valid" (click)="onRegister()" full color="blue">Tamam</button>
-          </ion-buttons>
+        </ion-item>
+      </ion-list>
+      <ion-buttons start>
+        <button round ion-button [disabled]="!registerForm.valid" (click)="onRegister()" full color="blue">Tamam</button>
+      </ion-buttons>
         </form>
   </div>
 </ion-content>

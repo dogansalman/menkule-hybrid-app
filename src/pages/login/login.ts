@@ -8,6 +8,7 @@ import { ToastServices } from "../../services/toast/toast.services";
 import { AuthServices } from "../../services/auth/auth.services";
 import { Events } from "ionic-angular";
 import { Activation } from "../activation/activation";
+import {Register} from "../register/register";
 
 @Component({
     selector: 'login',
@@ -43,6 +44,9 @@ export class Login implements OnInit {
         .catch((err) => {
           this._toast.showToast(err ? err : 'Eposta veya şifre hatalı.',3000, 'bottom');
        });
+    }
+    onRegister(): void {
+      this.navCtrl.push(Register, {},{animate:true, animation:'md-transition', direction: 'none', duration:500});
     }
 
 

@@ -1,27 +1,25 @@
-<ion-content  class="background-cover">
-    <div (swipe)="onSwipeRight($event)" class="main-container">
-        <ng-container padding>
-                <div class="center">
-                    <img src="assets/images/logo_flat.png" class="animated flipInY" style="  width: 100px;">
-                </div>
-                <h2 class="title animated fadeInUp">Keşfedeceğiniz Heryerde Eviniz Var</h2>
-                <ion-buttons start>
-                  <button [round]="true" (click)="onLogin()" ion-button icon-only full color="blue">Giriş</button>
-                  <button [round]="true" ion-button  full color="facebook">Facebook İle Bağlan</button>
-                </ion-buttons>
-                <div>
-                  <a (click)="onForgot()" float-right>Şifremi Unuttum</a>
-                </div>
-        </ng-container>
-      </div>
+<ion-content (swipe)="onSwipeRight($event)"  class="background-cover" >
+  <div class="main-container">
+  <ion-list no-padding no-margin no-border no-lines >
+    <img text-center src="assets/images/logo_flat.png" class="animated flipInY" width="100px" height="100px"/>
+    <ion-list-header class="title animated fadeInUp" transparent no-border no-padding text-center> Keşfedeceğiniz Heryerde Eviniz Var </ion-list-header>
+    <ion-item no-padding no-margin>
+      <ion-buttons start>
+        <button [round]="true" (click)="onLogin()" ion-button icon-only full color="blue">Giriş</button>
+        <button [round]="true" ion-button  full color="facebook">Facebook İle Bağlan</button>
+        <a float-right ion-button clear  (click)="onForgot()" >Şifremi Unuttum</a>
+      </ion-buttons>
+    </ion-item>
+  </ion-list>
+  </div>
+
 </ion-content>
 <ion-footer>
     <ion-toolbar transparent text-center>
       <span class="swipe-right-icon"></span>
       <span class="swipe-right-icon soft"></span>
-      <p class="animated fadeInUp" text-center color="light" ion-text>
-        Yeni hesap oluşturmak için
-        <span  color="twitter" (click)="onRegister()" ion-text> Kayıt Ol</span>
-      </p>
+      <a ion-button full clear text-center class="animated fadeInUp" color="white" (click)="onRegister()" >  Yeni hesap oluşturmak için Kayıt Ol</a>
     </ion-toolbar>
 </ion-footer>
+
+

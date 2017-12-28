@@ -20,14 +20,15 @@ export class Register implements OnInit {
       name: [null, Validators.required],
       lastname: [null, Validators.required],
       email: [null, [Validators.email, Validators.required]],
-      gsm: [null, [Validators.minLength(9), Validators.maxLength(9), Validators.required]],
-      gender: [null, [Validators.required]]
+      gsm: [null, [Validators.minLength(10), Validators.maxLength(10), Validators.required]],
+      gender: [null, [Validators.required]],
+      password: [null, [Validators.required]]
     })
   }
   ngOnInit() { }
   onRegister(): any {
     this.api.post('users', this.registerForm.value, {})
       .then(() => this.navCtrl.setRoot(Activation, {}, {animate:true, animation:'md-transition', direction: 'none', duration:500}))
-      .catch((err) => console.log(err))
+      .catch((err) => this.toast.showToast(err ? err : 'Beklenmedik bir hata oluştu. Daha sonra tekrar deneyin',3000, 'bottom'))
   }
 }

@@ -44,19 +44,28 @@ export class ApiServices {
         })
         .catch((err) => {
           console.log(err);
-          reject(this.handleError(err));
+
+          if(this.handleError(err)) this.toast.showToast(this.handleError(err),3000, 'bottom');
+          reject(err);
         })
         .then(() =>  this.loader.dismissLoading())
     })
   }
   handleError(error): any {
-   return this.errors[error.status] ? this.errors[error.status] : null;
+   return this.errors[error.status] ? this.errors[error.status] : this.getErrorMessage(error);
+  }
+  getErrorMessage(err): any {
+    if(err.hasOwnProperty('error')) {
+      const errMsg = () => { try { return JSON.parse(err.error).Message } catch(e) { return null }};
+      return errMsg();
+    }
+    return null;
   }
 
   private errors = {
     401: 'Bu işlem için yetki bulunamadı.',
     500: 'Lütfen daha sonra tekrar deneyin.',
-    0: 'Üzgünüz. Servis yanıt vermedi veya istek hatalı daha sonra tekar deneyin.',
-    1: 'İnternet bağlantısı bekleniyor...'
+    0:  'Üzgünüz. Servis yanıt vermedi veya istek hatalı daha sonra tekar deneyin.',
+    1:  'İnternet bağlantısı bekleniyor...'
   }
 }

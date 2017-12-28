@@ -2,16 +2,23 @@
   <ion-navbar transparent text-center></ion-navbar>
 </ion-header>
 <ion-content fullscreen color="white" padding class="forgot background-cover">
-  <div class="forgot-container">
-    <form [formGroup]="forgotForm" padding class="forgot-form">
-      <h2 ion-text center color="light"><ion-icon ios="ios-lock" md="md-lock"></ion-icon> Şifremi Unuttum !</h2>
-      <p ion-text center color="light">Kayıtlı e-posta adresinizi yazınız. Şifre bilginiz e-posta adresinize iletilecektir.</p>
-      <input ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/"  formControlName="email" type="email" placeholder="E-posta">
-      <ion-buttons start>
-        <button round ion-button  full color="blue" [disabled]="!forgotForm.valid" (click)="onForgot()" >Tamam</button>
-      </ion-buttons>
+    <form [formGroup]="forgotForm" padding class="forgot-form form-cover">
+      <ion-list no-padding no-border no-lines>
+        <ion-list-header no-padding text-left> <ion-icon ios="ios-lock" md="md-lock"></ion-icon> Şifremi Unuttum ! </ion-list-header>
+        <ion-item no-padding>
+          <p  ion-text center color="light">Kayıtlı e-posta adresinizi yazınız. Şifre bilginiz e-posta adresinize iletilecektir.</p>
+        </ion-item>
+        <ion-item no-padding>
+          <ion-input ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/"  formControlName="email" type="email" placeholder="E-posta"></ion-input>
+        </ion-item>
+        <ion-item no-padding>
+          <ion-buttons start>
+            <button round ion-button  full color="blue" [disabled]="!forgotForm.valid" (click)="onForgot()" >Tamam</button>
+          </ion-buttons>
+        </ion-item>
+      </ion-list>
+
     </form>
-  </div>
 </ion-content>
 <ion-footer >
   <ion-toolbar transparent text-center>
