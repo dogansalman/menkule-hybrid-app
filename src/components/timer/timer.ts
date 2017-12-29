@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {ITimer} from './itimer';
 
 
@@ -6,17 +6,16 @@ import {ITimer} from './itimer';
   selector: 'timer',
   templateUrl: 'timer.html'
 })
-export class TimerComponent {
+export class TimerComponent implements OnInit{
 
   @Input() timeInSeconds: number;
   public timer: ITimer;
+  public _timerTick: any;
+  constructor() { }
 
-  constructor() {
-  }
 
   ngOnInit() {
     this.initTimer();
-    this.startTimer();
   }
 
   hasFinished() {
@@ -51,8 +50,17 @@ export class TimerComponent {
     this.startTimer();
   }
 
+  restartTimer() {
+    clearTimeout(this._timerTick);
+    this.timer.hasStarted = false;
+    this.timer.runTimer = false;
+    this.timer.secondsRemaining = this.timeInSeconds;
+    this.startTimer();
+  }
+
   timerTick() {
-    setTimeout(() => {
+
+ this._timerTick = setTimeout(() => {
       if (!this.timer.runTimer) { return; }
       this.timer.secondsRemaining--;
       this.timer.displayTime = this.getSecondsAsDigitalClock(this.timer.secondsRemaining);
@@ -78,5 +86,4 @@ export class TimerComponent {
     secondsString = (seconds < 10) ? "0" + seconds : seconds.toString();
     return hoursString + ':' + minutesString + ':' + secondsString;
   }
-
 }

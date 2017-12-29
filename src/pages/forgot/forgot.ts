@@ -22,7 +22,7 @@ export class Forgot implements OnInit {
 
     onForgot() {
       this.api.post('users/password/forgot', this.forgotForm.value, {})
-        .then(() => this.toast.showToast('Yeni şifre talebiniz alındı. E-posta adresinizi kontrol ediniz.',4000, 'bottom'))
+        .then(() => this.toast.showToast('Yeni şifre talebiniz alındı. E-posta adresinizi kontrol ediniz.',4000, 'bottom', false))
         .catch((err) => this.toast.showToast(err ? err : 'E-posta adresi bulunamadı.',4000, 'bottom'));
     }
     onNewCode(): void {

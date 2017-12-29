@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { Register } from '../register/register';
 import { Forgot } from '../forgot/forgot';
@@ -12,12 +12,11 @@ import { Platform } from 'ionic-angular';
   selector: 'main',
   templateUrl: 'main.html'
 })
-export class Main implements OnInit{
+export class Main implements  AfterViewInit{
 
   constructor(public navCtrl: NavController, public SplashScreen: SplashScreen, public platform: Platform) {
   }
-  ngOnInit() {
-  }
+
 
   ngAfterViewInit(){
     this.platform.ready().then(() => {
@@ -27,7 +26,6 @@ export class Main implements OnInit{
   onLogin(): void {
     this.navCtrl.push(Login, {}, {animate:true, animation:'md-transition', direction: 'none', duration:500});
   }
-
   onRegister(): void {
     this.navCtrl.push(Register, {},{animate:true, animation:'md-transition', direction: 'none', duration:500});
   }

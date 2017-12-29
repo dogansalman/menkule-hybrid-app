@@ -70,7 +70,6 @@ export class MyApp {
               private evt: Events) {
 
 
-
     platform.ready().then(() => {
       statusBar.styleDefault();
       splashScreen.hide();
@@ -106,8 +105,9 @@ export class MyApp {
       if(user) {
         // set user
         Object.assign(this.user, user);
+
         // check user state
-        this.content.setRoot(user.state ? Tabs : Activation, {}, {animate: true, animation: 'animated fadeIn', direction: 'none', duration: 500});
+        this.content.setRoot(user.state ? Tabs : Activation, {is_new: this.user.hasOwnProperty('is_new')}, {animate: true, animation: 'animated fadeIn', direction: 'none', duration: 500});
       }
     });
   }

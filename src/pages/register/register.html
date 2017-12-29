@@ -23,13 +23,13 @@
           </ion-select>
         </ion-item>
         <ion-item no-padding>
-          <ion-input [regex]="'^[0-9]+$'"  formControlName="gsm"  placeholder="Örn: 5340000000" type="text"></ion-input>
+          <ion-input [regex]="'^[0-9]+$'"  formControlName="gsm"  placeholder="Örn: 5340000000" type="tel"></ion-input>
         </ion-item>
         <ion-item no-padding>
           <ion-input formControlName="password" placeholder="Şifre" type="password"></ion-input>
         </ion-item>
         <ion-item no-padding>
-          <ion-input placeholder="Şifre Tekrar" type="password"></ion-input>
+          <ion-input formControlName="reply" placeholder="Şifre Tekrar" type="password"></ion-input>
         </ion-item>
       </ion-list>
       <ion-buttons start>

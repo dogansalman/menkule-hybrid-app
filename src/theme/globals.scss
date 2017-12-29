@@ -17,10 +17,14 @@
 }
 // Toast Custom Style
 .toast_err {
-  background:#e74c3c !important;
+  .toast-wrapper {
+    background:#000000 !important;
+  }
 }
-.toast_success{
-  background:#27ae60 !important;
+.toast_success {
+  .toast-wrapper {
+    background:#27ae60 !important;
+  }
 }
 
 //Backgrounds cover & forms

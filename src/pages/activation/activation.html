@@ -34,6 +34,6 @@
   </form>
 </ion-content>
 <ion-footer>
-  <timer *ngIf="false" #timer timeInSeconds="240"></timer>
+  <timer [hidden]="!timerDisplay"  timeInSeconds="240"></timer>
 </ion-footer>
 
