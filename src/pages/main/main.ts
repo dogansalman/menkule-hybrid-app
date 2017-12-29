@@ -6,7 +6,7 @@ import { Login } from '../login/login';
 import { Search } from '../search/search';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Platform } from 'ionic-angular';
-
+import { User } from "../../interfaces/user/iuser";
 
 @Component({
   selector: 'main',
@@ -14,11 +14,23 @@ import { Platform } from 'ionic-angular';
 })
 export class Main implements  AfterViewInit{
 
-  constructor(public navCtrl: NavController, public SplashScreen: SplashScreen, public platform: Platform) {
-  }
+  constructor(public navCtrl: NavController, public SplashScreen: SplashScreen, public platform: Platform) {  }
 
 
   ngAfterViewInit(){
+
+    // TODO Interfaces
+
+    /* Interfaces Kullanımı */
+    /*
+    Direkt obje merge edilebiliyor.
+    function yazamadık !
+    devam edilecek.
+
+    * */
+    const user: User = {name: 'dogan', lastname: 'salman', photo: 'uu'};
+    console.log(user);
+
     this.platform.ready().then(() => {
       this.SplashScreen.hide();
     });

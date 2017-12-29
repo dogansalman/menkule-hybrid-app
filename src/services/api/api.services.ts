@@ -6,12 +6,12 @@ import { LoaderServices } from "../loader/loader.services";
 import { AuthServices } from "../auth/auth.services";
 import { ToastServices } from "../toast/toast.services";
 import { Network } from "@ionic-native/network";
-
+import env from '../../environment/environment';
 
 @Injectable()
 export class ApiServices {
 
-  private apiUrl = 'https://webapi.menkule.com.tr';
+
 
   constructor(private http: HTTP, private loader : LoaderServices, private auth: AuthServices, private network: Network, private toast: ToastServices) { }
 
@@ -20,7 +20,7 @@ export class ApiServices {
     this.loader.showLoading();
     return new Promise((resolve, reject) => {
       this.auth.getToken().then((token) => new Promise((resolve) => resolve( token ? Object.assign({ Authorization: 'Bearer ' + token.access_token }) : header)))
-        .then((header) => this.http.post(this.apiUrl + '/' + url, data, header) )
+        .then((header) => this.http.post(env.apiUrl + '/' + url, data, header) )
         .then((result) => {
           const _data = () => { try { return JSON.parse(result.data)} catch(e) { return null }};
           resolve(_data());
@@ -37,7 +37,7 @@ export class ApiServices {
     this.loader.showLoading();
     return new Promise((resolve, reject) => {
        this.auth.getToken().then((token) => new Promise((resolve) => resolve( token ? Object.assign({ Authorization: 'Bearer ' + token.access_token }) : header)))
-        .then((_header) => this.http.get(this.apiUrl + '/' + url, {}, _header))
+        .then((_header) => this.http.get(env.apiUrl + '/' + url, {}, _header))
         .then((result) => {
           const _data = () => { try { return JSON.parse(result.data)} catch(e) { return null }};
           resolve(_data());
