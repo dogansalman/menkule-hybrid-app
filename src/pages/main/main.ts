@@ -14,22 +14,13 @@ import { User } from "../../interfaces/user/iuser";
 })
 export class Main implements  AfterViewInit{
 
-  constructor(public navCtrl: NavController, public SplashScreen: SplashScreen, public platform: Platform) {  }
+  public user: any;
+  constructor(public navCtrl: NavController, public SplashScreen: SplashScreen, public platform: Platform) {
+    this.user = new User({name:'dogan', lastname:'salman'});
+  }
 
 
   ngAfterViewInit(){
-
-    // TODO Interfaces
-
-    /* Interfaces Kullanımı */
-    /*
-    Direkt obje merge edilebiliyor.
-    function yazamadık !
-    devam edilecek.
-
-    * */
-    const user: User = {name: 'dogan', lastname: 'salman', photo: 'uu'};
-    console.log(user);
 
     this.platform.ready().then(() => {
       this.SplashScreen.hide();
