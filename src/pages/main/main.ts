@@ -6,7 +6,7 @@ import { Login } from '../login/login';
 import { Search } from '../search/search';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Platform } from 'ionic-angular';
-import { User } from "../../interfaces/user/iuser";
+
 
 @Component({
   selector: 'main',
@@ -15,9 +15,7 @@ import { User } from "../../interfaces/user/iuser";
 export class Main implements  AfterViewInit{
 
   public user: any;
-  constructor(public navCtrl: NavController, public SplashScreen: SplashScreen, public platform: Platform) {
-    this.user = new User({name:'dogan', lastname:'salman'});
-  }
+  constructor(public navCtrl: NavController, public SplashScreen: SplashScreen, public platform: Platform) {  }
 
 
   ngAfterViewInit(){

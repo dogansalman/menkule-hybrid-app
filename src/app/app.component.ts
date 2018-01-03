@@ -20,32 +20,13 @@ import { AlertServices } from "../services/alert/alert.services";
 export class MyApp {
 
   rootPage: any = Main;
-  imageBaseUrl : string = "https://res.cloudinary.com/www-menkule-com-tr/image/upload/";
-
-  /* User Info */
-  public user: any = {
-    "id": null,
-    "name": null,
-    "lastname": null,
-    "email": null,
-    "gsm": null,
-    "gender": null,
-    "photo": null,
-    "ownershiping": false,
-    "advert_size": 0,
-    "notification_size": 0,
-    "state": false,
-    "email_state": false,
-    "gsm_state": false,
-    "created_date": null
-  };
 
   /* Menu Side Pages */
   public pages = [
-    { title: 'İlan', component: Login, is_event: false, icon: 'ios-home-outline' },
-    { title: 'Rezervasyon', component: Login, is_event: false, icon: 'ios-bookmarks-outline' },
-    { title: 'Mesaj', component: Login, is_event: false, icon: 'ios-mail-outline', data: { count: 0}, badge: 'flat_secondary' },
-    { title: 'Bildirim', component: Login, is_event: false, icon: 'ios-notifications-outline', data: { count: this.user.notification_size},  badge: 'flat_danger' }
+    { title: 'İlan', component: Login, is_event: false, icon: 'ios-home-outline', data: {}},
+    { title: 'Rezervasyon', component: Login, is_event: false, icon: 'ios-bookmarks-outline', data: {}},
+    { title: 'Mesaj', component: Login, is_event: false, icon: 'ios-mail-outline', data: {}, badge: 'flat_secondary' },
+    { title: 'Bildirim', component: Login, is_event: false, icon: 'ios-notifications-outline', data: {},  badge: 'flat_danger' }
   ];
   public under_pages = [
     { title: 'Hesabım', component: Login, is_event: false, icon: 'ios-contact-outline' },
@@ -68,7 +49,6 @@ export class MyApp {
               private alert: AlertServices,
               private _toast: ToastServices,
               private evt: Events) {
-
 
     platform.ready().then(() => {
       statusBar.styleDefault();
@@ -101,13 +81,14 @@ export class MyApp {
     });
 
     /* Event listeners */
+
+    // User Logged
     this.evt.subscribe('user:login', (user) => {
       if(user) {
-        // set user
-        Object.assign(this.user, user);
-
+        this.pages.find(p => p.title === 'Bildirim').data = {count: this.auth.user.notification_size};
+        this.pages.find(p => p.title === 'Mesaj').data = {count: this.auth.user.message_size};
         // check user state
-        this.content.setRoot(user.state ? Tabs : Activation, {is_new: this.user.hasOwnProperty('is_new')}, {animate: true, animation: 'animated fadeIn', direction: 'none', duration: 500});
+        this.content.setRoot(user.state ? Tabs : Activation, {is_new: user.hasOwnProperty('is_new')}, {animate: true, animation: 'animated fadeIn', direction: 'none', duration: 500});
       }
     });
   }
@@ -119,6 +100,7 @@ export class MyApp {
     !page.is_event ? this.content.push(page.component, {}, {animate: true, animation: 'animated fadeIn', direction: 'none', duration: 500}) : this[page.event]();
 
   }
+
 
 }
 

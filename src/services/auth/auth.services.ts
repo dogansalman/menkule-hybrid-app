@@ -1,14 +1,16 @@
 import { Injectable } from "@angular/core";
 import { File } from "@ionic-native/file";
 import { HTTP } from "@ionic-native/http";
-
+import { User } from "../../class/user/user";
+import { INotification } from '../../interface/notifications/notification'
+import  environment from '../../environment/environment';
 
 @Injectable()
 export class AuthServices {
 
   public token: any = null;
-  public user: any = null;
-  private apiUrl = 'https://webapi.menkule.com.tr';
+  public user: User;
+  public notify: INotification = { notification: 0, message: 0 };
 
   constructor(private file: File, private http: HTTP) { }
 
@@ -35,7 +37,14 @@ export class AuthServices {
 
   setUser(user): any {
     return new Promise((resolve,reject) => {
-      this.file.writeFile(this.file.cacheDirectory, 'profile.men', user, {append: false, replace: true}).then(() => resolve(user)).catch((err) => reject('Profil bilgisi kayıt edilemedi. Daha sonra tekrar deneyin.'))
+      this.file.writeFile(this.file.cacheDirectory, 'profile.men', user, {append: false, replace: true})
+        .then(() => {
+          this.user = new User(user);
+          this.notify.message = this.user.message_size;
+          this.notify.notification = this.user.notification_size;
+          resolve(user);
+        })
+        .catch((err) => reject('Profil bilgisi kayıt edilemedi. Daha sonra tekrar deneyin.'))
     });
   }
 
@@ -86,7 +95,7 @@ export class AuthServices {
   getForceUser(): any {
     return new Promise((resolve, reject) => {
       this.getToken()
-        .then((token) => this.http.get(this.apiUrl + '/users', {}, { Authorization: 'Bearer ' + token.access_token }))
+        .then((token) => this.http.get(environment.apiUrl + '/users', {}, { Authorization: 'Bearer ' + token.access_token }))
         .then((result) => this.tryToParse(result.data))
         .then((user) => this.setUser(user))
         .then((user) => {resolve(user)})
