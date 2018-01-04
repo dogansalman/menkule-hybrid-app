@@ -8,10 +8,10 @@ import { Main } from '../pages/main/main';
 import { Login } from "../pages/login/login";
 import { Activation } from "../pages/activation/activation";
 import { Tabs } from "../pages/tabs/tabs";
+import { Profile } from "../pages/profile/profile";
 import { AuthServices } from "../services/auth/auth.services";
 import { ToastServices } from "../services/toast/toast.services";
 import { AlertServices } from "../services/alert/alert.services";
-
 
 @Component({
   templateUrl: 'app.html'
@@ -20,6 +20,7 @@ import { AlertServices } from "../services/alert/alert.services";
 export class MyApp {
 
   rootPage: any = Main;
+  @ViewChild('content') content: Nav;
 
   /* Menu Side Pages */
   public pages = [
@@ -29,17 +30,21 @@ export class MyApp {
     { title: 'Bildirim', component: Login, is_event: false, icon: 'ios-notifications-outline', data: {},  badge: 'flat_danger' }
   ];
   public under_pages = [
-    { title: 'Hesabım', component: Login, is_event: false, icon: 'ios-contact-outline' },
-    { title: 'Oturumu Kapat', event: 'menuLogout', is_event: true, icon: 'ios-power-outline' }
+    { title: 'Hesabım', component: Profile, is_event: false, icon: 'ios-contact-outline' },
+    { title: 'Oturumu Kapat', event: 'logOut', is_event: true, icon: 'ios-power-outline' }
   ];
-
-  menuLogout(): void {
-    this.auth.deleteToken();
-    this.auth.deleteUser();
-    this.content.setRoot(Main, {}, {animate: true, animation: 'animated fadeIn', direction: 'none', duration: 500});
+  logOut(): void {
+    this.auth.deleteToken()
+      .then(() => this.auth.deleteUser())
+      .then(() => this.content.setRoot(Main, {}, {animate: true, animation: 'animated fadeIn', direction: 'none', duration: 500}))
   }
+  openPage(page) {
+    // close the menu when clicking a link from the menu
+    this.menu.close();
+    // navigate to the new page if it is not the current page
+    !page.is_event ? this.content.push(page.component, {}, {animate: true, animation: 'animated fadeIn', direction: 'none', duration: 500}) : this[page.event]();
 
-  @ViewChild('content') content: Nav;
+  }
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,
               private network: Network,
@@ -50,57 +55,46 @@ export class MyApp {
               private _toast: ToastServices,
               private evt: Events) {
 
-    platform.ready().then(() => {
-      statusBar.styleDefault();
-      splashScreen.hide();
+      platform.ready().then(() => {
+        statusBar.styleDefault();
+        splashScreen.hide();
 
-      if(platform.is('cordova')) {
+        if(platform.is('cordova')) {
 
-        /* Set root page with authentication */
-        this.auth.getToken().then((token) => {
-          if(token) this.auth.getUser(true).then((user) => { if(token && user ) this.evt.publish('user:login', user);})
-        }).catch((err) =>  this.rootPage =  Main);
+          /* Set root page with authentication */
+          this.auth.getToken().then((token) => {
+            if(token) this.auth.getUser(true).then((user) => { if(token && user ) this.evt.publish('user:login', user);})
+          }).catch((err) =>  this.rootPage =  Main);
 
-        /* Check location settings */
-        this.diagonistic.isLocationAvailable().then((state) => {
-          if(!state){
-            this._toast.showToast('Lütfen konum hizmetini aktif edin.', 10000, 'bottom');
-            this.alert.confirm('Konumunuzu hemen aktif etmek istiyor musunuz ?', 'Uyarı').then(() => this.diagonistic.switchToLocationSettings());
-          }
-        });
+          /* Check location settings */
+          this.diagonistic.isLocationAvailable().then((state) => {
+            if(!state){
+              this._toast.showToast('Lütfen konum hizmetini aktif edin.', 10000, 'bottom');
+              this.alert.confirm('Konumunuzu hemen aktif etmek istiyor musunuz ?', 'Uyarı').then(() => this.diagonistic.switchToLocationSettings());
+            }
+          });
 
-        /* Check connection*/
-        if( this.network.type === 'none') this._toast.showToast('İnternet bağlantısı bekleniyor...', 10000, 'bottom');
-        /* Watch connection */
-        this.network.onDisconnect().subscribe(() => this._toast.showToast('İnternet bağlantısı bekleniyor...', 10000, 'bottom'));
-      }
+          /* Check connection*/
+          if( this.network.type === 'none') this._toast.showToast('İnternet bağlantısı bekleniyor...', 10000, 'bottom');
+          /* Watch connection */
+          this.network.onDisconnect().subscribe(() => this._toast.showToast('İnternet bağlantısı bekleniyor...', 10000, 'bottom'));
+        }
 
-      /* Enable side menu */
-      this.menu.enable(true, 'menu1');
+        /* Enable side menu */
+        this.menu.enable(true, 'menu1');
 
-    });
+      });
 
-    /* Event listeners */
-
-    // User Logged
-    this.evt.subscribe('user:login', (user) => {
-      if(user) {
-        this.pages.find(p => p.title === 'Bildirim').data = {count: this.auth.user.notification_size};
-        this.pages.find(p => p.title === 'Mesaj').data = {count: this.auth.user.message_size};
-        // check user state
-        this.content.setRoot(user.state ? Tabs : Activation, {is_new: user.hasOwnProperty('is_new')}, {animate: true, animation: 'animated fadeIn', direction: 'none', duration: 500});
-      }
-    });
+      /* Event listeners */
+      // User Logged
+      this.evt.subscribe('user:login', (user) => {
+        if(user) {
+          this.pages.find(p => p.title === 'Bildirim').data = {count: user.notification_size};
+          this.pages.find(p => p.title === 'Mesaj').data = {count: 0 };
+          // check user state
+          this.content.setRoot(user.state ? Tabs : Activation, {is_new: user.hasOwnProperty('is_new')}, {animate: true, animation: 'animated fadeIn', direction: 'none', duration: 500});
+        }
+      });
   }
-
-  openPage(page) {
-    // close the menu when clicking a link from the menu
-    this.menu.close();
-    // navigate to the new page if it is not the current page
-    !page.is_event ? this.content.push(page.component, {}, {animate: true, animation: 'animated fadeIn', direction: 'none', duration: 500}) : this[page.event]();
-
-  }
-
-
 }
 

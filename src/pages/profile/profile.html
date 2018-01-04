@@ -1,0 +1,36 @@
+<ion-header no-shadow no-border>
+  <ion-navbar color="blue" text-center>
+    <ion-buttons left start>
+      <button menuToggle ion-button icon-only >
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content fullscreen>
+  <form padding [formGroup]="profileForm">
+    <img  text-center src="{{auth.user.full_photo}}" class="animated flipInY photo">
+    <ion-list no-lines no-border>
+      <ion-list-header class="animated fadeInUp">{{auth.user.name | capitalizeFirst }} {{auth.user.lastname}}</ion-list-header>
+      <ion-item no-padding no-margin>
+        <ion-input formControlName="email"  ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/"  type="email" placeholder="E-posta"></ion-input>
+      </ion-item>
+      <ion-item no-padding no-margin>
+        <ion-input formControlName="name" type="text" placeholder="Adınız"></ion-input>
+      </ion-item>
+      <ion-item no-padding no-margin>
+        <ion-input formControlName="lastname" type="text" placeholder="Soyadınız"></ion-input>
+      </ion-item>
+      <ion-item no-padding>
+        <ion-input formControlName="gsm" [regex]="'^[0-9]+$'"  placeholder="Örn: 5340000000" type="tel"></ion-input>
+      </ion-item>
+      <ion-item no-padding no-margin>
+        <ion-buttons  start>
+          <button [round]="true" class="animated fadeIn" ion-button icon-only full color="blue">Tamam</button>
+          <a ion-button clear float-right>Şifremi Değiştir</a>
+        </ion-buttons>
+      </ion-item>
+    </ion-list>
+  </form>
+
+</ion-content>

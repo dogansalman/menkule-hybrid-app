@@ -20,6 +20,7 @@ import { SearchModule } from '../pages/search/search.module';
 import { LoginModule } from '../pages/login/login.module';
 import { TabsModule } from "../pages/tabs/tabs.module";
 import { ActivationModule } from "../pages/activation/activation.module";
+import { ProfileModule } from "../pages/profile/profile.module";
 // Services
 import { ApiServices } from "../services/api/api.services";
 import { ToastServices } from "../services/toast/toast.services";
@@ -52,6 +53,7 @@ import { AlertServices } from "../services/alert/alert.services";
     SearchModule,
     TabsModule,
     ActivationModule,
+    ProfileModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
