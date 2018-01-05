@@ -3,8 +3,6 @@ import { Profile } from "./profile";
 import { IonicPageModule } from "ionic-angular";
 import { RegexModule } from "../../directives/regex/regex.module";
 import { RangeModule } from "../../directives/range/range.module";
-import { CommonModule } from '@angular/common';
-import { CapitalizeModule } from "../../pipes/capitalize/capitalize.module";
 
 
 @NgModule({
@@ -14,9 +12,7 @@ import { CapitalizeModule } from "../../pipes/capitalize/capitalize.module";
   imports: [
     IonicPageModule.forChild(Profile),
     RangeModule,
-    RegexModule,
-    CommonModule,
-    CapitalizeModule
+    RegexModule
   ],
   exports: [
     Profile
