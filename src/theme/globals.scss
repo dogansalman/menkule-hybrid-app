@@ -26,6 +26,20 @@
     background:#27ae60 !important;
   }
 }
+ion-input{
+  .text-input{
+    border-bottom: 1px solid #f3f3f3 !important;
+    padding-bottom: 10px !important;
+    color:#666 !important;
+  }
+  .text-input[type="text"]{
+    text-transform: capitalize;
+  }
+
+}
+.toolbar-title{
+  font-weight: 300 !important;
+}
 
 //Backgrounds cover & forms
 .background-cover {
@@ -81,6 +95,10 @@
       padding: 13px 8px 12px 9px;
     }
     .select-ios .select-placeholder { color:#ffffff;}
+      input{
+        border-bottom:inherit !important;
+        padding-bottom:inherit !important;
+      }
     input, select {
       display: block;
       width: 100%;
@@ -89,7 +107,8 @@
       border: none;
       outline: none;
       margin: 0px 0px 10px 0px;
-      color: #fff;
+      color: #fff !important;
+      text-transform: capitalize;
       background: rgba(0, 0, 0, 0.33);
     }
     input::-webkit-input-placeholder{ /* Chrome/Opera/Safari */
