@@ -12,7 +12,6 @@ import env from '../../environment/environment';
 export class ApiServices {
 
 
-
   constructor(private http: HTTP, private loader : LoaderServices, private auth: AuthServices, private network: Network, private toast: ToastServices) { }
 
   post(url: string, data: any, header: any): any {
@@ -21,6 +20,23 @@ export class ApiServices {
     return new Promise((resolve, reject) => {
       this.auth.getToken().then((token) => new Promise((resolve) => resolve( token ? Object.assign({ Authorization: 'Bearer ' + token.access_token }) : header)))
         .then((header) => this.http.post(env.apiUrl + '/' + url, data, header) )
+        .then((result) => {
+          const _data = () => { try { return JSON.parse(result.data)} catch(e) { return null }};
+          resolve(_data());
+        })
+        .catch((err) => {
+          console.log(err);
+          this.network.type === 'none' ? reject(this.handleError({status: 1})) : reject(this.handleError(err));
+        })
+        .then(() =>  this.loader.dismissLoading());
+    })
+  }
+  delete(url: string, data: any, header: any): any {
+
+    this.loader.showLoading();
+    return new Promise((resolve, reject) => {
+      this.auth.getToken().then((token) => new Promise((resolve) => resolve( token ? Object.assign({ Authorization: 'Bearer ' + token.access_token }) : header)))
+        .then((header) => this.http.delete(env.apiUrl + '/' + url, data, header) )
         .then((result) => {
           const _data = () => { try { return JSON.parse(result.data)} catch(e) { return null }};
           resolve(_data());

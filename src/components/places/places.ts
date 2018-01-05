@@ -42,7 +42,6 @@ export class Places {
       (predictions, status) => {
         this.autocompleteItems = [];
         if(!predictions) return;
-        console.log(predictions);
         predictions.forEach(p => {
           const first = p.description.split(',')[0].toLocaleLowerCase();
           if(first.indexOf(this.autocomplete.input.toLocaleLowerCase()) > -1) this.zone.run(() => this.autocompleteItems.push(p));
@@ -52,7 +51,6 @@ export class Places {
 
   selectSearchResult(item){
     this.autocomplete.input = item.structured_formatting.main_text;
-    console.log(item);
     this.load.showLoading();
     this.autocompleteItems = [];
     this.geocoder.geocode({'placeId': item.place_id}, (results, status) => {

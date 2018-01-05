@@ -27,7 +27,7 @@ constructor(private api: ApiServices, private auth: AuthServices, private fb: Fo
 
   onUpdate(): void {
     this.api.put('users', this.profileForm.value, {})
-      .then((user) => this.auth.setUser(user))
+      .then((user) => this.auth.getUser(true))
       .then(() => this.toast.showToast('Bilgileriniz güncellendi', 2000, 'bottom', false))
       .catch((err) => this.toast.showToast(err ? err : 'Lütfen tekrar deneyin.',3000, 'bottom'))
   }

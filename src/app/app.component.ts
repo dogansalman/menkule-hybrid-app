@@ -9,6 +9,7 @@ import { Login } from "../pages/login/login";
 import { Activation } from "../pages/activation/activation";
 import { Tabs } from "../pages/tabs/tabs";
 import { Profile } from "../pages/profile/profile";
+import { Notification } from "../pages/notification/notification";
 import { AuthServices } from "../services/auth/auth.services";
 import { ToastServices } from "../services/toast/toast.services";
 import { AlertServices } from "../services/alert/alert.services";
@@ -27,7 +28,7 @@ export class MyApp {
     { title: 'İlan', component: Login, is_event: false, icon: 'ios-home-outline', data: {}},
     { title: 'Rezervasyon', component: Login, is_event: false, icon: 'ios-bookmarks-outline', data: {}},
     { title: 'Mesaj', component: Login, is_event: false, icon: 'ios-mail-outline', data: {}, badge: 'flat_secondary' },
-    { title: 'Bildirim', component: Login, is_event: false, icon: 'ios-notifications-outline', data: {},  badge: 'flat_danger' }
+    { title: 'Bildirim', component: Notification, is_event: false, icon: 'ios-notifications-outline', data: {},  badge: 'flat_danger' }
   ];
   public under_pages = [
     { title: 'Hesabım', component: Profile, is_event: false, icon: 'ios-contact-outline' },

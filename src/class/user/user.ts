@@ -43,6 +43,7 @@ export class User {
     this.created_date;
     Object.assign(this, user);
 
+
     this.full_photo = this.getFullPhoto();
     this.full_name = this.getFullName();
   }
