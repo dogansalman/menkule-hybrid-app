@@ -24,16 +24,20 @@
         <ion-buttons>
           <button ion-button small clear color="white" (click)="onResendCode()"  icon-left float-right class="animated bounceInLeft">
             <ion-icon name="ios-refresh-outline"></ion-icon> Tekrar gönder</button>
-          <button ion-button small clear color="white" icon-left float-left class="animated bounceInRight">
+          <button ion-button small clear color="white" (click)="onProfile()" icon-left float-left class="animated bounceInRight">
             <ion-icon name="md-person"></ion-icon>Hesabım</button>
         </ion-buttons>
       </ion-col>
     </ion-row>
-
+      <ion-row>
+        <ion-col col-12>
+          <timer [hidden]="!timerDisplay"  timeInSeconds="240"></timer>
+        </ion-col>
+      </ion-row>
     </ion-grid>
   </form>
 </ion-content>
 <ion-footer>
-  <timer [hidden]="!timerDisplay"  timeInSeconds="240"></timer>
+
 </ion-footer>
 

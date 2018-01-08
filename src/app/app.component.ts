@@ -108,6 +108,8 @@ export class MyApp {
           this.content.setRoot(user.state ? Tabs : Activation, {is_new: user.hasOwnProperty('is_new')}, {animate: true, animation: 'animated fadeIn', direction: 'none', duration: 500});
         }
       });
+
+      // User Ownership Approved
       this.evt.subscribe('user:ownership', () => {
         this.auth.user.ownershiping = true;
         this._toast.showToast('Tebrikler ! Menüyü kullanarak ilan oluşturabilir ve yayınlayabilirsiniz.', 3500, 'bottom', false);

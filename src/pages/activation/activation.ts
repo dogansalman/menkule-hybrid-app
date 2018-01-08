@@ -6,7 +6,8 @@ import { NavController } from "ionic-angular";
 import { Tabs } from "../tabs/tabs";
 import { Main } from "../main/main";
 import { AuthServices } from "../../services/auth/auth.services";
-import {TimerComponent} from "../../components/timer/timer";
+import { TimerComponent } from "../../components/timer/timer";
+import { Profile } from "../profile/profile";
 
 @Component({
   selector: 'activation',
@@ -46,6 +47,9 @@ export class Activation implements AfterViewInit{
     this.api.get('users/validate/gsm/send', {}).then(() => this.toast.showToast('Aktivasyon kodu gönderildi.', 3000, 'bottom', false))
     .then(() => { this.timer.restartTimer(); this.timerDisplay = true; })
     .catch((err) => this.toast.showToast('Yeni aktivasyon kodu için 4 dakika beklemeniz gerekmektedir.',3000, 'bottom') )
+  }
+  onProfile(): void {
+    this.nav.push(Profile, {}, {animate:true, direction: 'forward', duration:500});
   }
 
 }
