@@ -3,7 +3,7 @@
     <name>Menkule</name>
     <description>Menkule.</description>
     <author email="iletisim@menkule.com.tr" href="http://menkule.com.tr/">Menkule - Keşfedeceğiniz heryerde eviniz var</author>
-    <content src="index.html" />
+    <content original-src="index.html" src="http://192.168.99.36:8100" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -47,6 +47,7 @@
         <splash density="port-xxhdpi" src="resources/android/splash/drawable-port-xxhdpi-screen.png" />
         <splash density="port-xxxhdpi" src="resources/android/splash/drawable-port-xxxhdpi-screen.png" />
     </platform>
+    <allow-navigation href="http://192.168.99.36:8100" />
     <engine name="android" spec="6.3.0" />
     <plugin name="ionic-plugin-keyboard" spec="^2.2.1" />
     <plugin name="cordova-plugin-whitelist" spec="^1.3.3" />

@@ -13,6 +13,7 @@ import { Notification } from "../pages/notification/notification";
 import { AuthServices } from "../services/auth/auth.services";
 import { ToastServices } from "../services/toast/toast.services";
 import { AlertServices } from "../services/alert/alert.services";
+import { ApiServices } from "../services/api/api.services";
 
 @Component({
   templateUrl: 'app.html'
@@ -25,14 +26,14 @@ export class MyApp {
 
   /* Menu Side Pages */
   public pages = [
-    { title: 'İlan', component: Login, is_event: false, icon: 'ios-home-outline', data: {}},
-    { title: 'Rezervasyon', component: Login, is_event: false, icon: 'ios-bookmarks-outline', data: {}},
-    { title: 'Mesaj', component: Login, is_event: false, icon: 'ios-mail-outline', data: {}, badge: 'flat_secondary' },
-    { title: 'Bildirim', component: Notification, is_event: false, icon: 'ios-notifications-outline', data: {},  badge: 'flat_danger' }
+    { title: 'İlan', component: Login, is_event: false, icon: 'ios-home-outline', data: {}, meta: 'advert'},
+    { title: 'Rezervasyon', component: Login, is_event: false, icon: 'ios-bookmarks-outline', data: {}, meta: 'rezervation'},
+    { title: 'Mesaj', component: Login, is_event: false, icon: 'ios-mail-outline', data: {}, badge: 'flat_secondary', meta: 'message' },
+    { title: 'Bildirim', component: Notification, is_event: false, icon: 'ios-notifications-outline', data: {},  badge: 'flat_danger', meta: 'notification' }
   ];
   public under_pages = [
-    { title: 'Hesabım', component: Profile, is_event: false, icon: 'ios-contact-outline' },
-    { title: 'Oturumu Kapat', event: 'logOut', is_event: true, icon: 'ios-power-outline' }
+    { title: 'Hesabım', component: Profile, is_event: false, icon: 'ios-contact-outline', meta: 'profile' },
+    { title: 'Oturumu Kapat', event: 'logOut', is_event: true, icon: 'ios-power-outline', meta: 'logout' }
   ];
   logOut(): void {
     this.auth.deleteToken()
@@ -46,7 +47,13 @@ export class MyApp {
     !page.is_event ? this.content.push(page.component, {}, {animate: true, animation: 'animated fadeIn', direction: 'none', duration: 500}) : this[page.event]();
 
   }
-
+  onOwnership(): void {
+    this.alert.confirm('İşleme devam etmek istediğinize emin misiniz ?', 'Ev sahipliği yapmak üzeresiniz !').then(() => {
+      this.api.post('users/approve/ownership', {}, {})
+        .then(() => this.evt.publish('user:ownership'))
+        .catch((err) => this._toast.showToast(err ? err : 'Lütfen tekrar deneyin.',3000, 'bottom') )
+    });
+  }
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,
               private network: Network,
               private menu: MenuController,
@@ -54,6 +61,7 @@ export class MyApp {
               public  auth: AuthServices,
               private alert: AlertServices,
               private _toast: ToastServices,
+              private api: ApiServices,
               private evt: Events) {
 
       platform.ready().then(() => {
@@ -87,15 +95,24 @@ export class MyApp {
       });
 
       /* Event listeners */
+
       // User Logged
       this.evt.subscribe('user:login', (user) => {
         if(user) {
-          this.pages.find(p => p.title === 'Bildirim').data = {count: user.notification_size};
-          this.pages.find(p => p.title === 'Mesaj').data = {count: 0 };
+          this.pages.find(p => p.meta === 'notification').data = {count: user.notification_size};
+          this.pages.find(p => p.meta === 'message').data = {count: 0 };
+          if(!user.ownershiping) {
+            Object.assign(this.pages.find(p => p.meta === 'advert'), { title: 'Ev Sahipliği Yap', component: null, is_event: true, event: 'onOwnership'});
+          }
           // check user state
           this.content.setRoot(user.state ? Tabs : Activation, {is_new: user.hasOwnProperty('is_new')}, {animate: true, animation: 'animated fadeIn', direction: 'none', duration: 500});
         }
       });
+      this.evt.subscribe('user:ownership', () => {
+        this.auth.user.ownershiping = true;
+        this._toast.showToast('Tebrikler ! Menüyü kullanarak ilan oluşturabilir ve yayınlayabilirsiniz.', 3500, 'bottom', false);
+        Object.assign(this.pages.find(p => p.meta === 'advert'), { title: 'İlan', component: Login, is_event: false, event: null});
+    });
   }
 }
 
