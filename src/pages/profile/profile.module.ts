@@ -3,7 +3,7 @@ import { Profile } from "./profile";
 import { IonicPageModule } from "ionic-angular";
 import { RegexModule } from "../../directives/regex/regex.module";
 import { RangeModule } from "../../directives/range/range.module";
-
+import { PasswordModule } from "../password/password.module";
 
 @NgModule({
   declarations: [
@@ -12,7 +12,8 @@ import { RangeModule } from "../../directives/range/range.module";
   imports: [
     IonicPageModule.forChild(Profile),
     RangeModule,
-    RegexModule
+    RegexModule,
+    PasswordModule
   ],
   exports: [
     Profile
