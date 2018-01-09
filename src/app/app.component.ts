@@ -14,6 +14,7 @@ import { AuthServices } from "../services/auth/auth.services";
 import { ToastServices } from "../services/toast/toast.services";
 import { AlertServices } from "../services/alert/alert.services";
 import { ApiServices } from "../services/api/api.services";
+import { Adverts } from "../pages/advert/adverts/adverts";
 
 @Component({
   templateUrl: 'app.html'
@@ -26,7 +27,7 @@ export class MyApp {
 
   /* Menu Side Pages */
   public pages = [
-    { title: 'İlan', component: Login, is_event: false, icon: 'ios-home-outline', data: {}, meta: 'advert'},
+    { title: 'İlan', component: Adverts, is_event: false, icon: 'ios-home-outline', data: {}, meta: 'advert'},
     { title: 'Rezervasyon', component: Login, is_event: false, icon: 'ios-bookmarks-outline', data: {}, meta: 'rezervation'},
     { title: 'Mesaj', component: Login, is_event: false, icon: 'ios-mail-outline', data: {}, badge: 'flat_secondary', meta: 'message' },
     { title: 'Bildirim', component: Notification, is_event: false, icon: 'ios-notifications-outline', data: {},  badge: 'flat_danger', meta: 'notification' }
@@ -54,6 +55,7 @@ export class MyApp {
         .catch((err) => this._toast.showToast(err ? err : 'Lütfen tekrar deneyin.',3000, 'bottom') )
     });
   }
+
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,
               private network: Network,
               private menu: MenuController,
@@ -112,7 +114,7 @@ export class MyApp {
       // User Ownership Approved
       this.evt.subscribe('user:ownership', () => {
         this.auth.user.ownershiping = true;
-        this._toast.showToast('Tebrikler ! Menüyü kullanarak ilan oluşturabilir ve yayınlayabilirsiniz.', 3500, 'bottom', false);
+        this._toast.showToast('Ev sahipliğini onayladınız. İlan oluşturabilir ve yayınlayabilirsiniz.', 3500, 'bottom', false);
         Object.assign(this.pages.find(p => p.meta === 'advert'), { title: 'İlan', component: Login, is_event: false, event: null});
     });
   }

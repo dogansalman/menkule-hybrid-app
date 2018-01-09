@@ -1,0 +1,23 @@
+<ion-header no-shadow no-border>
+  <ion-navbar color="blue" text-center>
+    <ion-buttons>
+      <button menuToggle ion-button icon-only >
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-list>
+    <button ion-item *ngFor="let item of adverts; let i = index;" >
+      <ion-avatar  item-start>
+        <img src="{{item.image}}">
+      </ion-avatar>
+      <h2>{{item.advert.title}}</h2>
+      <p>{{item.city.name}} / {{item.town.name}}</p>
+      <p>{{item.advert.price}} TL</p>
+    </button >
+    <p ion-text text-center *ngIf="no_adverts"> İlan kaydınız bulunmamaktadır.</p>
+  </ion-list>
+</ion-content>
