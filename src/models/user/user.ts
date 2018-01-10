@@ -1,6 +1,6 @@
 import environment from '../../environment/environment';
 
-export class User {
+export class UserModel {
   public id?: number;
   public name?: string;
   public lastname?: string;

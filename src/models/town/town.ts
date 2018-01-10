@@ -1,4 +1,4 @@
-export class Town {
+export class TownModel {
   public id?: number;
   public name?: string;
 

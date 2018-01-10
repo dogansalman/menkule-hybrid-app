@@ -1,9 +1,9 @@
 import environment from '../../environment/environment';
-import { City } from "../city/city";
-import { Town } from "../town/town";
-import { Types } from "../types/types";
+import { CityModel } from "../city/city";
+import { TownModel } from "../town/town";
+import { TypesModel } from "../types/types";
 
-export  class Advert {
+export  class AdvertModel {
   public id?: number;
   public adress?: string;
   public user_id?: number;
@@ -21,9 +21,9 @@ export  class Advert {
   public title?: string;
   public created_date?: Date;
   public updated_date?: Date;
-  public city?: City;
-  public town?: Town;
-  public advert_type?: Types;
+  public city?: CityModel;
+  public town?: TownModel;
+  public advert_type?: TypesModel;
   public image?: string;
 
   public getFullPhoto() {

@@ -1,4 +1,4 @@
-export class Types {
+export class TypesModel {
   public id?: number;
   public name?: string;
   public created_date?: Date;

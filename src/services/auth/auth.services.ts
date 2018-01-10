@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { File } from "@ionic-native/file";
 import { HTTP } from "@ionic-native/http";
-import { User } from "../../class/user/user";
+import { UserModel } from "../../models/user/user";
 import { INotification } from '../../interface/notifications/notification'
 import  environment from '../../environment/environment';
 
@@ -9,7 +9,7 @@ import  environment from '../../environment/environment';
 export class AuthServices {
 
   public token: any = null;
-  public user: User;
+  public user: UserModel;
   public notify: INotification = { notification: 0, message: 0 };
 
   constructor(private file: File, private http: HTTP) { }
@@ -39,7 +39,7 @@ export class AuthServices {
     return new Promise((resolve,reject) => {
       this.file.writeFile(this.file.cacheDirectory, 'profile.men', user, {append: false, replace: true})
         .then(() => {
-          this.user = new User(user);
+          this.user = new UserModel(user);
           this.notify.message = this.user.message_size;
           this.notify.notification = this.user.notification_size;
           resolve(user);

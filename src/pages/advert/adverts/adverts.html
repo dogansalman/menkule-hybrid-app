@@ -5,7 +5,6 @@
         <ion-icon name="menu"></ion-icon>
       </button>
     </ion-buttons>
-
   </ion-navbar>
 </ion-header>
 <ion-content>
@@ -20,4 +19,7 @@
     </button >
     <p ion-text text-center *ngIf="no_adverts"> İlan kaydınız bulunmamaktadır.</p>
   </ion-list>
+  <ion-fab right bottom>
+    <button (click)="onAddAdvert()" ion-fab color="flat_secondary"><ion-icon name="add"></ion-icon></button>
+  </ion-fab>
 </ion-content>
