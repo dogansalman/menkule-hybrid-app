@@ -10,35 +10,206 @@
       </button>
     </ion-buttons>
   </ion-toolbar>
+  <ion-navbar>
+    <ion-segment color="dark">
+      <ion-segment-button (click)="selectTab(0)" value="0">Genel
+      </ion-segment-button>
+      <ion-segment-button (click)="selectTab(1)" value="1">Özellikler
+      </ion-segment-button>
+      <ion-segment-button (click)="selectTab(2)" value="2">Olanaklar
+      </ion-segment-button>
+      <ion-segment-button (click)="selectTab(3)" value="3">Fotoğraf
+      </ion-segment-button>
+      <div id="slide" class="slide"></div>
+    </ion-segment>
+  </ion-navbar>
 </ion-header>
 <ion-content>
-  <ion-list>
-    <ion-item>
-      <ion-label stacked>İl</ion-label>
-      <ion-select  okText="Tamam" cancelText="İptal">
-        <ion-option value="Tekirdağ">Tekirdağ</ion-option>
-      </ion-select>
-    </ion-item>
-    <ion-item>
-      <ion-label stacked>İlçe</ion-label>
-      <ion-select  okText="Tamam" cancelText="İptal">
-        <ion-option value="Çorlu">Çorlu</ion-option>
-      </ion-select>
-    </ion-item>
-    <ion-item>
-      <ion-label stacked>Adres</ion-label>
-      <ion-textarea placeholder="Adres"></ion-textarea>
-    </ion-item>
-    <ion-item no-margin no-padding>
-      <ion-buttons  start>
-        <button (click)="onAddLocation()" class="animated fadeIn" ion-button icon-only full color="blue">Lokasyon Ekle</button>
-      </ion-buttons>
 
-      <div *ngIf="false" class="map-container" style="height: 250px" no-margin no-padding>
-        <google-map-component class="map"  [setMyPoi]="false"></google-map-component>
-      </div>
-      <ion-item-divider>Henüz konum eklenmemiş.</ion-item-divider>
 
-    </ion-item>
-  </ion-list>
+  <ion-slides #pageSlider (ionSlideWillChange)="changeWillSlide($event)"  >
+    <ion-slide>
+      <ion-list>
+        <ion-item>
+          <ion-label stacked>İl</ion-label>
+          <ion-select  okText="Tamam" cancelText="İptal">
+            <ion-option value="Tekirdağ">Tekirdağ</ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label stacked>İlçe</ion-label>
+          <ion-select  okText="Tamam" cancelText="İptal">
+            <ion-option value="Çorlu">Çorlu</ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label stacked>Adres</ion-label>
+          <ion-textarea placeholder="Adres"></ion-textarea>
+        </ion-item>
+        <ion-item no-margin no-padding>
+          <ion-buttons  start>
+            <button (click)="onAddLocation()" class="animated fadeIn" ion-button icon-only full color="blue">Lokasyon Ekle</button>
+          </ion-buttons>
+
+          <div *ngIf="false" class="map-container" style="height: 250px" no-margin no-padding>
+            <google-map-component class="map"  [setMyPoi]="false"></google-map-component>
+          </div>
+          <ion-item-divider>Henüz konum eklenmemiş.</ion-item-divider>
+
+        </ion-item>
+      </ion-list>
+    </ion-slide>
+    <ion-slide>
+      <ion-list>
+        <ion-item>
+          <ion-label stacked>Misafir Kapasitesi</ion-label>
+          <ion-select  okText="Tamam" cancelText="İptal">
+            <ion-option value="1">1 Kişi</ion-option>
+            <ion-option value="2">2 Kişi</ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label stacked>Banyo</ion-label>
+          <ion-select  okText="Tamam" cancelText="İptal">
+            <ion-option value="1">1 Banyo</ion-option>
+            <ion-option value="2">2 Banyo</ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label stacked>Yatak</ion-label>
+          <ion-select  okText="Tamam" cancelText="İptal">
+            <ion-option value="1">1 Yatak</ion-option>
+            <ion-option value="2">2 Yatak</ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label stacked>Bina Yaşı</ion-label>
+          <ion-select  okText="Tamam" cancelText="İptal">
+            <ion-option value="1">1</ion-option>
+            <ion-option value="2">2</ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label stacked>Kat</ion-label>
+          <ion-select  okText="Tamam" cancelText="İptal">
+            <ion-option value="1">1. Kat</ion-option>
+            <ion-option value="2">2. Kat</ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label stacked>Oda</ion-label>
+          <ion-select  okText="Tamam" cancelText="İptal">
+            <ion-option value="1">1 Oda</ion-option>
+            <ion-option value="2">2 Oda</ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label stacked>Salon</ion-label>
+          <ion-select  okText="Tamam" cancelText="İptal">
+            <ion-option value="1">1 Salon</ion-option>
+            <ion-option value="2">2 Salon</ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label stacked>Min. Konaklama Süresi</ion-label>
+          <ion-select  okText="Tamam" cancelText="İptal">
+            <ion-option value="1">1 Gün</ion-option>
+            <ion-option value="2">2 Gün</ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label stacked>Rez. İptal Süresi</ion-label>
+          <ion-select  okText="Tamam" cancelText="İptal">
+            <ion-option value="1">1 Gün Önce</ion-option>
+            <ion-option value="2">2 Gün Önce</ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label stacked>Giriş Saat</ion-label>
+          <ion-select  okText="Tamam" cancelText="İptal">
+            <ion-option value="1">12:00</ion-option>
+            <ion-option value="2">13:00</ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label stacked>Çıkış Saat</ion-label>
+          <ion-select  okText="Tamam" cancelText="İptal">
+            <ion-option value="1">12:00</ion-option>
+            <ion-option value="2">13:00</ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label stacked>Menkul Tipi Saat</ion-label>
+          <ion-select  okText="Tamam" cancelText="İptal">
+            <ion-option value="1">Müstakil Ev</ion-option>
+            <ion-option value="2">Oda</ion-option>
+            <ion-option value="2">Villa</ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label stacked>Gecelik Ücret</ion-label>
+          <ion-input placeholder="Gecelik ücret"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label stacked>Metrekare</ion-label>
+          <ion-input placeholder="Metrekare"></ion-input>
+        </ion-item>
+
+      </ion-list>
+    </ion-slide>
+    <ion-slide>
+      <ion-list>
+        <ion-item>
+          <ion-label>İnternet</ion-label>
+          <ion-checkbox></ion-checkbox>
+        </ion-item>
+        <ion-item>
+          <ion-label>Klima</ion-label>
+          <ion-checkbox></ion-checkbox>
+        </ion-item>
+        <ion-item>
+          <ion-label>Tv</ion-label>
+          <ion-checkbox></ion-checkbox>
+        </ion-item>
+        <ion-item>
+          <ion-label>Temel İhtiyaçlar</ion-label>
+          <ion-checkbox></ion-checkbox>
+        </ion-item>
+        <ion-item>
+          <ion-label>Isınma</ion-label>
+          <ion-checkbox></ion-checkbox>
+        </ion-item>
+        <ion-item>
+          <ion-label>Mutfak</ion-label>
+          <ion-checkbox></ion-checkbox>
+        </ion-item>
+        <ion-item>
+          <ion-label>Spor Salonu</ion-label>
+          <ion-checkbox></ion-checkbox>
+        </ion-item>
+        <ion-item>
+          <ion-label>Asansör</ion-label>
+          <ion-checkbox></ion-checkbox>
+        </ion-item>
+        <ion-item>
+          <ion-label>Jakuzi</ion-label>
+          <ion-checkbox></ion-checkbox>
+        </ion-item>
+        <ion-item>
+          <ion-label>Sigara İçilebilir</ion-label>
+          <ion-checkbox></ion-checkbox>
+        </ion-item>
+        <ion-item>
+          <ion-label>Evcil Hayvan Kabul Edilir</ion-label>
+          <ion-checkbox></ion-checkbox>
+        </ion-item>
+
+      </ion-list>
+    </ion-slide>
+    <ion-slide>
+      <h2>Slide 4</h2>
+    </ion-slide>
+  </ion-slides>
+
+
 </ion-content>
