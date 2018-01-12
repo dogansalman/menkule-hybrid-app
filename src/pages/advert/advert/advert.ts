@@ -14,10 +14,31 @@ import { Location } from "../location/location";
 export class Advert {
   public advertForm: FormGroup;
   @ViewChild('pageSlider') pageSlider: Slides;
-
   tabs: any = '0';
 
-  constructor(private api: ApiServices, private toast: ToastServices, private fb: FormBuilder, private view: ViewController, private modalController: ModalController, private ren: Renderer2) {}
+  constructor(private api: ApiServices, private toast: ToastServices, private fb: FormBuilder, private view: ViewController, private modalController: ModalController, private ren: Renderer2) {
+    this.advertForm = this.fb.group({
+      id: [null],
+      adress: [null, Validators.required],
+      entry_time: [null, Validators.required],
+      exit_time: [null, Validators.required],
+      state: [null, Validators.required],
+      views: [null],
+      score: [null],
+      price: [null, Validators.required],
+      min_layover: [null, Validators.required],
+      description: [null, Validators.required],
+      zoom: [null, Validators.required],
+      latitude: [null, Validators.required],
+      longitude: [null, Validators.required],
+      title: [null, Validators.required],
+      created_date: [null],
+      updated_date: [null],
+    })
+  }
+  ngAfterViewInit() {
+    this.pageSlider.autoHeight = true;
+  }
 
   dismiss(): void {
     this.view.dismiss();

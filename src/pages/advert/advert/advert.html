@@ -32,14 +32,16 @@
       <ion-list>
         <ion-item>
           <ion-label stacked>İl</ion-label>
-          <ion-select  okText="Tamam" cancelText="İptal">
-            <ion-option value="Tekirdağ">Tekirdağ</ion-option>
+          <ion-select interface="action-sheet" appCities (cities)="cities = $event" #citydrp okText="Tamam" cancelText="İptal">
+            <ion-option [selected]="true" value="Seçiniz">Seçiniz</ion-option>
+            <ion-option *ngFor="let c of cities" value="{{c.city.name}}"> {{c.city.name}}</ion-option>
           </ion-select>
         </ion-item>
         <ion-item>
           <ion-label stacked>İlçe</ion-label>
-          <ion-select  okText="Tamam" cancelText="İptal">
-            <ion-option value="Çorlu">Çorlu</ion-option>
+          <ion-select  interface="action-sheet"  appTowns (towns)="towns = $event"  #towndrp [selectedCity]="citydrp.value" okText="Tamam" cancelText="İptal">
+            <ion-option [selected]="true" value="Seçiniz">Seçiniz</ion-option>
+            <ion-option *ngFor="let t of towns" value="{{t.name}}"> {{t.name}} </ion-option>
           </ion-select>
         </ion-item>
         <ion-item>
@@ -48,14 +50,12 @@
         </ion-item>
         <ion-item no-margin no-padding>
           <ion-buttons  start>
-            <button (click)="onAddLocation()" class="animated fadeIn" ion-button icon-only full color="blue">Lokasyon Ekle</button>
+            <button (click)="onAddLocation()" [disabled]="(((citydrp.value.toString()) === 'Seçiniz') || ((towndrp.value.toString()) === 'Seçiniz'))" class="animated fadeIn" ion-button icon-only full color="blue">Konum Ekle</button>
           </ion-buttons>
-
           <div *ngIf="false" class="map-container" style="height: 250px" no-margin no-padding>
             <google-map-component class="map"  [setMyPoi]="false"></google-map-component>
           </div>
           <ion-item-divider>Henüz konum eklenmemiş.</ion-item-divider>
-
         </ion-item>
       </ion-list>
     </ion-slide>
