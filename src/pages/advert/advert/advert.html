@@ -55,22 +55,24 @@
             <ion-option *ngFor="let t of towns" value="{{t.id}}"> {{t.name}} </ion-option>
           </ion-select>
         </ion-item>
-        <ion-item>
-          <ion-label stacked>Fiyat</ion-label>
-          <ion-input placeholder="Gecelik fiyat" type="number" formControlName="price"></ion-input>
+        <ion-item no-margin no-padding>
+          <div *ngIf="false" class="map-container" style="height: 250px" no-margin no-padding>
+            <google-map-component class="map"  [setMyPoi]="false"></google-map-component>
+          </div>
+          <ion-buttons padding starts>
+            <button small (click)="onAddLocation()" [disabled]="((citydrp.value.length === 0) || (towndrp.value.length === 0))" ion-button icon-left color="blue">
+              <ion-icon name="pin"></ion-icon> Konum Ekle
+            </button>
+          </ion-buttons>
+          <p padding ion-text>Henüz konum eklenmemiş.</p>
         </ion-item>
         <ion-item>
           <ion-label stacked>Adres</ion-label>
           <ion-textarea formControlName="adress" placeholder="Adres"></ion-textarea>
         </ion-item>
-        <ion-item no-margin no-padding>
-          <div *ngIf="false" class="map-container" style="height: 250px" no-margin no-padding>
-            <google-map-component class="map"  [setMyPoi]="false"></google-map-component>
-          </div>
-          <button (click)="onAddLocation()" [disabled]="((citydrp.value) || (towndrp.value))" ion-button icon-left color="blue">
-            <ion-icon name="pin"></ion-icon> Konum Ekle
-          </button>
-          <ion-item-divider>Henüz konum eklenmemiş.</ion-item-divider>
+        <ion-item>
+          <ion-label stacked>Fiyat</ion-label>
+          <ion-input placeholder="Gecelik fiyat" type="number" formControlName="price"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label stacked>Min. Konaklama</ion-label>
