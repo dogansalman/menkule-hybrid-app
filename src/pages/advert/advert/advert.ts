@@ -19,21 +19,49 @@ export class Advert {
   constructor(private api: ApiServices, private toast: ToastServices, private fb: FormBuilder, private view: ViewController, private modalController: ModalController, private ren: Renderer2) {
     this.advertForm = this.fb.group({
       id: [null],
+      title: [null, Validators.required],
+      advert_type_id: [null, Validators.required],
       adress: [null, Validators.required],
+      city_id: [null, Validators.required],
+      town_id: [null, Validators.required],
+      min_layover: [null, Validators.required],
+      cancel_time: [null, Validators.required],
+      price: [null, Validators.required],
       entry_time: [null, Validators.required],
       exit_time: [null, Validators.required],
-      state: [null, Validators.required],
-      views: [null],
-      score: [null],
-      price: [null, Validators.required],
-      min_layover: [null, Validators.required],
       description: [null, Validators.required],
       zoom: [null, Validators.required],
       latitude: [null, Validators.required],
       longitude: [null, Validators.required],
-      title: [null, Validators.required],
+      state: [null, Validators.required],
+      views: [null],
+      score: [null],
       created_date: [null],
       updated_date: [null],
+      properties: this.fb.group({
+        visitor: [null, Validators.required],
+        bathroom: [null, Validators.required],
+        m2: [null, Validators.required],
+        beds: [null, Validators.required],
+        bedroom: [null, Validators.required],
+        build_age: [null, Validators.required],
+        floor: [null, Validators.required],
+        room: [null, Validators.required],
+        hall: [null, Validators.required],
+      }),
+      possibility: this.fb.group({
+        internet: [false, Validators.required],
+        air: [false, Validators.required],
+        tv: [false, Validators.required],
+        requiments: [false, Validators.required],
+        heat: [false, Validators.required],
+        kitchen: [false, Validators.required],
+        gym: [false, Validators.required],
+        elevator: [false, Validators.required],
+        jacuzzi: [false, Validators.required],
+        smoke: [false, Validators.required],
+        pet: [false, Validators.required],
+      })
     })
   }
   ngAfterViewInit() {
@@ -52,7 +80,6 @@ export class Advert {
     });
     modal.present();
   }
-
   changeWillSlide($event) {
     this.tabs = $event._snapIndex.toString();
     this.selectTab($event._snapIndex);
@@ -61,8 +88,11 @@ export class Advert {
     }
     this.ren.addClass(document.getElementsByTagName("ion-segment-button")[$event._snapIndex], 'segment-activated');
   }
-
   selectTab(index) {
     this.pageSlider.slideTo(index);
+  }
+
+  onAddAdvert(): void {
+    console.log(this.advertForm.value);
   }
 }

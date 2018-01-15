@@ -1,29 +1,24 @@
-import {Directive, Output, Input, EventEmitter, OnInit, OnChanges} from '@angular/core';
-import cities from '../../environment/cities';
-import {Observable} from 'rxjs/Rx';
+import {Directive, Output, Input, EventEmitter, OnChanges} from '@angular/core';
+import { ApiServices } from "../../services/api/api.services";
+
 
 @Directive({
   selector: '[appTowns]'
 })
 
-export class TownsDirective implements OnInit, OnChanges {
+export class TownsDirective implements  OnChanges {
 
   @Input('selectedCity') selectedCity: string;
   @Output('towns') towns: EventEmitter<object> = new EventEmitter<object>();
 
-  constructor() {  }
+  constructor(private api: ApiServices) {  }
 
   ngOnChanges() {
     //  Emitted Output Town
-    if (this.selectedCity.length > 0 && this.selectedCity[0] != 'Seçiniz' && this.selectedCity) {
-      /*
-      Production moda geçene kadar timeout kullanılacak.
-       */
-      setTimeout(() => this.towns.emit(cities.filter(t => t.city.name === this.selectedCity)[0].towns), 1500)
+    if (this.selectedCity.length > 0 && this.selectedCity != 'Seçiniz' && this.selectedCity) {
+      this.api.get('cities/' + this.selectedCity, {}).then((t) => this.towns.emit(t));
+    } else {
+      this.towns.emit([]);
     }
   }
-
-  ngOnInit() {
-  }
-
 }

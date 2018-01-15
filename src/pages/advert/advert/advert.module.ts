@@ -5,6 +5,7 @@ import { MapModule } from "../../../components/map/map.module";
 import { LocationModule } from "../location/location.module";
 import { CitiesModule } from "../../../directives/cities/cities.module";
 import { TownsModule } from "../../../directives/towns/towns.module";
+import { TypesModule } from "../../../directives/types/types.module";
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { TownsModule } from "../../../directives/towns/towns.module";
     MapModule,
     LocationModule,
     CitiesModule,
-    TownsModule
+    TownsModule,
+    TypesModule
   ],
   exports: [
     Advert

@@ -25,191 +25,189 @@
   </ion-navbar>
 </ion-header>
 <ion-content>
-
-
-  <ion-slides #pageSlider (ionSlideWillChange)="changeWillSlide($event)"  >
+  <form [formGroup]="advertForm">
+  <ion-slides #pageSlider (ionSlideWillChange)="changeWillSlide($event)">
     <ion-slide>
       <ion-list>
         <ion-item>
+          <ion-label stacked>Başlık</ion-label>
+          <ion-input placeholder="İlan başlığı" formControlName="title"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label stacked>Açıklama</ion-label>
+          <ion-textarea formControlName="description" placeholder="Açıklama"></ion-textarea>
+        </ion-item>
+        <ion-item>
+          <ion-label stacked>Menkul tipi</ion-label>
+          <ion-select placeholder="Seçiniz" interface="action-sheet" formControlName="advert_type_id" appTypes (types)="types = $event"  okText="Tamam" cancelText="İptal">
+            <ion-option *ngFor="let t of types" value="{{t.id}}"> {{t.name}} </ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
           <ion-label stacked>İl</ion-label>
-          <ion-select interface="action-sheet" appCities (cities)="cities = $event" #citydrp okText="Tamam" cancelText="İptal">
-            <ion-option [selected]="true" value="Seçiniz">Seçiniz</ion-option>
-            <ion-option *ngFor="let c of cities" value="{{c.city.name}}"> {{c.city.name}}</ion-option>
+          <ion-select placeholder="Seçiniz" interface="action-sheet" formControlName="city_id" appCities (cities)="cities = $event" #citydrp okText="Tamam" cancelText="İptal">
+            <ion-option *ngFor="let c of cities" value="{{c.id}}"> {{c.name}}</ion-option>
           </ion-select>
         </ion-item>
         <ion-item>
           <ion-label stacked>İlçe</ion-label>
-          <ion-select  interface="action-sheet"  appTowns (towns)="towns = $event"  #towndrp [selectedCity]="citydrp.value" okText="Tamam" cancelText="İptal">
-            <ion-option [selected]="true" value="Seçiniz">Seçiniz</ion-option>
-            <ion-option *ngFor="let t of towns" value="{{t.name}}"> {{t.name}} </ion-option>
+          <ion-select placeholder="Seçiniz" interface="action-sheet" formControlName="town_id"  appTowns (towns)="towns = $event"  #towndrp [selectedCity]="citydrp.value" okText="Tamam" cancelText="İptal">
+            <ion-option *ngFor="let t of towns" value="{{t.id}}"> {{t.name}} </ion-option>
           </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label stacked>Fiyat</ion-label>
+          <ion-input placeholder="Gecelik fiyat" type="number" formControlName="price"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label stacked>Adres</ion-label>
-          <ion-textarea placeholder="Adres"></ion-textarea>
+          <ion-textarea formControlName="adress" placeholder="Adres"></ion-textarea>
         </ion-item>
         <ion-item no-margin no-padding>
-          <ion-buttons  start>
-            <button (click)="onAddLocation()" [disabled]="(((citydrp.value.toString()) === 'Seçiniz') || ((towndrp.value.toString()) === 'Seçiniz'))" class="animated fadeIn" ion-button icon-only full color="blue">Konum Ekle</button>
-          </ion-buttons>
           <div *ngIf="false" class="map-container" style="height: 250px" no-margin no-padding>
             <google-map-component class="map"  [setMyPoi]="false"></google-map-component>
           </div>
+          <button (click)="onAddLocation()" [disabled]="((citydrp.value) || (towndrp.value))" ion-button icon-left color="blue">
+            <ion-icon name="pin"></ion-icon> Konum Ekle
+          </button>
           <ion-item-divider>Henüz konum eklenmemiş.</ion-item-divider>
         </ion-item>
-      </ion-list>
-    </ion-slide>
-    <ion-slide>
-      <ion-list>
         <ion-item>
-          <ion-label stacked>Misafir Kapasitesi</ion-label>
-          <ion-select  okText="Tamam" cancelText="İptal">
-            <ion-option value="1">1 Kişi</ion-option>
-            <ion-option value="2">2 Kişi</ion-option>
-          </ion-select>
-        </ion-item>
-        <ion-item>
-          <ion-label stacked>Banyo</ion-label>
-          <ion-select  okText="Tamam" cancelText="İptal">
-            <ion-option value="1">1 Banyo</ion-option>
-            <ion-option value="2">2 Banyo</ion-option>
-          </ion-select>
-        </ion-item>
-        <ion-item>
-          <ion-label stacked>Yatak</ion-label>
-          <ion-select  okText="Tamam" cancelText="İptal">
-            <ion-option value="1">1 Yatak</ion-option>
-            <ion-option value="2">2 Yatak</ion-option>
-          </ion-select>
-        </ion-item>
-        <ion-item>
-          <ion-label stacked>Bina Yaşı</ion-label>
-          <ion-select  okText="Tamam" cancelText="İptal">
-            <ion-option value="1">1</ion-option>
-            <ion-option value="2">2</ion-option>
-          </ion-select>
-        </ion-item>
-        <ion-item>
-          <ion-label stacked>Kat</ion-label>
-          <ion-select  okText="Tamam" cancelText="İptal">
-            <ion-option value="1">1. Kat</ion-option>
-            <ion-option value="2">2. Kat</ion-option>
-          </ion-select>
-        </ion-item>
-        <ion-item>
-          <ion-label stacked>Oda</ion-label>
-          <ion-select  okText="Tamam" cancelText="İptal">
-            <ion-option value="1">1 Oda</ion-option>
-            <ion-option value="2">2 Oda</ion-option>
-          </ion-select>
-        </ion-item>
-        <ion-item>
-          <ion-label stacked>Salon</ion-label>
-          <ion-select  okText="Tamam" cancelText="İptal">
-            <ion-option value="1">1 Salon</ion-option>
-            <ion-option value="2">2 Salon</ion-option>
-          </ion-select>
-        </ion-item>
-        <ion-item>
-          <ion-label stacked>Min. Konaklama Süresi</ion-label>
-          <ion-select  okText="Tamam" cancelText="İptal">
-            <ion-option value="1">1 Gün</ion-option>
-            <ion-option value="2">2 Gün</ion-option>
+          <ion-label stacked>Min. Konaklama</ion-label>
+          <ion-select placeholder="Seçiniz" interface="action-sheet" formControlName="min_layover" okText="Tamam" cancelText="İptal">
+            <ion-option *ngFor="let number of [1,2,3,4,5,6,7,8,9]" value="{{number}}"> {{number}} Gün. </ion-option>
           </ion-select>
         </ion-item>
         <ion-item>
           <ion-label stacked>Rez. İptal Süresi</ion-label>
-          <ion-select  okText="Tamam" cancelText="İptal">
-            <ion-option value="1">1 Gün Önce</ion-option>
-            <ion-option value="2">2 Gün Önce</ion-option>
+          <ion-select placeholder="Seçiniz" interface="action-sheet" formControlName="cancel_time" okText="Tamam" cancelText="İptal">
+            <ion-option *ngFor="let number of [1,2,3,4,5,6,7,8,9,10,11,12,13,14]" value="{{number}}"> {{number}} Gün önce </ion-option>
           </ion-select>
         </ion-item>
         <ion-item>
-          <ion-label stacked>Giriş Saat</ion-label>
-          <ion-select  okText="Tamam" cancelText="İptal">
-            <ion-option value="1">12:00</ion-option>
-            <ion-option value="2">13:00</ion-option>
+          <ion-label stacked>Giriş Sati</ion-label>
+          <ion-select placeholder="Seçiniz" interface="action-sheet" formControlName="entry_time" okText="Tamam" cancelText="İptal">
+            <ion-option *ngFor="let number of ['00:00','01:00','02:00','03:00','04:00','05:00','06:00','07:00','08:00','09:00','10:00','11:00','12:00','13:00','14:00','15:00','16:00','17:00','18:00','19:00','20:00','21:00','22:00','23:00']" value="{{number}}"> {{number}} </ion-option>
           </ion-select>
         </ion-item>
         <ion-item>
-          <ion-label stacked>Çıkış Saat</ion-label>
-          <ion-select  okText="Tamam" cancelText="İptal">
-            <ion-option value="1">12:00</ion-option>
-            <ion-option value="2">13:00</ion-option>
+          <ion-label stacked>Çıkıi Sati</ion-label>
+          <ion-select placeholder="Seçiniz" interface="action-sheet" formControlName="exit_time" okText="Tamam" cancelText="İptal">
+            <ion-option *ngFor="let number of ['00:00','01:00','02:00','03:00','04:00','05:00','06:00','07:00','08:00','09:00','10:00','11:00','12:00','13:00','14:00','15:00','16:00','17:00','18:00','19:00','20:00','21:00','22:00','23:00']" value="{{number}}"> {{number}} </ion-option>
           </ion-select>
         </ion-item>
-        <ion-item>
-          <ion-label stacked>Menkul Tipi Saat</ion-label>
-          <ion-select  okText="Tamam" cancelText="İptal">
-            <ion-option value="1">Müstakil Ev</ion-option>
-            <ion-option value="2">Oda</ion-option>
-            <ion-option value="2">Villa</ion-option>
-          </ion-select>
-        </ion-item>
-        <ion-item>
-          <ion-label stacked>Gecelik Ücret</ion-label>
-          <ion-input placeholder="Gecelik ücret"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label stacked>Metrekare</ion-label>
-          <ion-input placeholder="Metrekare"></ion-input>
-        </ion-item>
-
       </ion-list>
     </ion-slide>
     <ion-slide>
-      <ion-list>
+      <ion-list formGroupName="properties">
+        <ion-item>
+          <ion-label stacked>Misafir Kapasitesi</ion-label>
+          <ion-select placeholder="Seçiniz" interface="action-sheet" formControlName="visitor" okText="Tamam" cancelText="İptal">
+            <ion-option *ngFor="let visitor of [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]" value="{{visitor}}"> {{visitor}} Misafir</ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label stacked>Banyo</ion-label>
+          <ion-select placeholder="Seçiniz" interface="action-sheet" formControlName="bathroom" okText="Tamam" cancelText="İptal">
+            <ion-option *ngFor="let bathroom of [1,2,3,4,5]" value="{{bathroom}}"> {{bathroom}} Banyo</ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label stacked>Bina Yaşı</ion-label>
+          <ion-select placeholder="Seçiniz" interface="action-sheet" formControlName="build_age" okText="Tamam" cancelText="İptal">
+            <ion-option *ngFor="let age of [1,2,3,4,5,6,7,8,9,10]; let last = last" value="{{age}}"> {{ !last ? age : age + ' ve üzeri'}}</ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label stacked>Kat</ion-label>
+          <ion-select placeholder="Seçiniz" interface="action-sheet" formControlName="floor" okText="Tamam" cancelText="İptal">
+            <ion-option *ngFor="let floor of [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]; let first = first" value="{{floor}}"> {{ !first ? floor  + '. Kat': 'Zemin Kat'}}</ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label stacked>Oda</ion-label>
+          <ion-select placeholder="Seçiniz" interface="action-sheet" formControlName="room" okText="Tamam" cancelText="İptal">
+            <ion-option *ngFor="let room of [1,2,3,4,5,6,7];" value="{{room}}"> {{room + ' Oda'}}</ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label stacked>Salon</ion-label>
+          <ion-select placeholder="Seçiniz" interface="action-sheet" formControlName="hall" okText="Tamam" cancelText="İptal">
+            <ion-option *ngFor="let hall of [1,2,3,4,5,6,7];" value="{{hall}}"> {{hall + ' Salon'}}</ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label stacked>Yatak</ion-label>
+          <ion-select placeholder="Seçiniz" interface="action-sheet" formControlName="beds" okText="Tamam" cancelText="İptal">
+            <ion-option *ngFor="let bed of [1,2,3,4,5,6,7];" value="{{bed}}"> {{bed + ' Yataklı'}}</ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label stacked>Yatak Odası</ion-label>
+          <ion-select placeholder="Seçiniz" interface="action-sheet" formControlName="bedroom" okText="Tamam" cancelText="İptal">
+            <ion-option *ngFor="let bed of [1,2,3,4,5,6,7];" value="{{bed}}"> {{bed + ' Yatak Odalı'}}</ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label stacked>Metrekare</ion-label>
+          <ion-input type="number" formControlName="m2" placeholder="Metrekare"></ion-input>
+        </ion-item>
+      </ion-list>
+    </ion-slide>
+    <ion-slide>
+      <ion-list formGroupName="possibility">
         <ion-item>
           <ion-label>İnternet</ion-label>
-          <ion-checkbox></ion-checkbox>
+          <ion-checkbox formControlName="internet"></ion-checkbox>
         </ion-item>
         <ion-item>
           <ion-label>Klima</ion-label>
-          <ion-checkbox></ion-checkbox>
+          <ion-checkbox formControlName="air"></ion-checkbox>
         </ion-item>
         <ion-item>
           <ion-label>Tv</ion-label>
-          <ion-checkbox></ion-checkbox>
+          <ion-checkbox formControlName="tv"></ion-checkbox>
         </ion-item>
         <ion-item>
           <ion-label>Temel İhtiyaçlar</ion-label>
-          <ion-checkbox></ion-checkbox>
+          <ion-checkbox formControlName="requiments"></ion-checkbox>
         </ion-item>
         <ion-item>
           <ion-label>Isınma</ion-label>
-          <ion-checkbox></ion-checkbox>
+          <ion-checkbox formControlName="heat"></ion-checkbox>
         </ion-item>
         <ion-item>
           <ion-label>Mutfak</ion-label>
-          <ion-checkbox></ion-checkbox>
+          <ion-checkbox formControlName="kitchen"></ion-checkbox>
         </ion-item>
         <ion-item>
           <ion-label>Spor Salonu</ion-label>
-          <ion-checkbox></ion-checkbox>
+          <ion-checkbox formControlName="gym"></ion-checkbox>
         </ion-item>
         <ion-item>
           <ion-label>Asansör</ion-label>
-          <ion-checkbox></ion-checkbox>
+          <ion-checkbox formControlName="elevator"></ion-checkbox>
         </ion-item>
         <ion-item>
           <ion-label>Jakuzi</ion-label>
-          <ion-checkbox></ion-checkbox>
+          <ion-checkbox formControlName="jacuzzi"></ion-checkbox>
         </ion-item>
         <ion-item>
           <ion-label>Sigara İçilebilir</ion-label>
-          <ion-checkbox></ion-checkbox>
+          <ion-checkbox formControlName="smoke"></ion-checkbox>
         </ion-item>
         <ion-item>
           <ion-label>Evcil Hayvan Kabul Edilir</ion-label>
-          <ion-checkbox></ion-checkbox>
+          <ion-checkbox formControlName="pet"></ion-checkbox>
         </ion-item>
-
       </ion-list>
     </ion-slide>
     <ion-slide>
       <h2>Slide 4</h2>
     </ion-slide>
   </ion-slides>
-
-
+  </form>
+  <ion-fab right bottom>
+    <button [disabled]="!advertForm.valid" (click)="onAddAdvert()" ion-fab color="flat_secondary"><ion-icon name="md-checkmark"></ion-icon></button>
+  </ion-fab>
 </ion-content>
