@@ -1,7 +1,6 @@
-import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from "@angular/core";
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from "@angular/core";
 import { Advert } from "./advert";
 import { IonicPageModule } from "ionic-angular";
-import { MapModule } from "../../../components/map/map.module";
 import { LocationModule } from "../location/location.module";
 import { CitiesModule } from "../../../directives/cities/cities.module";
 import { TownsModule } from "../../../directives/towns/towns.module";
@@ -13,7 +12,6 @@ import { TypesModule } from "../../../directives/types/types.module";
   ],
   imports: [
     IonicPageModule.forChild(Advert),
-    MapModule,
     LocationModule,
     CitiesModule,
     TownsModule,

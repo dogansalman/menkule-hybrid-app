@@ -51,20 +51,17 @@
         </ion-item>
         <ion-item>
           <ion-label stacked>İlçe</ion-label>
-          <ion-select placeholder="Seçiniz" interface="action-sheet" formControlName="town_id"  appTowns (towns)="towns = $event"  #towndrp [selectedCity]="citydrp.value" okText="Tamam" cancelText="İptal">
+          <ion-select placeholder="Seçiniz" interface="action-sheet" formControlName="town_id"  appTowns (towns)="towns = $event"  (townPosition)="position = $event"  #towndrp [selectedCity]="citydrp.value" okText="Tamam" cancelText="İptal">
             <ion-option *ngFor="let t of towns" value="{{t.id}}"> {{t.name}} </ion-option>
           </ion-select>
         </ion-item>
         <ion-item no-margin no-padding>
-          <div *ngIf="false" class="map-container" style="height: 250px" no-margin no-padding>
-            <google-map-component class="map"  [setMyPoi]="false"></google-map-component>
-          </div>
           <ion-buttons padding starts>
-            <button small (click)="onAddLocation()" [disabled]="((citydrp.value.length === 0) || (towndrp.value.length === 0))" ion-button icon-left color="blue">
-              <ion-icon name="pin"></ion-icon> Konum Ekle
+            <button full (click)="onAddLocation(position)" [disabled]="((citydrp.value.length === 0) || (towndrp.value.length === 0))" ion-button icon-left color="blue">
+              <ion-icon name="pin"></ion-icon> Konum {{!advertForm.value.latitude || !advertForm.value.longitude ? 'Ekle' : 'Düzenle'}}
             </button>
           </ion-buttons>
-          <p padding ion-text>Henüz konum eklenmemiş.</p>
+          <p *ngIf="!advertForm.value.latitude || !advertForm.value.longitude" padding ion-text>Henüz konum eklenmemiş.</p>
         </ion-item>
         <ion-item>
           <ion-label stacked>Adres</ion-label>
@@ -210,6 +207,6 @@
   </ion-slides>
   </form>
   <ion-fab right bottom>
-    <button [disabled]="!advertForm.valid" (click)="onAddAdvert()" ion-fab color="flat_secondary"><ion-icon name="md-checkmark"></ion-icon></button>
+    <button  (click)="onAddAdvert()" ion-fab color="flat_secondary"><ion-icon name="md-checkmark"></ion-icon></button>
   </ion-fab>
 </ion-content>

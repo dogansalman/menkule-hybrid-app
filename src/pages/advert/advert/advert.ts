@@ -2,7 +2,7 @@ import {Component, ViewChild, Renderer2} from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ToastServices } from "../../../services/toast/toast.services";
 import { ApiServices } from "../../../services/api/api.services";
-import {Slides, ViewController} from "ionic-angular";
+import {Slides, ViewController, Events} from "ionic-angular";
 import { ModalController } from "ionic-angular";
 import { Location } from "../location/location";
 
@@ -15,8 +15,11 @@ export class Advert {
   public advertForm: FormGroup;
   @ViewChild('pageSlider') pageSlider: Slides;
   tabs: any = '0';
+  public position: any;
 
-  constructor(private api: ApiServices, private toast: ToastServices, private fb: FormBuilder, private view: ViewController, private modalController: ModalController, private ren: Renderer2) {
+  constructor(private api: ApiServices, private toast: ToastServices, private fb: FormBuilder, private view: ViewController, private modalController: ModalController, private ren: Renderer2, private evt: Events) {
+
+    // advert form rules
     this.advertForm = this.fb.group({
       id: [null],
       title: [null, Validators.required],
@@ -30,7 +33,7 @@ export class Advert {
       entry_time: [null, Validators.required],
       exit_time: [null, Validators.required],
       description: [null, Validators.required],
-      zoom: [null, Validators.required],
+      zoom: [12, Validators.required],
       latitude: [null, Validators.required],
       longitude: [null, Validators.required],
       state: [null, Validators.required],
@@ -63,6 +66,12 @@ export class Advert {
         pet: [false, Validators.required],
       })
     })
+
+    // listening location selection
+    this.evt.subscribe('map:marker', (selectedLocation) => {
+      this.position = selectedLocation;
+      this.advertForm.patchValue({latitude: selectedLocation.lat,longitude: selectedLocation.lng});
+    })
   }
   ngAfterViewInit() {
     this.pageSlider.autoHeight = true;
@@ -71,10 +80,10 @@ export class Advert {
   dismiss(): void {
     this.view.dismiss();
   }
-  onAddLocation(): void {
+  onAddLocation(position): void {
     // fix ionic native maps displaying
     this.ren.setStyle(document.getElementsByTagName("ion-modal")[0],'opacity','0');
-    let modal = this.modalController.create(Location);
+    let modal = this.modalController.create(Location, {position: position});
     modal.onDidDismiss(() => {
       this.ren.setStyle(document.getElementsByTagName("ion-modal")[0],'opacity','1');
     });
@@ -91,8 +100,8 @@ export class Advert {
   selectTab(index) {
     this.pageSlider.slideTo(index);
   }
-
   onAddAdvert(): void {
     console.log(this.advertForm.value);
   }
+
 }

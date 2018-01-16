@@ -1,5 +1,5 @@
-import { Component, ViewChild, Input, AfterViewInit } from '@angular/core';
-import {Platform } from 'ionic-angular';
+import {Component, ViewChild, Input, AfterViewInit, Output, EventEmitter} from '@angular/core';
+import { Platform } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
 import {
   GoogleMaps,
@@ -25,8 +25,10 @@ export class Map implements AfterViewInit {
   @Input('position') position: any = new LatLng(39.542088, 34.525015);
   @Input('zoom') zoom: any = 6;
   @Input('addMark') addMark: boolean = false;
+  @Input('autoAddMarker') autoAddMarker: boolean = false;
   @Input('editableMark') editableMark: boolean = false;
-
+  @Output('selectedPosition') selectedPosition: EventEmitter<object> = new EventEmitter<object>();
+  private map: GoogleMap;
 
   constructor(public googleMaps: GoogleMaps, public plt: Platform, public geolocation: Geolocation) { }
 
@@ -38,31 +40,40 @@ export class Map implements AfterViewInit {
   }
 
   initMap() {
-     let map: GoogleMap = this.googleMaps.create(this.element.nativeElement);
-        map.one(GoogleMapsEvent.MAP_READY).then((data: any) => {
-        let position = {
-          target: this.position,
-          zoom: this.zoom,
-          duration: 0
-        };
-        map.moveCamera(position);
+    this.map = this.googleMaps.create(this.element.nativeElement);
 
-        if(this.setMyPoi) {
-          let markerOptions: MarkerOptions = {
-            position: this.position,
-            icon: "assets/images/my-poi.png",
-            title: 'Buradasın !',
-            animation: 'DROP',
+    this.map.one(GoogleMapsEvent.MAP_READY).then((data: any) => {
+      // set map position
+      this.map.moveCamera({target: this.position, zoom: this.zoom, duration: 0});
 
-          };
-          map.addMarker(markerOptions)
-            .then((marker: Marker) => {
-              marker.showInfoWindow();
-            });
-        }
+      // set my location
+      if(this.setMyPoi) this.addMarker(this.position, 'assets/images/my-poi.png', 'Buradasınız!','DROP');
+
+      if(this.autoAddMarker) this.addMarker(this.position, 'assets/images/advert-poi.png', null,'DROP');
+    });
+
+    // on click add marker
+    if(this.addMark) {
+        this.map.on(GoogleMapsEvent.MAP_CLICK).subscribe((_position) => {
+          this.map.clear();
+          this.addMarker(_position[0],'assets/images/advert-poi.png',null,'DROP');
+          this.selectedPosition.emit(_position[0]);
+        });
+    }
+  }
+  addMarker(poi, iconPath, title, animate): void {
+    let markerOptions: MarkerOptions = {
+      position: poi,
+      icon: iconPath,
+      title: title,
+      animation: animate,
+      draggable: true
+    };
+    this.map.addMarker(markerOptions)
+      .then((marker: Marker) => {
+        if(title) marker.showInfoWindow();
       });
   }
-
   initMyLocation(): void {
     this.geolocation.getCurrentPosition().then((resp) => {
       this.position = new LatLng(resp.coords.latitude, resp.coords.longitude);
