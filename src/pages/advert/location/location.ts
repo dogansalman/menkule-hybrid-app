@@ -14,12 +14,16 @@ export class Location {
   public position: any;
   constructor(private toast: ToastServices, private view: ViewController, private param: NavParams, private evt: Events) {
     this.position = param.get('position');
+    /*TODO drag eventını yakalaka ve selectedposition a eşitle yoksa drag edilen position algılanmıyor
+    * clickteki olay dragdada olacak yanı
+    * */
+    this.selectedPosition = this.position;
   }
 
   dismiss(): void {
     this.view.dismiss();
   }
   onSelectLocation(): void {
-    if(this.selectedPosition) this.evt.publish('map:marker', this.selectedPosition) && this.dismiss();
+    this.evt.publish('map:marker', this.selectedPosition) && this.dismiss();
   }
 }

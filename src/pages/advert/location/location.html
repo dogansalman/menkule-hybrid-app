@@ -16,6 +16,6 @@
     <google-map-component class="map" [setMyPoi]="false" [position]="position" [zoom]="15" [autoAddMarker]="true" [addMark]="true" [editableMark]="true"  (selectedPosition)="selectedPosition = $event"></google-map-component>
   </div>
   <ion-fab right bottom>
-    <button [disabled]="!selectedPosition" (click)="onSelectLocation()" ion-fab color="flat_secondary"><ion-icon name="md-checkmark"></ion-icon></button>
+    <button (click)="onSelectLocation()" ion-fab color="flat_secondary"><ion-icon name="md-checkmark"></ion-icon></button>
   </ion-fab>
 </ion-content>
