@@ -47,31 +47,34 @@ export class Map implements AfterViewInit {
       this.map.moveCamera({target: this.position, zoom: this.zoom, duration: 0});
 
       // set my location
-      if(this.setMyPoi) this.addMarker(this.position, 'assets/images/my-poi.png', 'Buradasınız!','DROP');
+      if(this.setMyPoi) this.addMarker(this.position, 'assets/images/my-poi.png', 'Buradasınız!','DROP', false);
 
-      if(this.autoAddMarker) this.addMarker(this.position, 'assets/images/advert-poi.png', null,'DROP');
+      if(this.autoAddMarker) this.addMarker(this.position, 'assets/images/advert-poi.png', null,'DROP', true);
     });
 
     // on click add marker
     if(this.addMark) {
         this.map.on(GoogleMapsEvent.MAP_CLICK).subscribe((_position) => {
           this.map.clear();
-          this.addMarker(_position[0],'assets/images/advert-poi.png',null,'DROP');
+          this.addMarker(_position[0],'assets/images/advert-poi.png',null,'DROP', true);
           this.selectedPosition.emit(_position[0]);
         });
     }
   }
-  addMarker(poi, iconPath, title, animate): void {
+  addMarker(poi, iconPath, title, animate, draggable): void {
     let markerOptions: MarkerOptions = {
       position: poi,
       icon: iconPath,
       title: title,
       animation: animate,
-      draggable: true
+      draggable: draggable
     };
     this.map.addMarker(markerOptions)
       .then((marker: Marker) => {
         if(title) marker.showInfoWindow();
+        marker.on(GoogleMapsEvent.MARKER_DRAG_END).subscribe((_position) => {
+          this.selectedPosition.emit(_position[0]);
+        })
       });
   }
   initMyLocation(): void {
